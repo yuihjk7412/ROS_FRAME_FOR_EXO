@@ -1,0 +1,8 @@
+prefix=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel
+
+Name: exosystem
+Description: Description of exosystem
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib 
+Requires: 

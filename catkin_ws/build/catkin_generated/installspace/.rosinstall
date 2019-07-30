@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/install/setup.sh
