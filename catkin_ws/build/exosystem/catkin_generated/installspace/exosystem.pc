@@ -3,6 +3,6 @@ prefix=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/install
 Name: exosystem
 Description: Description of exosystem
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/install/include
 Libs: -L/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/install/lib 
-Requires: 
+Requires: roscpp rospy std_msgs message_runtime
