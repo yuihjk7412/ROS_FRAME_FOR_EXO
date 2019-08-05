@@ -217,8 +217,17 @@ void *receive_func(void* param)  //接收线程。
 void *receive_Limbpos_func(void* param)
 {
 	ros::NodeHandle n;
-	ros::Subscriber sub = n.subscribe("pos_topic", 10, chatterCallbackLimbpos);
-	ros::spin();	
+	ros::Subscriber sub0 = n.subscribe("pos_topic", 10, chatterCallbackLimbpos);
+	ros::Subscriber sub1 = n.subscribe("force_topic", 10, chatterCallbackForce);
+	ros::MultiThreadedSpinner s(2);  //多线程
+    ros::spin(s);  
+}
+
+void *receive_Force_func(void* param)
+{
+	ros::NodeHandle n;
+	ros::Subscriber sub = n.subscribe("force_topic", 10, chatterCallbackForce);
+	ros::spin();
 }
 
 main(int argc, char **argv)
