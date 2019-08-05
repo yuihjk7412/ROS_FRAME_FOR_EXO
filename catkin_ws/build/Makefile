@@ -530,6 +530,19 @@ std_msgs_generate_messages_lisp/fast:
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named motorcontrol
+
+# Build rule for target.
+motorcontrol: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 motorcontrol
+.PHONY : motorcontrol
+
+# fast build rule for target.
+motorcontrol/fast:
+	$(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/build
+.PHONY : motorcontrol/fast
+
+#=============================================================================
 # Target rules for targets named exosystem_generate_messages
 
 # Build rule for target.
@@ -674,6 +687,7 @@ help:
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... exosystem_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... motorcontrol"
 	@echo "... exosystem_generate_messages"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... _exosystem_generate_messages_check_deps_Limbpos"

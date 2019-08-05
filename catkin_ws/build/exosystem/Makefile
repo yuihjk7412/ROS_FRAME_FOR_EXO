@@ -451,6 +451,21 @@ std_msgs_generate_messages_lisp/fast:
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+exosystem/CMakeFiles/motorcontrol.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/motorcontrol.dir/rule
+.PHONY : exosystem/CMakeFiles/motorcontrol.dir/rule
+
+# Convenience name for target.
+motorcontrol: exosystem/CMakeFiles/motorcontrol.dir/rule
+
+.PHONY : motorcontrol
+
+# fast build rule for target.
+motorcontrol/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/build
+.PHONY : motorcontrol/fast
+
+# Convenience name for target.
 exosystem/CMakeFiles/exosystem_generate_messages.dir/rule:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages.dir/rule
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages.dir/rule
@@ -570,6 +585,33 @@ exosystem_geneus/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/exosystem_geneus.dir/build.make exosystem/CMakeFiles/exosystem_geneus.dir/build
 .PHONY : exosystem_geneus/fast
 
+src/motorcontrol.o: src/motorcontrol.cpp.o
+
+.PHONY : src/motorcontrol.o
+
+# target to build an object file
+src/motorcontrol.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o
+.PHONY : src/motorcontrol.cpp.o
+
+src/motorcontrol.i: src/motorcontrol.cpp.i
+
+.PHONY : src/motorcontrol.i
+
+# target to preprocess a source file
+src/motorcontrol.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.i
+.PHONY : src/motorcontrol.cpp.i
+
+src/motorcontrol.s: src/motorcontrol.cpp.s
+
+.PHONY : src/motorcontrol.s
+
+# target to generate assembly for a file
+src/motorcontrol.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.s
+.PHONY : src/motorcontrol.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -602,6 +644,7 @@ help:
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... exosystem_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... motorcontrol"
 	@echo "... exosystem_generate_messages"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... _exosystem_generate_messages_check_deps_Limbpos"
@@ -610,6 +653,9 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... exosystem_generate_messages_eus"
 	@echo "... exosystem_geneus"
+	@echo "... src/motorcontrol.o"
+	@echo "... src/motorcontrol.i"
+	@echo "... src/motorcontrol.s"
 .PHONY : help
 
 
