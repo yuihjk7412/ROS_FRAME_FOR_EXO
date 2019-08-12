@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/exosystem_generate_messages_nodejs"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Limbpos.js"
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Encoder.js"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -148,9 +148,9 @@ def Get_Limb_Pos(Rot_Mat):
     Trans = np.column_stack((Rot_Mat, np.zeros([3,1])))
     Trans = np.row_stack((Trans, np.zeros((1,4))))
     # 初始位姿为双臂垂于体侧
-    #Linear_Trans = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,-Limb_Length],[0,0,0,1]])
+    Linear_Trans = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,-Limb_Length],[0,0,0,1]])
     # 初始位姿为Tpose
-    Linear_Trans = np.array([[1, 0, 0, 0], [0, 1, 0, -Limb_Length], [0, 0, 1, 0], [0, 0, 0, 1]])
+    #Linear_Trans = np.array([[1, 0, 0, 0], [0, 1, 0, -Limb_Length], [0, 0, 1, 0], [0, 0, 0, 1]])
     Trans = np.dot(Trans,Linear_Trans)
     u_o = np.dot(Trans, Upper_Limb_Origin)
     return [u_o]
@@ -163,9 +163,14 @@ def Stop_The_Process():
 
 def Get_Euler_Angle(Rot_Mat):
     assert (Rot_Mat.shape == (3, 3))
-    xtheta = np.degrees(np.arcsin(-Rot_Mat[1][2]))
+    #初始位姿为Tpose
+    '''xtheta = np.degrees(np.arcsin(-Rot_Mat[1][2]))
     ytheta = np.degrees(np.arctan(Rot_Mat[0][2] / Rot_Mat[2][2]))
-    ztheta = np.degrees(np.arctan(Rot_Mat[1][0] / Rot_Mat[1][1]))
+    ztheta = np.degrees(np.arctan(Rot_Mat[1][0] / Rot_Mat[1][1]))'''
+    #初始姿态为Npose
+    xtheta = np.degrees(np.arctan2(-Rot_Mat[1][2], Rot_Mat[2][2]))
+    ytheta = np.degrees(np.arctan2(Rot_Mat[0][2]*np.sin(np.radians(xtheta)), -Rot_Mat[2][2]))
+    ztheta = np.degrees(np.arctan2(-Rot_Mat[0][1], Rot_Mat[0][0]))
     return [xtheta, ytheta, ztheta]
 
 def Draw_the_Euler(xpos, ypos, zpos):

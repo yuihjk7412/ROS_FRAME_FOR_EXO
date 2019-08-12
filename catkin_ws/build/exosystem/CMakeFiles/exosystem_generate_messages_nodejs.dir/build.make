@@ -54,6 +54,7 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 include exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/progress.make
 
 exosystem/CMakeFiles/exosystem_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Limbpos.js
+exosystem/CMakeFiles/exosystem_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Encoder.js
 
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Limbpos.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
@@ -61,8 +62,14 @@ exosystem/CMakeFiles/exosystem_generate_messages_nodejs: /home/jackho/ROS_FRAME_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from exosystem/Limbpos.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Limbpos.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Encoder.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Encoder.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from exosystem/Encoder.msg"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg
+
 exosystem_generate_messages_nodejs: exosystem/CMakeFiles/exosystem_generate_messages_nodejs
 exosystem_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Limbpos.js
+exosystem_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/exosystem/msg/Encoder.js
 exosystem_generate_messages_nodejs: exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/build.make
 
 .PHONY : exosystem_generate_messages_nodejs

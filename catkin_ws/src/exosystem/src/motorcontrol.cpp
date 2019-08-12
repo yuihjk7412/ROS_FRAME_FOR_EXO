@@ -12,6 +12,7 @@
 
 #include "ros/ros.h"
 #include "exosystem/Limbpos.h"
+#include "exosystem/Encoder.h"
 #include "std_msgs/Int32.h"
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
@@ -27,6 +28,11 @@ void chatterCallbackForce(const std_msgs::Int32::ConstPtr& msg)
 void chatterCallbackLimbpos(const exosystem::Limbpos::ConstPtr& msg)
 {
 	ROS_INFO("xtheta: [%f]ytheta: [%f]ztheta: [%f]", msg->xtheta, msg->ytheta, msg->ztheta);
+}
+
+void chatterCallbackEncoder(const exosystem::Encoder::ConstPtr& msg)
+{
+	ROS_INFO("encoder1: [%d]encoder2: [%d]", msg->encoder1, msg->encoder2);
 }
 
 class motor
@@ -214,21 +220,16 @@ void *receive_func(void* param)  //接收线程。
 	pthread_exit(0);
 }
 
-void *receive_Limbpos_func(void* param)
+void *receive_ROS_func(void* param)
 {
 	ros::NodeHandle n;
 	ros::Subscriber sub0 = n.subscribe("pos_topic", 10, chatterCallbackLimbpos);
 	ros::Subscriber sub1 = n.subscribe("force_topic", 10, chatterCallbackForce);
-	ros::MultiThreadedSpinner s(2);  //多线程
+	ros::Subscriber sub2 = n.subscribe("encoder_topic", 10, chatterCallbackEncoder);
+	ros::MultiThreadedSpinner s(3);  //多线程
     ros::spin(s);  
 }
 
-void *receive_Force_func(void* param)
-{
-	ros::NodeHandle n;
-	ros::Subscriber sub = n.subscribe("force_topic", 10, chatterCallbackForce);
-	ros::spin();
-}
 
 main(int argc, char **argv)
 {
@@ -237,7 +238,7 @@ main(int argc, char **argv)
 	ros::init(argc, argv, "motorcontrol");
 	pthread_t threadid0;
 	int ret0;
-	ret0 = pthread_create(&threadid0,NULL,receive_Limbpos_func, NULL);
+	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);
 
 	while (ros::ok())
 	{

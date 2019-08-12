@@ -246,7 +246,7 @@ gtest/preinstall: gtest/gtest/preinstall
 gtest/CMakeFiles/gmock.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gmock.dir/build.make gtest/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=8,9,10 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=13,14,15 "Built target gmock"
 .PHONY : gtest/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -278,7 +278,7 @@ clean: gtest/CMakeFiles/gmock.dir/clean
 gtest/CMakeFiles/gmock_main.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gmock_main.dir/build.make gtest/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=11,12,13,14 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=16,17,18,19 "Built target gmock_main"
 .PHONY : gtest/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -329,7 +329,7 @@ gtest/gtest/preinstall:
 gtest/gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest.dir/build.make gtest/gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=15,16 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=20,21 "Built target gtest"
 .PHONY : gtest/gtest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -361,7 +361,7 @@ clean: gtest/gtest/CMakeFiles/gtest.dir/clean
 gtest/gtest/CMakeFiles/gtest_main.dir/all: gtest/gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/gtest/CMakeFiles/gtest_main.dir/build.make gtest/gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=17,18 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=22,23 "Built target gtest_main"
 .PHONY : gtest/gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -399,6 +399,7 @@ exosystem/all: exosystem/CMakeFiles/exosystem_generate_messages.dir/all
 exosystem/clean: exosystem/CMakeFiles/exosystem_genpy.dir/clean
 exosystem/clean: exosystem/CMakeFiles/exosystem_generate_messages_py.dir/clean
 exosystem/clean: exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/clean
+exosystem/clean: exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
 exosystem/clean: exosystem/CMakeFiles/std_msgs_generate_messages_py.dir/clean
 exosystem/clean: exosystem/CMakeFiles/roscpp_generate_messages_py.dir/clean
 exosystem/clean: exosystem/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
@@ -410,7 +411,6 @@ exosystem/clean: exosystem/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/cle
 exosystem/clean: exosystem/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
 exosystem/clean: exosystem/CMakeFiles/roscpp_generate_messages_nodejs.dir/clean
 exosystem/clean: exosystem/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
-exosystem/clean: exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
 exosystem/clean: exosystem/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
 exosystem/clean: exosystem/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
 exosystem/clean: exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/clean
@@ -419,6 +419,7 @@ exosystem/clean: exosystem/CMakeFiles/motorcontrol.dir/clean
 exosystem/clean: exosystem/CMakeFiles/exosystem_generate_messages.dir/clean
 exosystem/clean: exosystem/CMakeFiles/roscpp_generate_messages_eus.dir/clean
 exosystem/clean: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/clean
+exosystem/clean: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/clean
 exosystem/clean: exosystem/CMakeFiles/exosystem_gennodejs.dir/clean
 exosystem/clean: exosystem/CMakeFiles/exosystem_gencpp.dir/clean
 exosystem/clean: exosystem/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
@@ -444,7 +445,7 @@ exosystem/CMakeFiles/exosystem_genpy.dir/all: exosystem/CMakeFiles/exosystem_gen
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_genpy.dir/rule
@@ -470,14 +471,15 @@ clean: exosystem/CMakeFiles/exosystem_genpy.dir/clean
 # All Build rule for target.
 exosystem/CMakeFiles/exosystem_generate_messages_py.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_py.dir/all
 exosystem/CMakeFiles/exosystem_generate_messages_py.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/all
+exosystem/CMakeFiles/exosystem_generate_messages_py.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_py.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_py.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_py.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=6,7 "Built target exosystem_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=10,11,12 "Built target exosystem_generate_messages_py"
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_py.dir/rule
@@ -503,14 +505,15 @@ clean: exosystem/CMakeFiles/exosystem_generate_messages_py.dir/clean
 # All Build rule for target.
 exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/all
+exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=5 "Built target exosystem_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=8,9 "Built target exosystem_generate_messages_nodejs"
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/rule
@@ -527,6 +530,40 @@ exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/clean:
 
 # clean rule for target.
 clean: exosystem/CMakeFiles/exosystem_generate_messages_nodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir
+
+# All Build rule for target.
+exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/all
+exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
+	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/depend
+	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=6,7 "Built target exosystem_generate_messages_lisp"
+.PHONY : exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all
+
+# Build rule for subdir invocation for target.
+exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
+.PHONY : exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+exosystem_generate_messages_lisp: exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/rule
+
+.PHONY : exosystem_generate_messages_lisp
+
+# clean rule for target.
+exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean:
+	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
+.PHONY : exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
+
+# clean rule for target.
+clean: exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
 
 .PHONY : clean
 
@@ -734,7 +771,7 @@ exosystem/CMakeFiles/exosystem_genlisp.dir/all: exosystem/CMakeFiles/exosystem_g
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_genlisp.dir/rule
@@ -883,39 +920,6 @@ clean: exosystem/CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir
-
-# All Build rule for target.
-exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
-exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/all
-	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/depend
-	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=4 "Built target exosystem_generate_messages_lisp"
-.PHONY : exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all
-
-# Build rule for subdir invocation for target.
-exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
-.PHONY : exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-exosystem_generate_messages_lisp: exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/rule
-
-.PHONY : exosystem_generate_messages_lisp
-
-# clean rule for target.
-exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean:
-	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
-.PHONY : exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
-
-# clean rule for target.
-clean: exosystem/CMakeFiles/exosystem_generate_messages_lisp.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target exosystem/CMakeFiles/roscpp_generate_messages_lisp.dir
 
 # All Build rule for target.
@@ -985,14 +989,15 @@ clean: exosystem/CMakeFiles/std_msgs_generate_messages_eus.dir/clean
 # All Build rule for target.
 exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/all
+exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=1 "Built target exosystem_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=1,2 "Built target exosystem_generate_messages_cpp"
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/rule
@@ -1051,7 +1056,7 @@ clean: exosystem/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 exosystem/CMakeFiles/motorcontrol.dir/all: exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=19,20 "Built target motorcontrol"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=24,25 "Built target motorcontrol"
 .PHONY : exosystem/CMakeFiles/motorcontrol.dir/all
 
 # Include target in all.
@@ -1061,7 +1066,7 @@ all: exosystem/CMakeFiles/motorcontrol.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/motorcontrol.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/motorcontrol.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/motorcontrol.dir/rule
@@ -1102,7 +1107,7 @@ all: exosystem/CMakeFiles/exosystem_generate_messages.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages.dir/rule
@@ -1187,6 +1192,38 @@ clean: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir
+
+# All Build rule for target.
+exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all:
+	$(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/depend
+	$(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num= "Built target _exosystem_generate_messages_check_deps_Encoder"
+.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
+
+# Build rule for subdir invocation for target.
+exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
+.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
+
+# Convenience name for target.
+_exosystem_generate_messages_check_deps_Encoder: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
+
+.PHONY : _exosystem_generate_messages_check_deps_Encoder
+
+# clean rule for target.
+exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/clean:
+	$(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/clean
+.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/clean
+
+# clean rule for target.
+clean: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target exosystem/CMakeFiles/exosystem_gennodejs.dir
 
 # All Build rule for target.
@@ -1198,7 +1235,7 @@ exosystem/CMakeFiles/exosystem_gennodejs.dir/all: exosystem/CMakeFiles/exosystem
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_gennodejs.dir/rule
@@ -1230,7 +1267,7 @@ exosystem/CMakeFiles/exosystem_gencpp.dir/all: exosystem/CMakeFiles/exosystem_ge
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_gencpp.dir/rule
@@ -1288,14 +1325,15 @@ clean: exosystem/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
 # All Build rule for target.
 exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_eus.dir/all
 exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/all
+exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/all: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=2,3 "Built target exosystem_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=3,4,5 "Built target exosystem_generate_messages_eus"
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/rule
@@ -1327,7 +1365,7 @@ exosystem/CMakeFiles/exosystem_geneus.dir/all: exosystem/CMakeFiles/exosystem_ge
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/exosystem_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/exosystem_geneus.dir/rule

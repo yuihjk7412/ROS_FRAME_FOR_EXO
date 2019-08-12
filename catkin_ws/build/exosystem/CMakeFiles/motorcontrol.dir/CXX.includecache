@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Encoder.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Limbpos.h
 string
 -
@@ -49,6 +65,8 @@ ros/ros.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/ros/ros.h
 exosystem/Limbpos.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/exosystem/Limbpos.h
+exosystem/Encoder.h
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/exosystem/Encoder.h
 std_msgs/Int32.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/std_msgs/Int32.h
 

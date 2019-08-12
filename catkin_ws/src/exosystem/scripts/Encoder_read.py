@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 import rospy
-from std_msgs.msg import UInt16
+from exosystem.msg import Encoder
 import serial
 
 if __name__ == '__main__':
@@ -9,7 +9,7 @@ if __name__ == '__main__':
     with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
         print("Serial Port OK!")
     ser.close()
-    pub = rospy.Publisher('encoder_topic', UInt16, queue_size=10)
+    pub = rospy.Publisher('encoder_topic', Encoder, queue_size=10)
     rospy.init_node('encoder_talker', anonymous=True)
     rate = rospy.Rate(50)
     while not rospy.is_shutdown():
@@ -22,6 +22,10 @@ if __name__ == '__main__':
                 print("found data")
                 encoder1 = int.from_bytes(buf[1:3], signed=False, byteorder='big')
                 encoder2 = int.from_bytes(buf[3:5], signed=False, byteorder='big')
+                pub_msg = Encoder()
+                pub_msg.encoder1 = encoder1
+                pub_msg.encoder2 = encoder2
+                pub.publish(pub_msg)
                 rospy.loginfo("encoder1:%d  encoder2:%d"%(encoder1,encoder2))
                 rate.sleep()
         

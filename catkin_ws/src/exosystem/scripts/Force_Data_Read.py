@@ -16,15 +16,17 @@ if __name__ == '__main__':
     ser.close()
     pub = rospy.Publisher('force_topic', Int32, queue_size=10)
     rospy.init_node('force_talker', anonymous=True)
-    rate = rospy.Rate(50)
+    rate = rospy.Rate(100)
     while not rospy.is_shutdown():
-        with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
+        with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None) as ser:
             ser.write(request_Command)
             buf = ser.read(21)
 
-        force_val = int.from_bytes(buf[3:7], signed=True, byteorder='big')
-        pub.publish(force_val)
-        rospy.loginfo("force:%d"%force_val)
-        #print(int.from_bytes(buf[3:7], signed=True, byteorder='big'))
-
-        rate.sleep()
+        if len(buf) < 21:
+                continue
+        if buf[0] == 0x01:
+            force_val = int.from_bytes(buf[3:7], signed=True, byteorder='big')
+            pub.publish(force_val)
+            rospy.loginfo("force:%d"%force_val)
+            #print(int.from_bytes(buf[3:7], signed=True, byteorder='big'))
+            rate.sleep()
