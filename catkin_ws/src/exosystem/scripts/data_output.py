@@ -169,7 +169,7 @@ def Get_Euler_Angle(Rot_Mat):
     ztheta = np.degrees(np.arctan(Rot_Mat[1][0] / Rot_Mat[1][1]))'''
     #初始姿态为Npose
     xtheta = np.degrees(np.arctan2(-Rot_Mat[1][2], Rot_Mat[2][2]))
-    ytheta = np.degrees(np.arctan2(Rot_Mat[0][2]*np.sin(np.radians(xtheta)), -Rot_Mat[2][2]))
+    ytheta = np.degrees(np.arctan2(Rot_Mat[0][2]*np.sin(np.radians(xtheta)), -Rot_Mat[1][2]))
     ztheta = np.degrees(np.arctan2(-Rot_Mat[0][1], Rot_Mat[0][0]))
     return [xtheta, ytheta, ztheta]
 
@@ -196,6 +196,7 @@ def Draw_the_Euler(xpos, ypos, zpos):
     print('yew i did')
 
 def cal_RSsJs(q0,q1,q2,q3):
+    '''这个地方可以进行修改以提高精度'''
     # 放置与躯干传感器默认Y轴与关节Y轴平行，放置于胸前，Z轴指向身体外
     RSs2Js = Quat2R(q0,q1,q2,q3)
     yta = np.arcsin(-RSs2Js[2,0])
@@ -303,9 +304,9 @@ if __name__ == '__main__':
         Rot_Mat_u2s = Cur_Quat2Relative_R(Quat_Relative_Zero_Point, (np.asarray(Quat)).reshape((1,-1)), REu2Es, RSs2Js)
         upper_o = Get_Limb_Pos(Rot_Mat_u2s)
         [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
-        xtheta.append(xtheta_temp)
+        '''xtheta.append(xtheta_temp)
         ytheta.append(ytheta_temp)
-        ztheta.append(ztheta_temp)
+        ztheta.append(ztheta_temp)'''
         xpos.append(upper_o[0][0,0])
         ypos.append(upper_o[0][1,0])
         zpos.append(upper_o[0][2,0])
@@ -314,9 +315,10 @@ if __name__ == '__main__':
         msg_pub.ytheta = ytheta_temp
         msg_pub.ztheta = ztheta_temp
         pub.publish(msg_pub)
-        rospy.loginfo(msg_pub)
+        #rospy.loginfo(msg_pub)
+        print("\r xtheta:%-5.2fytheta:%-5.2fztheta:%-5.2fxpos:%-5.2fypos:%-5.2fzpos:%-5.2f"%(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]), end="")
 
-        Points_Num = list(range(len(xtheta)))
+        #Points_Num = list(range(len(xtheta)))
         if Flag_Data_Record:
             df = DataFrame([[xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]]])
             df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
