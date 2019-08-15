@@ -5,5 +5,7 @@
    "ENCODER"
    "<LIMBPOS>"
    "LIMBPOS"
+   "<MOTOR_FORCE>"
+   "MOTOR_FORCE"
   ))
 

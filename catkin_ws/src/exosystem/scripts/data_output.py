@@ -12,6 +12,7 @@ from multiprocessing import Process, Queue
 import os
 import rospy
 from exosystem.msg import Limbpos
+from exosystem.msg import Motor_Force
 
 
 Initialize_Num = 5
@@ -277,6 +278,7 @@ if __name__ == '__main__':
     ts.start() #start reading the data from the Serai port
 
     pub = rospy.Publisher('pos_topic', Limbpos, queue_size=10)
+    pub_f = rospy.Publisher('motor_force_topic', Motor_Force, queue_size=10)
     rospy.init_node('pos_talker', anonymous=True)
     rate = rospy.Rate(50)
 
@@ -307,23 +309,25 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         Get_Quat(Quat)
         Rot_Mat_u2s = Cur_Quat2Relative_R(Quat_Relative_Zero_Point, (np.asarray(Quat)).reshape((1,-1)), REu2Es, RSs2Js)
-        [Tad,Tcf] = Cal_Motor_Force(Rot_Mat_u2s)
+        msg_pub = Motor_Force()
+        [msg_pub.motor1_force,msg_pub.motor2_force] = Cal_Motor_Force(Rot_Mat_u2s)
+        pub_f.publish(msg_pub)#发布计算出来的拉力结果
         upper_o = Get_Limb_Pos(Rot_Mat_u2s)
         [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
         '''xtheta.append(xtheta_temp)
         ytheta.append(ytheta_temp)
-        ztheta.append(ztheta_temp)'''
+        ztheta.append(ztheta_temp)
         xpos.append(upper_o[0][0,0])
         ypos.append(upper_o[0][1,0])
-        zpos.append(upper_o[0][2,0])
-        msg_pub = Limbpos()
-        msg_pub.xtheta = xtheta_temp
-        msg_pub.ytheta = ytheta_temp
-        msg_pub.ztheta = ztheta_temp
-        pub.publish(msg_pub)
-        #rospy.loginfo(msg_pub)
-        print("\r xtheta:%-5.2fytheta:%-5.2fztheta:%-5.2fxpos:%-5.2fypos:%-5.2fzpos:%-5.2fTad:%-5.2fTcf:%-5.2f"\
-        %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],Tad,Tcf), end="")
+        zpos.append(upper_o[0][2,0])'''
+        #msg_pub = Limbpos()
+        #msg_pub.xtheta = xtheta_temp
+        #msg_pub.ytheta = ytheta_temp
+        #msg_pub.ztheta = ztheta_temp
+        #pub.publish(msg_pub)
+        rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
+        #print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
+        #%(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
 
         #Points_Num = list(range(len(xtheta)))
         if Flag_Data_Record:

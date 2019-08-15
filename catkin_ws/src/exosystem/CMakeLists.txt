@@ -52,6 +52,7 @@ add_message_files(
   FILES
   Limbpos.msg
   Encoder.msg
+  Motor_Force.msg
 #  Message2.msg
 )
 

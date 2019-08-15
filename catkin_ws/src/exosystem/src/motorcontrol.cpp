@@ -14,6 +14,7 @@
 #include "exosystem/Limbpos.h"
 #include "exosystem/Encoder.h"
 #include "std_msgs/Int32.h"
+#include "exosystem/Motor_Force.h"
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
 int count=0;//数据列表中，用来存储列表序号。
@@ -28,6 +29,11 @@ void chatterCallbackForce(const std_msgs::Int32::ConstPtr& msg)
 void chatterCallbackLimbpos(const exosystem::Limbpos::ConstPtr& msg)
 {
 	ROS_INFO("xtheta: [%f]ytheta: [%f]ztheta: [%f]", msg->xtheta, msg->ytheta, msg->ztheta);
+}
+
+void chatterCallbackMotorForce(const exosystem::Motor_Force::ConstPtr& msg)
+{
+	ROS_INFO("motor1: [%f]motor2: [%f]", msg->motor1_force, msg->motor2_force);
 }
 
 void chatterCallbackEncoder(const exosystem::Encoder::ConstPtr& msg)
@@ -223,30 +229,15 @@ void *receive_func(void* param)  //接收线程。
 void *receive_ROS_func(void* param)
 {
 	ros::NodeHandle n;
-	ros::Subscriber sub0 = n.subscribe("pos_topic", 10, chatterCallbackLimbpos);
+	ros::Subscriber sub0 = n.subscribe("motor_force_topic", 10, chatterCallbackMotorForce);
 	ros::Subscriber sub1 = n.subscribe("force_topic", 10, chatterCallbackForce);
 	ros::Subscriber sub2 = n.subscribe("encoder_topic", 10, chatterCallbackEncoder);
 	ros::MultiThreadedSpinner s(3);  //多线程
     ros::spin(s);  
 }
 
-
-main(int argc, char **argv)
+int initialize_can_adaptor(void)
 {
-	printf(">>this is hello !\r\n");//指示程序已运行
-
-	ros::init(argc, argv, "motorcontrol");
-	pthread_t threadid0;
-	int ret0;
-	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);
-
-	while (ros::ok())
-	{
-		/* code */
-		;
-	}
-	
-
 	num=VCI_FindUsbDevice2(pInfo1);
 
 	printf(">>USBCAN DEVICE NUM:");printf("%d", num);printf(" PCS");printf("\n");
@@ -365,7 +356,7 @@ main(int argc, char **argv)
 	config.AccCode=0;
 	config.AccMask=0xFFFFFFFF;
 	config.Filter=1;//接收所有帧
-	config.Timing0=0x00;/*波特率125 Kbps  0x03  0x1C*/
+	config.Timing0=0x00;/*波特率500 Kbps  0x00  0x1C*/
 	config.Timing1=0x1C;
 	config.Mode=0;//正常模式		
 	
@@ -394,6 +385,25 @@ main(int argc, char **argv)
 		VCI_CloseDevice(VCI_USBCAN2,0);
 
 	}
+}
+
+
+main(int argc, char **argv)
+{
+	printf(">>programme running\r\n");//指示程序已运行
+
+	initialize_can_adaptor();//初始化Can Adaptor设备
+	
+	ros::init(argc, argv, "motorcontrol");
+	pthread_t threadid0;
+	int ret0;
+	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);//启动线程读取节点上传的数据
+	
+	int m_run0=1;
+	pthread_t threadid;
+	int ret;
+	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);//启动接收线程
+	
 
 	motor motor1(1);
 	motor1.Initialize_Can();
@@ -418,10 +428,7 @@ main(int argc, char **argv)
 		send[0].Data[i] = i;
 	}
 
-	int m_run0=1;
-	pthread_t threadid;
-	int ret;
-	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);
+	
 
 	int times = 5;
 	while(times--)

@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Limbpos.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg"
+messages_str = "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Limbpos.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Motor_Force.msg"
 services_str = ""
 pkg_name = "exosystem"
 dependencies_str = "std_msgs"

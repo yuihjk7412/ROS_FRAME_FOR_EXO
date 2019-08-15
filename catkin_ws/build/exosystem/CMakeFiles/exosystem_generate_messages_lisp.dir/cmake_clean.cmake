@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/exosystem_generate_messages_lisp"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/exosystem/msg/Limbpos.lisp"
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/exosystem/msg/Motor_Force.lisp"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/exosystem/msg/Encoder.lisp"
 )
 
