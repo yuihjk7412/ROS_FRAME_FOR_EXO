@@ -239,7 +239,12 @@ def Norm_Cordinate():
     RSs2Es = Quat2R(average[0][0],average[0][1],average[0][2],average[0][3])
     RSu2Eu = Quat2R(average[0][4],average[0][5],average[0][6],average[0][7])
     REu2Es = np.dot(RSs2Es,np.linalg.inv(RSu2Eu))
-    return REu2Es
+    return REu2Es 
+
+def Cal_Motor_Force(Rot_Mat_u2s):
+    Tad = (189*(409**(1/2))*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]))/(20*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,2] - Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,2] + Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,0] + Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,0]))
+    Tcf = (189*(409**(1/2))*(Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]))/(20*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,2] - Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,2] + Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,0] + Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,0]))
+    return [Tad,Tcf]
 
 if __name__ == '__main__':
 
@@ -302,6 +307,7 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         Get_Quat(Quat)
         Rot_Mat_u2s = Cur_Quat2Relative_R(Quat_Relative_Zero_Point, (np.asarray(Quat)).reshape((1,-1)), REu2Es, RSs2Js)
+        [Tad,Tcf] = Cal_Motor_Force(Rot_Mat_u2s)
         upper_o = Get_Limb_Pos(Rot_Mat_u2s)
         [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
         '''xtheta.append(xtheta_temp)
@@ -316,7 +322,8 @@ if __name__ == '__main__':
         msg_pub.ztheta = ztheta_temp
         pub.publish(msg_pub)
         #rospy.loginfo(msg_pub)
-        print("\r xtheta:%-5.2fytheta:%-5.2fztheta:%-5.2fxpos:%-5.2fypos:%-5.2fzpos:%-5.2f"%(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]), end="")
+        print("\r xtheta:%-5.2fytheta:%-5.2fztheta:%-5.2fxpos:%-5.2fypos:%-5.2fzpos:%-5.2fTad:%-5.2fTcf:%-5.2f"\
+        %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],Tad,Tcf), end="")
 
         #Points_Num = list(range(len(xtheta)))
         if Flag_Data_Record:
