@@ -16,6 +16,25 @@
 #include "std_msgs/Int32.h"
 #include "exosystem/Motor_Force.h"
 
+float Td_ad, Td_cf; //根据上肢位姿计算出来的理想拉力值
+int Tr_ad; //拉力传感器测量出来的实际拉力值
+float Ks = 0.1433; //扭簧K值单位（Nm/degree）
+float theta_l1, theta_l2; //扭簧末端扭转角
+int* monitor_switch, updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
+VCI_CAN_OBJ* temp_buf; //存放
+
+/*PID控制程序结构体 */
+typedef struct
+{
+  float setpoint;       //设定值
+  float proportiongain = 0;     //比例系数
+  float integralgain = 0;      //积分系数
+  float derivativegain = 0;    //微分系数
+  float lasterror;     //前一拍偏差
+  float result; //输出值
+  float integral;//积分值
+}PID;
+
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
 int count=0;//数据列表中，用来存储列表序号。
 VCI_BOARD_INFO pInfo1 [50];
@@ -23,7 +42,8 @@ int num=0;
 
 void chatterCallbackForce(const std_msgs::Int32::ConstPtr& msg)
 {
-  ROS_INFO("Force: [%d]", msg->data);
+	Tr_ad = msg->data;
+  	//ROS_INFO("Force: [%d]", msg->data);
 }
 
 void chatterCallbackLimbpos(const exosystem::Limbpos::ConstPtr& msg)
@@ -33,12 +53,16 @@ void chatterCallbackLimbpos(const exosystem::Limbpos::ConstPtr& msg)
 
 void chatterCallbackMotorForce(const exosystem::Motor_Force::ConstPtr& msg)
 {
-	ROS_INFO("motor1: [%f]motor2: [%f]", msg->motor1_force, msg->motor2_force);
+	Td_ad = msg->motor1_force;
+	Td_cf = msg->motor2_force;
+	//ROS_INFO("motor1: [%f]motor2: [%f]", msg->motor1_force, msg->motor2_force);
 }
 
 void chatterCallbackEncoder(const exosystem::Encoder::ConstPtr& msg)
 {
-	ROS_INFO("encoder1: [%d]encoder2: [%d]", msg->encoder1, msg->encoder2);
+	theta_l1 = msg->encoder1 / (2500 * 4 - 1) * 360;
+	theta_l2 = msg->encoder2 / (2500 * 4 - 1) * 360; //换算出弹簧末端的转角
+	//ROS_INFO("encoder1: [%d]encoder2: [%d]", msg->encoder1, msg->encoder2);
 }
 
 class motor
@@ -49,6 +73,9 @@ private:
 public:
 	motor(u_int32_t id);
 	~motor();
+	int data_coming = 0; //显示是否等待有数据到来，0为没有，1为有
+	int data_updated = 0; //显示数据是否已经更新
+	VCI_CAN_OBJ rec_data; //暂存接收到的数据
 	int Send_Command(VCI_CAN_OBJ * command);
 	int Initialize_Can();
 	int Motor_Disable();
@@ -57,6 +84,7 @@ public:
 	int Motor_Speed(int32_t speed);
 	int Motor_Begin();
 	int Motor_Stop();
+	int Motor_Main_Pos();
 	
 };
 
@@ -159,10 +187,48 @@ int motor::Motor_Stop()
 	return(Send_Command(&command));
 }
 
+int motor::Motor_Main_Pos()
+{
+	VCI_CAN_OBJ command;
+	command.ID = (u_int32_t)0x300 + ID;
+	command.SendType = 1;
+	command.RemoteFlag = 0;
+	command.ExternFlag = 0;
+	command.DataLen = 4;
+	BYTE Data[command.DataLen] = {0x50, 0x58, 0x00, 0x00};
+	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
+	monitor_switch = &(data_coming);
+	updated_flag = &(data_updated);
+	temp_buf = &(rec_data);
+	data_coming = 1;
+	Send_Command(&command);
+	while (data_coming && ros::ok())
+	{
+		/* code */
+		if (rec_data.ID == 0x280 + ID && data_updated)
+		{
+			//printf("it is my boy\r\n");
+			/* code */
+			if (rec_data.Data[0]==0x50 && rec_data.Data[1]==0x58)
+			{
+				/* code */
+				data_coming = 0;
+				data_updated = 0;
+				break;
+			}			
+		}			
+	}
+	int32_t main_pos;
+	memcpy(&main_pos, &(rec_data.Data[4]), 4 * sizeof(BYTE));
+	return main_pos;
+
+}
+
 int motor::Send_Command(VCI_CAN_OBJ * command)
 {
 	if(VCI_Transmit(VCI_USBCAN2, 0, 0, command, 1) == 1)
 	{
+		//打印发送指令
 		printf("Index:%04d  ",count);count++;
 		printf("CAN1 TX ID:0x%08X",command->ID);
 		if(command->ExternFlag==0) printf(" Standard ");
@@ -198,7 +264,7 @@ void *receive_func(void* param)  //接收线程。
 	int *run=(int*)param;//线程启动，退出控制。
     int ind=0;
 	
-	while((*run)&0x0f)
+	while((*run)&0x0f && ros::ok())
 	{
 		if((reclen=VCI_Receive(VCI_USBCAN2,0,ind,rec,3000,100))>0)//调用接收函数，如果有数据，进行数据处理显示。
 		{
@@ -211,13 +277,20 @@ void *receive_func(void* param)  //接收线程。
 				if(rec[j].RemoteFlag==0) printf(" Data   ");//帧类型：数据帧
 				if(rec[j].RemoteFlag==1) printf(" Remote ");//帧类型：远程帧
 				printf("DLC:0x%02X",rec[j].DataLen);//帧长度
-				printf(" data:0x");	//数据
+				printf(" data:0x");	//数据 */
 				for(i = 0; i < rec[j].DataLen; i++)
 				{
 					printf(" %02X", rec[j].Data[i]);
 				}
 				printf(" TimeStamp:0x%08X",rec[j].TimeStamp);//时间标识。
 				printf("\n");
+				printf("%d\r\n",*monitor_switch);
+				if (*monitor_switch == 1)
+				{
+					/* code */
+					memcpy(temp_buf, &(rec[j]), sizeof(VCI_CAN_OBJ));
+					*updated_flag = 1;
+				}				
 			}
 		}
 		ind=!ind;//变换通道号，以便下次读取另一通道，交替读取。		
@@ -387,6 +460,17 @@ int initialize_can_adaptor(void)
 	}
 }
 
+void PIDRegulation(PID *vPID, float processValue)
+{
+  float thisError;
+  thisError=vPID->setpoint-processValue;
+  vPID->integral+=thisError;
+  vPID->result=vPID->proportiongain*thisError+vPID->integralgain*vPID->integral+vPID->derivativegain*(thisError-vPID->lasterror);
+  vPID->lasterror=thisError;
+}
+
+
+
 
 main(int argc, char **argv)
 {
@@ -403,9 +487,29 @@ main(int argc, char **argv)
 	pthread_t threadid;
 	int ret;
 	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);//启动接收线程
-	
+
+	PID force_ad; //力控制的PID环节
+	PID delta_theta_m1; //转角的PID环节
+	float delta_theta_d;
 
 	motor motor1(1);
+	motor1.Initialize_Can();
+
+	/*下面为控制回路 */
+	while (ros::ok())
+	{
+		/* code */
+		force_ad.setpoint = Td_ad;
+		PIDRegulation(&force_ad, Tr_ad);//拉力值经过PID调制
+		delta_theta_d = force_ad.result / Ks;
+		float theta_m1;
+		theta_m1 = (float)motor1.Motor_Main_Pos() / (128.0*500.0*4.0) * 360.0;
+		//delta_theta_r = theta_m1 - theta_l1;
+		usleep(1000000);
+	}
+	/*end */
+
+	/*motor motor1(1);
 	motor1.Initialize_Can();
 	motor1.Motor_Disable();
 	motor1.Motor_Mode(2);//选择速度模式
@@ -413,7 +517,7 @@ main(int argc, char **argv)
 	motor1.Motor_Speed(128000);
 	motor1.Motor_Begin();
 	usleep(5000000);
-	motor1.Motor_Stop();
+	motor1.Motor_Stop(); */
 	//需要发送的帧，结构体设置
 	VCI_CAN_OBJ send[1];
 	send[0].ID=0;
