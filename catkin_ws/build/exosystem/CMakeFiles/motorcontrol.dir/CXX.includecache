@@ -83,8 +83,8 @@ exosystem/Limbpos.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/exosystem/Limbpos.h
 exosystem/Encoder.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/exosystem/Encoder.h
-std_msgs/Int32.h
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/std_msgs/Int32.h
+std_msgs/Float32.h
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/std_msgs/Float32.h
 exosystem/Motor_Force.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/exosystem/Motor_Force.h
 
@@ -734,7 +734,7 @@ ros/forwards.h
 
 /opt/ros/kinetic/include/rosconsole/macros_generated.h
 
-/opt/ros/kinetic/include/std_msgs/Int32.h
+/opt/ros/kinetic/include/std_msgs/Float32.h
 string
 -
 vector

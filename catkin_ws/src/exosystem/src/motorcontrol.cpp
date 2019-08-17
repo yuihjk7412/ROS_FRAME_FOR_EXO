@@ -13,14 +13,14 @@
 #include "ros/ros.h"
 #include "exosystem/Limbpos.h"
 #include "exosystem/Encoder.h"
-#include "std_msgs/Int32.h"
+#include "std_msgs/Float32.h"
 #include "exosystem/Motor_Force.h"
 
 float Td_ad, Td_cf; //根据上肢位姿计算出来的理想拉力值
-int Tr_ad; //拉力传感器测量出来的实际拉力值
+float Tr_ad; //拉力传感器测量出来的实际拉力值
 float Ks = 0.1433; //扭簧K值单位（Nm/degree）
 float theta_l1, theta_l2; //扭簧末端扭转角
-int* monitor_switch, updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
+int* monitor_switch, *updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
 VCI_CAN_OBJ* temp_buf; //存放
 
 /*PID控制程序结构体 */
@@ -40,9 +40,9 @@ int count=0;//数据列表中，用来存储列表序号。
 VCI_BOARD_INFO pInfo1 [50];
 int num=0;
 
-void chatterCallbackForce(const std_msgs::Int32::ConstPtr& msg)
+void chatterCallbackForce(const std_msgs::Float32::ConstPtr& msg)
 {
-	Tr_ad = msg->data;
+	Tr_ad = msg->data; //实际测量的拉力值
   	//ROS_INFO("Force: [%d]", msg->data);
 }
 
@@ -70,6 +70,7 @@ class motor
 private:
 	/* data */
 	u_int32_t ID; 
+	int32_t speed_limit_L, speed_limit_H; //速度上下限
 public:
 	motor(u_int32_t id);
 	~motor();
@@ -85,13 +86,19 @@ public:
 	int Motor_Begin();
 	int Motor_Stop();
 	int Motor_Main_Pos();
-	
+	int Move_To(int32_t pos);
+	int Motor_Set_Pos(int32_t pos);
+	int Motor_Acc(int32_t acc);
+	int Motor_Dec(int32_t dec);
+	int Motor_Stop_Dec(int32_t sdec);
+	int Motor_Speed_for_PTP(int32_t speed);	
 };
 
 motor::motor(u_int32_t id)
 {
 	ID = id;
-
+	speed_limit_H = 496666;
+	speed_limit_L = -496666;
 }
 
 int motor::Initialize_Can()
@@ -185,6 +192,110 @@ int motor::Motor_Stop()
 	BYTE Data[command.DataLen] = {0x53, 0x54, 0x00, 0x00};
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
 	return(Send_Command(&command));
+}
+
+int motor::Move_To(int32_t pos)
+{
+	int flag;
+	Motor_Stop();
+	flag = Motor_Set_Pos(pos);
+	Motor_Begin();	
+	return(flag);
+}
+
+int motor::Motor_Set_Pos(int32_t pos)
+{
+	if (pos<-1000000000 && pos>1000000000)
+	{
+		return 0;
+	}	
+	VCI_CAN_OBJ command;
+	command.ID = (u_int32_t)0x300 + ID;
+	command.SendType = 1;
+	command.RemoteFlag = 0;
+	command.ExternFlag = 0;
+	command.DataLen = 8;
+	BYTE pos_array[4];
+	memcpy(pos_array, &pos, 4 * sizeof(BYTE));
+	BYTE Data[command.DataLen] = {0x50, 0x41, 0x00, 0x00, pos_array[0], pos_array[1], pos_array[2], pos_array[3]};
+	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
+	return(Send_Command(&command));
+}
+
+int motor::Motor_Acc(int32_t acc)
+{
+	if (acc<100 && acc > 1000000000)
+	{
+		return(0);
+	}	
+	VCI_CAN_OBJ command;
+	command.ID = (u_int32_t)0x300 + ID;
+	command.SendType = 1;
+	command.RemoteFlag = 0;
+	command.ExternFlag = 0;
+	command.DataLen = 8;
+	BYTE acc_array[4];
+	memcpy(acc_array, &acc, 4 * sizeof(BYTE));
+	BYTE Data[command.DataLen] = {0x41, 0x43, 0x00, 0x00, acc_array[0], acc_array[1], acc_array[2], acc_array[3]};
+	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
+	return(Send_Command(&command));
+}
+
+int motor::Motor_Dec(int32_t dec)
+{
+	if (dec<100 && dec > 1000000000)
+	{
+		return(0);
+	}	
+	VCI_CAN_OBJ command;
+	command.ID = (u_int32_t)0x300 + ID;
+	command.SendType = 1;
+	command.RemoteFlag = 0;
+	command.ExternFlag = 0;
+	command.DataLen = 8;
+	BYTE dec_array[4];
+	memcpy(dec_array, &dec, 4 * sizeof(BYTE));
+	BYTE Data[command.DataLen] = {0x44, 0x43, 0x00, 0x00, dec_array[0], dec_array[1], dec_array[2], dec_array[3]};
+	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
+	return(Send_Command(&command));	
+}
+
+int motor::Motor_Stop_Dec(int32_t sdec)
+{
+	if (sdec<200 && sdec > 1000000000)
+	{
+		return(0);
+	}	
+	VCI_CAN_OBJ command;
+	command.ID = (u_int32_t)0x300 + ID;
+	command.SendType = 1;
+	command.RemoteFlag = 0;
+	command.ExternFlag = 0;
+	command.DataLen = 8;
+	BYTE sdec_array[4];
+	memcpy(sdec_array, &sdec, 4 * sizeof(BYTE));
+	BYTE Data[command.DataLen] = {0x53, 0x44, 0x00, 0x00, sdec_array[0], sdec_array[1], sdec_array[2], sdec_array[3]};
+	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
+	return(Send_Command(&command));
+}
+
+int motor::Motor_Speed_for_PTP(int32_t speed)
+{
+	if (speed<speed_limit_L && speed > speed_limit_L)
+	{
+		return(0);
+	}	
+	VCI_CAN_OBJ command;
+	command.ID = (u_int32_t)0x300 + ID;
+	command.SendType = 1;
+	command.RemoteFlag = 0;
+	command.ExternFlag = 0;
+	command.DataLen = 8;
+	BYTE speed_array[4];
+	memcpy(speed_array, &speed, 4 * sizeof(BYTE));
+	BYTE Data[command.DataLen] = {0x53, 0x44, 0x00, 0x00, speed_array[0], speed_array[1], speed_array[2], speed_array[3]};
+	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
+	return(Send_Command(&command));	
 }
 
 int motor::Motor_Main_Pos()
@@ -284,7 +395,7 @@ void *receive_func(void* param)  //接收线程。
 				}
 				printf(" TimeStamp:0x%08X",rec[j].TimeStamp);//时间标识。
 				printf("\n");
-				printf("%d\r\n",*monitor_switch);
+				//printf("%d\r\n",*monitor_switch);
 				if (*monitor_switch == 1)
 				{
 					/* code */
@@ -488,23 +599,62 @@ main(int argc, char **argv)
 	int ret;
 	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);//启动接收线程
 
-	PID force_ad; //力控制的PID环节
+	PID torque_ad_m; //力矩控制的PID环节
 	PID delta_theta_m1; //转角的PID环节
-	float delta_theta_d;
+	float delta_theta_d1; //理想的转角差
+	float delta_theta_r1; //实际的转角差
+	int32_t theta_m_i1; //初始的电机位置
+	int16_t theta_l_i1; //初始的弹簧末端位置
 
 	motor motor1(1);
 	motor1.Initialize_Can();
+	motor1.Motor_Disable();
+	motor1.Motor_Mode(5);//选择速度模式
+	motor1.Motor_Enable();
+	motor1.Motor_Speed_for_PTP(496665);
+
+	theta_m_i1 = motor1.Motor_Main_Pos();
+	theta_l_i1 = theta_l1;
+	usleep(1000000);
+
+	for (int i = 0; i < 1000; i++)
+	{
+		/* code */
+		motor1.Move_To((int32_t)(theta_m_i1 + 2 * i / 360.0 * (128.0*500.0*4.0)));
+		usleep(100000);
+	}
+
+	for (int i = 0; i < 1000; i++)
+	{
+		/* code */
+		motor1.Move_To((int32_t)(theta_m_i1 - 2 * i / 360.0 * (128.0*500.0*4.0)));
+		usleep(100000);
+	}
+	motor1.Motor_Stop();
+	motor1.Motor_Disable();
+
+	//motor* motor2 = new motor(2);
+	
+
+	
 
 	/*下面为控制回路 */
 	while (ros::ok())
 	{
-		/* code */
-		force_ad.setpoint = Td_ad;
-		PIDRegulation(&force_ad, Tr_ad);//拉力值经过PID调制
-		delta_theta_d = force_ad.result / Ks;
-		float theta_m1;
-		theta_m1 = (float)motor1.Motor_Main_Pos() / (128.0*500.0*4.0) * 360.0;
-		//delta_theta_r = theta_m1 - theta_l1;
+		/* code 
+		torque_ad_m.setpoint = Td_ad;
+		PIDRegulation(&torque_ad_m, Tr_ad);//拉力值经过PID调制
+		delta_theta_d1 = torque_ad_m.result / Ks; //理想的转角差
+		delta_theta_m1.setpoint = delta_theta_d1;
+		float theta_m1; //电机实际相对转角
+		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
+		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
+		printf("theta_m1:%f\r\n", theta_m1);
+		PIDRegulation(&delta_theta_m1, delta_theta_r1);
+		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_theta_m1.result) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
+		*/
+
+		
 		usleep(1000000);
 	}
 	/*end */
