@@ -27,6 +27,6 @@ if __name__ == '__main__':
         if buf[0] == 0x01:
             force_val = int.from_bytes(buf[3:7], signed=True, byteorder='big')
             pub.publish(-force_val * 0.1 * 0.03)
-            rospy.loginfo("force:%d"%force_val)
+            #rospy.loginfo("force:%d"%force_val)
             #print(int.from_bytes(buf[3:7], signed=True, byteorder='big'))
             rate.sleep()

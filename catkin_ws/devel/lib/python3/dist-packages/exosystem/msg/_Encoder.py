@@ -7,14 +7,14 @@ import struct
 
 
 class Encoder(genpy.Message):
-  _md5sum = "cd83c38535a6ecc48fe19927ddfdf036"
+  _md5sum = "5c2f5cd41268c3b81a9a0b5972ee0639"
   _type = "exosystem/Encoder"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """uint16 encoder1
-uint16 encoder2
+  _full_text = """float32 encoder1
+float32 encoder2
 """
   __slots__ = ['encoder1','encoder2']
-  _slot_types = ['uint16','uint16']
+  _slot_types = ['float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -34,12 +34,12 @@ uint16 encoder2
       super(Encoder, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.encoder1 is None:
-        self.encoder1 = 0
+        self.encoder1 = 0.
       if self.encoder2 is None:
-        self.encoder2 = 0
+        self.encoder2 = 0.
     else:
-      self.encoder1 = 0
-      self.encoder2 = 0
+      self.encoder1 = 0.
+      self.encoder2 = 0.
 
   def _get_types(self):
     """
@@ -54,7 +54,7 @@ uint16 encoder2
     """
     try:
       _x = self
-      buff.write(_get_struct_2H().pack(_x.encoder1, _x.encoder2))
+      buff.write(_get_struct_2f().pack(_x.encoder1, _x.encoder2))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -67,8 +67,8 @@ uint16 encoder2
       end = 0
       _x = self
       start = end
-      end += 4
-      (_x.encoder1, _x.encoder2,) = _get_struct_2H().unpack(str[start:end])
+      end += 8
+      (_x.encoder1, _x.encoder2,) = _get_struct_2f().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,7 +82,7 @@ uint16 encoder2
     """
     try:
       _x = self
-      buff.write(_get_struct_2H().pack(_x.encoder1, _x.encoder2))
+      buff.write(_get_struct_2f().pack(_x.encoder1, _x.encoder2))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -96,8 +96,8 @@ uint16 encoder2
       end = 0
       _x = self
       start = end
-      end += 4
-      (_x.encoder1, _x.encoder2,) = _get_struct_2H().unpack(str[start:end])
+      end += 8
+      (_x.encoder1, _x.encoder2,) = _get_struct_2f().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -106,9 +106,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2H = None
-def _get_struct_2H():
-    global _struct_2H
-    if _struct_2H is None:
-        _struct_2H = struct.Struct("<2H")
-    return _struct_2H
+_struct_2f = None
+def _get_struct_2f():
+    global _struct_2f
+    if _struct_2f is None:
+        _struct_2f = struct.Struct("<2f")
+    return _struct_2f

@@ -294,7 +294,7 @@ int motor::Motor_Speed_for_PTP(int32_t speed)
 	command.DataLen = 8;
 	BYTE speed_array[4];
 	memcpy(speed_array, &speed, 4 * sizeof(BYTE));
-	BYTE Data[command.DataLen] = {0x53, 0x44, 0x00, 0x00, speed_array[0], speed_array[1], speed_array[2], speed_array[3]};
+	BYTE Data[command.DataLen] = {0x53, 0x50, 0x00, 0x00, speed_array[0], speed_array[1], speed_array[2], speed_array[3]};
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
 	return(Send_Command(&command));	
 }
@@ -611,14 +611,14 @@ main(int argc, char **argv)
 
 
 	usleep(1000000);
-	motor motor1(1);
-	motor1.Initialize_Can();
-	motor1.Motor_Disable();
-	motor1.Motor_Mode(5);//选择速度模式
-	motor1.Motor_Enable();
-	motor1.Motor_Speed_for_PTP(496665);
+	motor motor2(2);
+	motor2.Initialize_Can();
+	motor2.Motor_Disable();
+	motor2.Motor_Mode(5);//选择速度模式
+	motor2.Motor_Enable();
+	motor2.Motor_Speed_for_PTP(496665);
 
-	theta_m_i1 = motor1.Motor_Main_Pos(); //电机的初始位置
+	theta_m_i1 = motor2.Motor_Main_Pos(); //电机的初始位置
 	theta_l_i1 = theta_l1; //弹簧末端的初始位置
 	printf("theta_l_i1:%f\r\n",theta_l_i1);
 	Ti_ad = Tr_ad; //记录初始力矩值
@@ -627,11 +627,16 @@ main(int argc, char **argv)
 	while (ros::ok())
 	{
 		/* code */
-		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
+		float degree;
+		printf("Input the degree you want to move:");
+		scanf("%f",&degree);
+		motor2.Move_To((int32_t)((degree + theta_m1) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
+		usleep(1000000); //延时一秒
+		theta_m1 = (float)(motor2.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差		
 		Trr_ad = Tr_ad - Ti_ad;
 		printf("电机转角：%-8.3f末端转角：%-8.3f差值：%-8.3f输出扭矩：%-8.3f\r\n",theta_m1, (theta_l1 - theta_l_i1), delta_theta_r1, Trr_ad);
-		usleep(100000);
+		usleep(100000); //延时一秒
 	}
 	
 

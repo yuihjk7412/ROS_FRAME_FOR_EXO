@@ -75,7 +75,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsMessage': True, 'IsFixedSize': True, 'HasHeader': False}
+// BOOLTRAITS {'HasHeader': False, 'IsFixedSize': True, 'IsMessage': True}
 // {'exosystem': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg'], 'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -84,13 +84,13 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> >
-  : TrueType
+struct HasHeader< ::exosystem::Motor_Force_<ContainerAllocator> >
+  : FalseType
   { };
 
 template <class ContainerAllocator>
-struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> const>
-  : TrueType
+struct HasHeader< ::exosystem::Motor_Force_<ContainerAllocator> const>
+  : FalseType
   { };
 
 template <class ContainerAllocator>
@@ -104,13 +104,13 @@ struct IsFixedSize< ::exosystem::Motor_Force_<ContainerAllocator> const>
   { };
 
 template <class ContainerAllocator>
-struct HasHeader< ::exosystem::Motor_Force_<ContainerAllocator> >
-  : FalseType
+struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> >
+  : TrueType
   { };
 
 template <class ContainerAllocator>
-struct HasHeader< ::exosystem::Motor_Force_<ContainerAllocator> const>
-  : FalseType
+struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> const>
+  : TrueType
   { };
 
 

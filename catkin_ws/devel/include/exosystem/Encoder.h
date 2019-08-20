@@ -24,21 +24,21 @@ struct Encoder_
   typedef Encoder_<ContainerAllocator> Type;
 
   Encoder_()
-    : encoder1(0)
-    , encoder2(0)  {
+    : encoder1(0.0)
+    , encoder2(0.0)  {
     }
   Encoder_(const ContainerAllocator& _alloc)
-    : encoder1(0)
-    , encoder2(0)  {
+    : encoder1(0.0)
+    , encoder2(0.0)  {
   (void)_alloc;
     }
 
 
 
-   typedef uint16_t _encoder1_type;
+   typedef float _encoder1_type;
   _encoder1_type encoder1;
 
-   typedef uint16_t _encoder2_type;
+   typedef float _encoder2_type;
   _encoder2_type encoder2;
 
 
@@ -75,7 +75,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsMessage': True, 'IsFixedSize': True, 'HasHeader': False}
+// BOOLTRAITS {'IsMessage': True, 'HasHeader': False, 'IsFixedSize': True}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'exosystem': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -94,16 +94,6 @@ struct IsMessage< ::exosystem::Encoder_<ContainerAllocator> const>
   { };
 
 template <class ContainerAllocator>
-struct IsFixedSize< ::exosystem::Encoder_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::exosystem::Encoder_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct HasHeader< ::exosystem::Encoder_<ContainerAllocator> >
   : FalseType
   { };
@@ -113,18 +103,28 @@ struct HasHeader< ::exosystem::Encoder_<ContainerAllocator> const>
   : FalseType
   { };
 
+template <class ContainerAllocator>
+struct IsFixedSize< ::exosystem::Encoder_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::exosystem::Encoder_<ContainerAllocator> const>
+  : TrueType
+  { };
+
 
 template<class ContainerAllocator>
 struct MD5Sum< ::exosystem::Encoder_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "cd83c38535a6ecc48fe19927ddfdf036";
+    return "5c2f5cd41268c3b81a9a0b5972ee0639";
   }
 
   static const char* value(const ::exosystem::Encoder_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xcd83c38535a6ecc4ULL;
-  static const uint64_t static_value2 = 0x8fe19927ddfdf036ULL;
+  static const uint64_t static_value1 = 0x5c2f5cd41268c3b8ULL;
+  static const uint64_t static_value2 = 0x1a9a0b5972ee0639ULL;
 };
 
 template<class ContainerAllocator>
@@ -143,8 +143,8 @@ struct Definition< ::exosystem::Encoder_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "uint16 encoder1\n\
-uint16 encoder2\n\
+    return "float32 encoder1\n\
+float32 encoder2\n\
 ";
   }
 
@@ -184,9 +184,9 @@ struct Printer< ::exosystem::Encoder_<ContainerAllocator> >
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::exosystem::Encoder_<ContainerAllocator>& v)
   {
     s << indent << "encoder1: ";
-    Printer<uint16_t>::stream(s, indent + "  ", v.encoder1);
+    Printer<float>::stream(s, indent + "  ", v.encoder1);
     s << indent << "encoder2: ";
-    Printer<uint16_t>::stream(s, indent + "  ", v.encoder2);
+    Printer<float>::stream(s, indent + "  ", v.encoder2);
   }
 };
 

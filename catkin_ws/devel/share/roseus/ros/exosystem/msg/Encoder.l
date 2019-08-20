@@ -19,12 +19,12 @@
 (defmethod exosystem::Encoder
   (:init
    (&key
-    ((:encoder1 __encoder1) 0)
-    ((:encoder2 __encoder2) 0)
+    ((:encoder1 __encoder1) 0.0)
+    ((:encoder2 __encoder2) 0.0)
     )
    (send-super :init)
-   (setq _encoder1 (round __encoder1))
-   (setq _encoder2 (round __encoder2))
+   (setq _encoder1 (float __encoder1))
+   (setq _encoder2 (float __encoder2))
    self)
   (:encoder1
    (&optional __encoder1)
@@ -35,41 +35,41 @@
   (:serialization-length
    ()
    (+
-    ;; uint16 _encoder1
-    2
-    ;; uint16 _encoder2
-    2
+    ;; float32 _encoder1
+    4
+    ;; float32 _encoder2
+    4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; uint16 _encoder1
-       (write-word _encoder1 s)
-     ;; uint16 _encoder2
-       (write-word _encoder2 s)
+     ;; float32 _encoder1
+       (sys::poke _encoder1 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float32 _encoder2
+       (sys::poke _encoder2 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; uint16 _encoder1
-     (setq _encoder1 (sys::peek buf ptr- :short)) (incf ptr- 2)
-   ;; uint16 _encoder2
-     (setq _encoder2 (sys::peek buf ptr- :short)) (incf ptr- 2)
+   ;; float32 _encoder1
+     (setq _encoder1 (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float32 _encoder2
+     (setq _encoder2 (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;;
    self)
   )
 
-(setf (get exosystem::Encoder :md5sum-) "cd83c38535a6ecc48fe19927ddfdf036")
+(setf (get exosystem::Encoder :md5sum-) "5c2f5cd41268c3b81a9a0b5972ee0639")
 (setf (get exosystem::Encoder :datatype-) "exosystem/Encoder")
 (setf (get exosystem::Encoder :definition-)
-      "uint16 encoder1
-uint16 encoder2
+      "float32 encoder1
+float32 encoder2
 
 ")
 
 
 
-(provide :exosystem/Encoder "cd83c38535a6ecc48fe19927ddfdf036")
+(provide :exosystem/Encoder "5c2f5cd41268c3b81a9a0b5972ee0639")
 
 
