@@ -16,8 +16,9 @@
 #include "std_msgs/Float32.h"
 #include "exosystem/Motor_Force.h"
 
-float Td_ad, Td_cf; //根据上肢位姿计算出来的理想拉力值
-float Tr_ad; //拉力传感器测量出来的实际拉力值
+float Td_ad, Td_cf; //根据上肢位姿计算出来的理想力矩值
+float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
+float Ti_ad, Ti_cf; //初始换算出来的扭力值
 float Ks = 0.1433; //扭簧K值单位（Nm/degree）
 float theta_l1, theta_l2; //扭簧末端扭转角
 int* monitor_switch, *updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
@@ -42,7 +43,7 @@ int num=0;
 
 void chatterCallbackForce(const std_msgs::Float32::ConstPtr& msg)
 {
-	Tr_ad = msg->data; //实际测量的拉力值
+	Tr_ad = msg->data; //实际测量的拉力值换算成扭矩
   	//ROS_INFO("Force: [%d]", msg->data);
 }
 
@@ -53,15 +54,15 @@ void chatterCallbackLimbpos(const exosystem::Limbpos::ConstPtr& msg)
 
 void chatterCallbackMotorForce(const exosystem::Motor_Force::ConstPtr& msg)
 {
-	Td_ad = msg->motor1_force;
-	Td_cf = msg->motor2_force;
+	Td_ad = msg->motor1_force * 0.03;
+	Td_cf = msg->motor2_force * 0.03; //末端输出理想转矩
 	//ROS_INFO("motor1: [%f]motor2: [%f]", msg->motor1_force, msg->motor2_force);
 }
 
 void chatterCallbackEncoder(const exosystem::Encoder::ConstPtr& msg)
 {
-	theta_l1 = msg->encoder1 / (2500 * 4 - 1) * 360;
-	theta_l2 = msg->encoder2 / (2500 * 4 - 1) * 360; //换算出弹簧末端的转角
+	theta_l1 = msg->encoder1 / (2500.0 * 4.0) * 360.0;
+	theta_l2 = msg->encoder2 / (2500.0 * 4.0) * 360.0; //换算出弹簧末端的转角(单位为degree)
 	//ROS_INFO("encoder1: [%d]encoder2: [%d]", msg->encoder1, msg->encoder2);
 }
 
@@ -604,8 +605,12 @@ main(int argc, char **argv)
 	float delta_theta_d1; //理想的转角差
 	float delta_theta_r1; //实际的转角差
 	int32_t theta_m_i1; //初始的电机位置
-	int16_t theta_l_i1; //初始的弹簧末端位置
+	float theta_l_i1; //初始的弹簧末端位置
+	float Trr_ad; //相对零点的实测力矩值
+	float theta_m1; //电机实际相对转角
 
+
+	usleep(1000000);
 	motor motor1(1);
 	motor1.Initialize_Can();
 	motor1.Motor_Disable();
@@ -613,25 +618,38 @@ main(int argc, char **argv)
 	motor1.Motor_Enable();
 	motor1.Motor_Speed_for_PTP(496665);
 
-	theta_m_i1 = motor1.Motor_Main_Pos();
-	theta_l_i1 = theta_l1;
+	theta_m_i1 = motor1.Motor_Main_Pos(); //电机的初始位置
+	theta_l_i1 = theta_l1; //弹簧末端的初始位置
+	printf("theta_l_i1:%f\r\n",theta_l_i1);
+	Ti_ad = Tr_ad; //记录初始力矩值
 	usleep(1000000);
 
-	for (int i = 0; i < 1000; i++)
+	while (ros::ok())
 	{
 		/* code */
+		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
+		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差		
+		Trr_ad = Tr_ad - Ti_ad;
+		printf("电机转角：%-8.3f末端转角：%-8.3f差值：%-8.3f输出扭矩：%-8.3f\r\n",theta_m1, (theta_l1 - theta_l_i1), delta_theta_r1, Trr_ad);
+		usleep(100000);
+	}
+	
+
+	/*for (int i = 0; i < 1000; i++)
+	{
+		/* code 
 		motor1.Move_To((int32_t)(theta_m_i1 + 2 * i / 360.0 * (128.0*500.0*4.0)));
 		usleep(100000);
 	}
 
 	for (int i = 0; i < 1000; i++)
-	{
-		/* code */
+	{*/
+		/* code
 		motor1.Move_To((int32_t)(theta_m_i1 - 2 * i / 360.0 * (128.0*500.0*4.0)));
 		usleep(100000);
 	}
 	motor1.Motor_Stop();
-	motor1.Motor_Disable();
+	motor1.Motor_Disable();*/
 
 	//motor* motor2 = new motor(2);
 	
@@ -643,7 +661,7 @@ main(int argc, char **argv)
 	{
 		/* code 
 		torque_ad_m.setpoint = Td_ad;
-		PIDRegulation(&torque_ad_m, Tr_ad);//拉力值经过PID调制
+		PIDRegulation(&torque_ad_m, Tr_ad);//力矩值经过PID调制
 		delta_theta_d1 = torque_ad_m.result / Ks; //理想的转角差
 		delta_theta_m1.setpoint = delta_theta_d1;
 		float theta_m1; //电机实际相对转角

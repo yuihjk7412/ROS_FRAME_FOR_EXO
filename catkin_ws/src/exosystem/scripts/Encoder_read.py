@@ -19,14 +19,14 @@ if __name__ == '__main__':
             if len(buf) < 6:
                 continue
             if buf[0] == 0x7f and buf[-1] == 0xf7:
-                print("found data")
+                #print("found data")
                 encoder1 = int.from_bytes(buf[1:3], signed=False, byteorder='big')
                 encoder2 = int.from_bytes(buf[3:5], signed=False, byteorder='big')
                 pub_msg = Encoder()
                 pub_msg.encoder1 = encoder1
                 pub_msg.encoder2 = encoder2
                 pub.publish(pub_msg)
-                rospy.loginfo("encoder1:%d  encoder2:%d"%(encoder1,encoder2))
+                #rospy.loginfo("encoder1:%d  encoder2:%d"%(encoder1,encoder2))
                 rate.sleep()
         
                 
