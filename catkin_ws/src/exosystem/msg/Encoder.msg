@@ -1,2 +1,2 @@
-uint16 encoder1
-uint16 encoder2
+float32 encoder1
+float32 encoder2
