@@ -13,7 +13,7 @@ if __name__ == '__main__':
     rospy.init_node('encoder_talker', anonymous=True)
     rate = rospy.Rate(50)
     while not rospy.is_shutdown():
-        with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None) as ser:
+        with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
             ser.write(request_Command)
             buf = ser.read(6)
             if len(buf) < 6:
@@ -26,7 +26,7 @@ if __name__ == '__main__':
                 pub_msg.encoder1 = 65536/2-encoder1
                 pub_msg.encoder2 = 65536/2-encoder2
                 pub.publish(pub_msg)
-                #rospy.loginfo("encoder1:%d  encoder2:%d"%(pub_msg.encoder1,pub_msg.encoder2))
+                rospy.loginfo("encoder1:%d  encoder2:%d"%(pub_msg.encoder1,pub_msg.encoder2))
                 rate.sleep()
         
                 

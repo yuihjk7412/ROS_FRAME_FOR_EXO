@@ -19,7 +19,7 @@
 float Td_ad, Td_cf; //根据上肢位姿计算出来的理想力矩值
 float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
 float Ti_ad, Ti_cf; //初始换算出来的扭力值
-float Ks = 0.1433; //扭簧K值单位（Nm/degree）
+float Ks = 0.0856; //扭簧K值单位（Nm/degree）
 float theta_l1, theta_l2; //扭簧末端扭转角
 int* monitor_switch, *updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
 VCI_CAN_OBJ* temp_buf; //存放
@@ -616,7 +616,7 @@ main(int argc, char **argv)
 	motor2.Motor_Disable();
 	motor2.Motor_Mode(5);//选择速度模式
 	motor2.Motor_Enable();
-	motor2.Motor_Speed_for_PTP(496665);
+	motor2.Motor_Speed_for_PTP(49666);
 
 	theta_m_i1 = motor2.Motor_Main_Pos(); //电机的初始位置
 	theta_l_i1 = theta_l1; //弹簧末端的初始位置
@@ -630,6 +630,7 @@ main(int argc, char **argv)
 		float degree;
 		printf("Input the degree you want to move:");
 		scanf("%f",&degree);
+		usleep(1000000); //延时一秒
 		motor2.Move_To((int32_t)((degree + theta_m1) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
 		usleep(1000000); //延时一秒
 		theta_m1 = (float)(motor2.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
