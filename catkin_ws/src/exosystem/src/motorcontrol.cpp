@@ -9,6 +9,7 @@
 #include <ctime>
 #include <cstdlib>
 #include "unistd.h"
+//#include "motorclass.h"
 
 #include "ros/ros.h"
 #include "exosystem/Limbpos.h"
@@ -68,10 +69,11 @@ void chatterCallbackEncoder(const exosystem::Encoder::ConstPtr& msg)
 	//ROS_INFO("encoder1: [%d]encoder2: [%d]", msg->encoder1, msg->encoder2);
 }
 
+///* 
 class motor
 {
 private:
-	/* data */
+	
 	u_int32_t ID; 
 	int32_t speed_limit_L, speed_limit_H; //速度上下限
 public:
@@ -320,14 +322,14 @@ int motor::Motor_Main_Pos()
 	Send_Command(&command);
 	while (data_coming && ros::ok())
 	{
-		/* code */
+		
 		if (rec_data.ID == 0x280 + ID && data_updated)
 		{
 			//printf("it is my boy\r\n");
-			/* code */
+			
 			if (rec_data.Data[0]==0x50 && rec_data.Data[1]==0x58)
 			{
-				/* code */
+				
 				data_coming = 0;
 				data_updated = 0;
 				break;
@@ -369,7 +371,7 @@ int motor::Send_Command(VCI_CAN_OBJ * command)
 motor::~motor()
 {
 }
-
+//*/
 
 void *receive_func(void* param)  //接收线程。
 {
