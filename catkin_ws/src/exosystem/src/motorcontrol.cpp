@@ -629,7 +629,7 @@ main(int argc, char **argv)
 		/* code */
 		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差		
-		Trr_ad = Tr_ad - Ti_ad;
+		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
 		printf("电机转角：%-8.3f末端转角：%-8.3f差值：%-8.3f输出扭矩：%-8.3f\r\n",theta_m1, (theta_l1 - theta_l_i1), delta_theta_r1, Trr_ad);
 		usleep(100000);
 	}
@@ -659,18 +659,18 @@ main(int argc, char **argv)
 	/*下面为控制回路 */
 	while (ros::ok())
 	{
-		/* code 
-		torque_ad_m.setpoint = Td_ad;
-		PIDRegulation(&torque_ad_m, Tr_ad);//力矩值经过PID调制
+		/* 力控制回路 */
+		torque_ad_m.setpoint = Td_ad;	//设置PID理想力矩值
+		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
+		PIDRegulation(&torque_ad_m, Trr_ad);//力矩值经过PID调制
 		delta_theta_d1 = torque_ad_m.result / Ks; //理想的转角差
-		delta_theta_m1.setpoint = delta_theta_d1;
+		delta_theta_m1.setpoint = delta_theta_d1;	///设置PID理想转角差
 		float theta_m1; //电机实际相对转角
 		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
-		printf("theta_m1:%f\r\n", theta_m1);
-		PIDRegulation(&delta_theta_m1, delta_theta_r1);
-		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_theta_m1.result) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
-		*/
+		//printf("theta_m1:%f\r\n", theta_m1);
+		PIDRegulation(&delta_theta_m1, delta_theta_r1);	//转角差经过PID调制
+		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_theta_m1.result) / 360 * (128.0*500.0*4.0) + theta_m_i1));		
 
 		
 		usleep(1000000);
