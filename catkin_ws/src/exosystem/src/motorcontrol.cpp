@@ -106,6 +106,9 @@ motor::motor(u_int32_t id)
 	speed_limit_L = -496666;
 	data_coming = 0;
 	data_updated = 0;
+	monitor_switch = &(data_coming);
+	updated_flag = &(data_updated);
+	temp_buf = &(rec_data);
 }
 
 int motor::Initialize_Can()
@@ -315,9 +318,6 @@ int motor::Motor_Main_Pos()
 	command.DataLen = 4;
 	BYTE Data[command.DataLen] = {0x50, 0x58, 0x00, 0x00};
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
-	monitor_switch = &(data_coming);
-	updated_flag = &(data_updated);
-	temp_buf = &(rec_data);
 	data_coming = 1;
 	Send_Command(&command);
 	while (data_coming && ros::ok())
@@ -665,7 +665,7 @@ main(int argc, char **argv)
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
 		PIDRegulation(&delta_theta_m1, delta_theta_r1);	//转角差经过PID调制
 		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_theta_m1.result) / 360 * (128.0*500.0*4.0) + theta_m_i1));			
-		usleep(1000000);//延时
+		usleep(1000);//延时1ms
 	}
 	/*end */
 
