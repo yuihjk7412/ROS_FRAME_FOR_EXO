@@ -129,3 +129,6 @@ exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /opt/ros/kinetic/i
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /opt/ros/kinetic/include/xmlrpcpp/XmlRpcDecl.h
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /opt/ros/kinetic/include/xmlrpcpp/XmlRpcValue.h
 
+exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/include/pidclass.h
+exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/pidclass.cpp
+

@@ -669,6 +669,33 @@ src/motorcontrol.cpp.s:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.s
 .PHONY : src/motorcontrol.cpp.s
 
+src/pidclass.o: src/pidclass.cpp.o
+
+.PHONY : src/pidclass.o
+
+# target to build an object file
+src/pidclass.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.o
+.PHONY : src/pidclass.cpp.o
+
+src/pidclass.i: src/pidclass.cpp.i
+
+.PHONY : src/pidclass.i
+
+# target to preprocess a source file
+src/pidclass.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.i
+.PHONY : src/pidclass.cpp.i
+
+src/pidclass.s: src/pidclass.cpp.s
+
+.PHONY : src/pidclass.s
+
+# target to generate assembly for a file
+src/pidclass.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.s
+.PHONY : src/pidclass.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -718,6 +745,9 @@ help:
 	@echo "... src/motorcontrol.o"
 	@echo "... src/motorcontrol.i"
 	@echo "... src/motorcontrol.s"
+	@echo "... src/pidclass.o"
+	@echo "... src/pidclass.i"
+	@echo "... src/pidclass.s"
 .PHONY : help
 
 

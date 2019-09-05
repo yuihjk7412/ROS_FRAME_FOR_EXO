@@ -1,5 +1,5 @@
-#ifndef __MOTORCLASS_H__
-#define __MOTORCLASS_H__
+#ifndef __PIDCLASS_H__
+#define __PIDCLASS_H__
 
 #include <iostream>
 #include <sys/types.h>

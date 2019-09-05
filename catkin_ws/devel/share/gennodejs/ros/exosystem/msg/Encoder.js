@@ -26,13 +26,13 @@ class Encoder {
         this.encoder1 = initObj.encoder1
       }
       else {
-        this.encoder1 = 0;
+        this.encoder1 = 0.0;
       }
       if (initObj.hasOwnProperty('encoder2')) {
         this.encoder2 = initObj.encoder2
       }
       else {
-        this.encoder2 = 0;
+        this.encoder2 = 0.0;
       }
     }
   }
@@ -40,9 +40,9 @@ class Encoder {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type Encoder
     // Serialize message field [encoder1]
-    bufferOffset = _serializer.uint16(obj.encoder1, buffer, bufferOffset);
+    bufferOffset = _serializer.float32(obj.encoder1, buffer, bufferOffset);
     // Serialize message field [encoder2]
-    bufferOffset = _serializer.uint16(obj.encoder2, buffer, bufferOffset);
+    bufferOffset = _serializer.float32(obj.encoder2, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -51,14 +51,14 @@ class Encoder {
     let len;
     let data = new Encoder(null);
     // Deserialize message field [encoder1]
-    data.encoder1 = _deserializer.uint16(buffer, bufferOffset);
+    data.encoder1 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [encoder2]
-    data.encoder2 = _deserializer.uint16(buffer, bufferOffset);
+    data.encoder2 = _deserializer.float32(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 4;
+    return 8;
   }
 
   static datatype() {
@@ -68,14 +68,14 @@ class Encoder {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'cd83c38535a6ecc48fe19927ddfdf036';
+    return '5c2f5cd41268c3b81a9a0b5972ee0639';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    uint16 encoder1
-    uint16 encoder2
+    float32 encoder1
+    float32 encoder2
     
     `;
   }
@@ -90,14 +90,14 @@ class Encoder {
       resolved.encoder1 = msg.encoder1;
     }
     else {
-      resolved.encoder1 = 0
+      resolved.encoder1 = 0.0
     }
 
     if (msg.encoder2 !== undefined) {
       resolved.encoder2 = msg.encoder2;
     }
     else {
-      resolved.encoder2 = 0
+      resolved.encoder2 = 0.0
     }
 
     return resolved;

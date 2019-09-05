@@ -14,12 +14,12 @@ PID_position::PID_position(float p,float i,float d):kp(p),ki(i),kd(d),target(0),
 float PID_position::pid_control(float tar,float act)
 {
     float u;
-    target=tar;
-    actual=act;
-    e=target-actual;
-    integral+=e;
-    u=kp*e+ki*integral+kd*(e-e_pre);
-    e_pre=e;
+    target=tar; //目标值
+    actual=act; //实际值
+    e=target-actual; //误差
+    integral+=e; //积分项
+    u=kp*e+ki*integral+kd*(e-e_pre); //计算结果
+    e_pre=e; //计算前一拍误差
     return u;
 }
 void PID_position::pid_show()

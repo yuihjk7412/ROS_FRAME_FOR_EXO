@@ -136,6 +136,10 @@ std_msgs/Float32.h
 exosystem/Motor_Force.h
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/exosystem/Motor_Force.h
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/pidclass.cpp
+pidclass.h
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/pidclass.h
+
 /opt/ros/kinetic/include/ros/advertise_options.h
 ros/forwards.h
 /opt/ros/kinetic/include/ros/ros/forwards.h
