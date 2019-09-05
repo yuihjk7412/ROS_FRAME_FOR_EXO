@@ -1,12 +1,14 @@
 #include "motorclass.h"
 
-motor::motor(u_int32_t id)
+
+motor::motor(u_int32_t id, int * count)
 {
 	ID = id;
 	speed_limit_H = 496666;
 	speed_limit_L = -496666;
 	data_coming = 0;
 	data_updated = 0;
+    this->count = count;
 }
 
 int motor::Initialize_Can()
@@ -216,9 +218,6 @@ int motor::Motor_Main_Pos()
 	command.DataLen = 4;
 	BYTE Data[command.DataLen] = {0x50, 0x58, 0x00, 0x00};
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
-	monitor_switch = &(data_coming);
-	updated_flag = &(data_updated);
-	temp_buf = &(rec_data);
 	data_coming = 1;
 	Send_Command(&command);
 	while (data_coming && ros::ok())
@@ -248,7 +247,7 @@ int motor::Send_Command(VCI_CAN_OBJ * command)
 	if(VCI_Transmit(VCI_USBCAN2, 0, 0, command, 1) == 1)
 	{
 		//打印发送指令
-		printf("Index:%04d  ",count);count++;
+		printf("Index:%04d  ",*count);*count++;
 		printf("CAN1 TX ID:0x%08X",command->ID);
 		if(command->ExternFlag==0) printf(" Standard ");
 		if(command->ExternFlag==1) printf(" Extend   ");
