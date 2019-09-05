@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o"
+  "CMakeFiles/motorcontrol.dir/src/motorclass.cpp.o"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/exosystem/motorcontrol.pdb"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/exosystem/motorcontrol"
 )
