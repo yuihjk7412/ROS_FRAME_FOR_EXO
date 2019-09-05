@@ -8,7 +8,7 @@ motor::motor(u_int32_t id)
 	speed_limit_L = -496666;
 	data_coming = 0;
 	data_updated = 0;
-    count = 0;
+    //count = 0;
 }
 
 int motor::Initialize_Can()
