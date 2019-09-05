@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include "unistd.h"
 #include "motorclass.h"
+#include "pidclass.h"
 
 #include "ros/ros.h"
 #include "exosystem/Limbpos.h"

@@ -13,10 +13,10 @@
 #include "unistd.h"
 
 #include "ros/ros.h"
-#include "exosystem/Limbpos.h"
-#include "exosystem/Encoder.h"
-#include "std_msgs/Float32.h"
-#include "exosystem/Motor_Force.h"
+// #include "exosystem/Limbpos.h"
+// #include "exosystem/Encoder.h"
+// #include "std_msgs/Float32.h"
+// #include "exosystem/Motor_Force.h"
 
 
 class motor
