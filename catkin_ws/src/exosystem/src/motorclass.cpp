@@ -1,6 +1,7 @@
 #include "motorclass.h"
 
 
+/*初始化motor类，需要提供驱动器can节点号以及外部计数器 */
 motor::motor(u_int32_t id, int * count)
 {
 	ID = id;
