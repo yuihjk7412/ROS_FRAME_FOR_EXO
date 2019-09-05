@@ -18,7 +18,6 @@
 #include "std_msgs/Float32.h"
 #include "exosystem/Motor_Force.h"
 
-extern int count;
 
 class motor
 {
@@ -26,9 +25,10 @@ private:
 	/* data */
 	u_int32_t ID; 
 	int32_t speed_limit_L, speed_limit_H; //速度上下限
+	int * count;
 
 public:
-	motor(u_int32_t id);
+	motor(u_int32_t id, int * count);
 	~motor();
 	int data_coming; //显示是否等待有数据到来，0为没有，1为有
 	int data_updated; //显示数据是否已经更新

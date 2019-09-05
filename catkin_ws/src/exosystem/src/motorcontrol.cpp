@@ -635,7 +635,7 @@ main(int argc, char **argv)
 
 
 	usleep(1000000);//延时1秒
-	motor motor1(1);//
+	motor motor1(1, &(count));//
 	monitor_switch = &(motor1.data_coming);
 	updated_flag = &(motor1.data_updated);
 	temp_buf = &(motor1.rec_data);
@@ -651,13 +651,28 @@ main(int argc, char **argv)
 	printf("theta_l_i1:%f\r\n",theta_l_i1);
 	Ti_ad = Tr_ad; //记录初始力矩值
 	usleep(1000000); //延时1秒
-	
 
-	/*将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 */
-	/*下面为控制回路 */
 	while (ros::ok())
 	{
-		/* 力控制回路 */
+		/* code */
+		float degree;
+		printf("Input the degree you want to move:");
+		scanf("%f",&degree);
+		usleep(100000); //延时0.1秒
+		motor1.Move_To((int32_t)((degree + theta_m1) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
+		usleep(1000000); //延时一秒
+		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
+		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差		
+		Trr_ad = Tr_ad - Ti_ad;
+		printf("电机转角：%-8.3f末端转角：%-8.3f差值：%-8.3f输出扭矩：%-8.3f\r\n",theta_m1, (theta_l1 - theta_l_i1), delta_theta_r1, Trr_ad);
+		usleep(100000); //延时一秒
+	}	
+
+	/*将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
+	///*下面为控制回路
+	while (ros::ok())
+	{
+		// 力控制回路 
 		torque_ad_m.setpoint = Td_ad;	//设置PID理想力矩值
 		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
 		PIDRegulation(&torque_ad_m, Trr_ad);//力矩值经过PID调制
@@ -670,7 +685,7 @@ main(int argc, char **argv)
 		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_theta_m1.result) / 360 * (128.0*500.0*4.0) + theta_m_i1));			
 		usleep(1000000);//延时
 	}
-	/*end */
+	*/
 
 	/*motor motor1(1);
 	motor1.Initialize_Can();
