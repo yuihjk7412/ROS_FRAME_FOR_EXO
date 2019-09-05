@@ -615,6 +615,33 @@ exosystem_generate_messages_eus/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/build
 .PHONY : exosystem_generate_messages_eus/fast
 
+src/motorclass.o: src/motorclass.cpp.o
+
+.PHONY : src/motorclass.o
+
+# target to build an object file
+src/motorclass.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorclass.cpp.o
+.PHONY : src/motorclass.cpp.o
+
+src/motorclass.i: src/motorclass.cpp.i
+
+.PHONY : src/motorclass.i
+
+# target to preprocess a source file
+src/motorclass.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorclass.cpp.i
+.PHONY : src/motorclass.cpp.i
+
+src/motorclass.s: src/motorclass.cpp.s
+
+.PHONY : src/motorclass.s
+
+# target to generate assembly for a file
+src/motorclass.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorclass.cpp.s
+.PHONY : src/motorclass.cpp.s
+
 src/motorcontrol.o: src/motorcontrol.cpp.o
 
 .PHONY : src/motorcontrol.o
@@ -685,6 +712,9 @@ help:
 	@echo "... exosystem_gencpp"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... exosystem_generate_messages_eus"
+	@echo "... src/motorclass.o"
+	@echo "... src/motorclass.i"
+	@echo "... src/motorclass.s"
 	@echo "... src/motorcontrol.o"
 	@echo "... src/motorcontrol.i"
 	@echo "... src/motorcontrol.s"

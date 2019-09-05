@@ -9,7 +9,7 @@
 #include <ctime>
 #include <cstdlib>
 #include "unistd.h"
-//#include "motorclass.h"
+#include "motorclass.h"
 
 #include "ros/ros.h"
 #include "exosystem/Limbpos.h"
@@ -69,7 +69,7 @@ void chatterCallbackEncoder(const exosystem::Encoder::ConstPtr& msg)
 	//ROS_INFO("encoder1: [%d]encoder2: [%d]", msg->encoder1, msg->encoder2);
 }
 
-///* 
+/* 
 class motor
 {
 private:
@@ -371,7 +371,7 @@ int motor::Send_Command(VCI_CAN_OBJ * command)
 motor::~motor()
 {
 }
-//*/
+*/
 
 void *receive_func(void* param)  //接收线程。
 {
@@ -636,6 +636,9 @@ main(int argc, char **argv)
 
 	usleep(1000000);//延时1秒
 	motor motor1(1);//
+	monitor_switch = &(motor1.data_coming);
+	updated_flag = &(motor1.data_updated);
+	temp_buf = &(motor1.rec_data);
 	motor1.Initialize_Can();//初始化CAN网络
 	motor1.Motor_Disable();//失能电机
 	motor1.Motor_Mode(5);//选择位置模式

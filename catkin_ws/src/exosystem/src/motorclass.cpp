@@ -1,5 +1,6 @@
 #include "motorclass.h"
 
+
 motor::motor(u_int32_t id)
 {
 	ID = id;
@@ -7,6 +8,7 @@ motor::motor(u_int32_t id)
 	speed_limit_L = -496666;
 	data_coming = 0;
 	data_updated = 0;
+    count = 0;
 }
 
 int motor::Initialize_Can()
@@ -216,9 +218,6 @@ int motor::Motor_Main_Pos()
 	command.DataLen = 4;
 	BYTE Data[command.DataLen] = {0x50, 0x58, 0x00, 0x00};
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
-	monitor_switch = &(data_coming);
-	updated_flag = &(data_updated);
-	temp_buf = &(rec_data);
 	data_coming = 1;
 	Send_Command(&command);
 	while (data_coming && ros::ok())

@@ -1125,7 +1125,7 @@ clean: exosystem/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 exosystem/CMakeFiles/motorcontrol.dir/all: exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=29,30 "Built target motorcontrol"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=29,30,31 "Built target motorcontrol"
 .PHONY : exosystem/CMakeFiles/motorcontrol.dir/all
 
 # Include target in all.
@@ -1135,7 +1135,7 @@ all: exosystem/CMakeFiles/motorcontrol.dir/all
 
 # Build rule for subdir invocation for target.
 exosystem/CMakeFiles/motorcontrol.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/motorcontrol.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
 .PHONY : exosystem/CMakeFiles/motorcontrol.dir/rule
