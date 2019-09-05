@@ -37,6 +37,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
     "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Limbpos.msg"
     "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg"
     "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Motor_Force.msg"
+    "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Sysstatus.msg"
     )
 endif()
 

@@ -7,5 +7,7 @@
    "LIMBPOS"
    "<MOTOR_FORCE>"
    "MOTOR_FORCE"
+   "<SYSSTATUS>"
+   "SYSSTATUS"
   ))
 

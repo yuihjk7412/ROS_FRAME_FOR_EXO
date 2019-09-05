@@ -25,7 +25,7 @@ private:
 	/* data */
 	u_int32_t ID; 
 	int32_t speed_limit_L, speed_limit_H; //速度上下限
-	int * count;
+	int * m_count;
 
 public:
 	motor(u_int32_t id, int * count);

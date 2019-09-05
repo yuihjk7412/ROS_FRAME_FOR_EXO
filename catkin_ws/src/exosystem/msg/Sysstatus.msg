@@ -1,0 +1,4 @@
+float32 theta_m1
+float32 theta_l1
+float32 delta_theta_r1
+float32 Trr_ad

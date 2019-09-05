@@ -9,7 +9,7 @@ motor::motor(u_int32_t id, int * count)
 	speed_limit_L = -496666;
 	data_coming = 0;
 	data_updated = 0;
-    this->count = count;
+    m_count = count;
 }
 
 int motor::Initialize_Can()
@@ -247,20 +247,20 @@ int motor::Send_Command(VCI_CAN_OBJ * command)
 {
 	if(VCI_Transmit(VCI_USBCAN2, 0, 0, command, 1) == 1)
 	{
-		//打印发送指令
-		printf("Index:%04d  ",*count);*count++;
-		printf("CAN1 TX ID:0x%08X",command->ID);
-		if(command->ExternFlag==0) printf(" Standard ");
-		if(command->ExternFlag==1) printf(" Extend   ");
-		if(command->RemoteFlag==0) printf(" Data   ");
-		if(command->RemoteFlag==1) printf(" Remote ");
-		printf("DLC:0x%02X",command->DataLen);
-		printf(" data:0x");
-		for(int i=0;i<command->DataLen;i++)
-		{
-			printf(" %02X",command->Data[i]);
-		}
-		printf("\n");
+		// //打印发送指令
+		// printf("Index:%04d  ",*m_count);*m_count++;
+		// printf("CAN1 TX ID:0x%08X",command->ID);
+		// if(command->ExternFlag==0) printf(" Standard ");
+		// if(command->ExternFlag==1) printf(" Extend   ");
+		// if(command->RemoteFlag==0) printf(" Data   ");
+		// if(command->RemoteFlag==1) printf(" Remote ");
+		// printf("DLC:0x%02X",command->DataLen);
+		// printf(" data:0x");
+		// for(int i=0;i<command->DataLen;i++)
+		// {
+		// 	printf(" %02X",command->Data[i]);
+		// }
+		// printf("\n");
 		return 1;
 	}
 	else

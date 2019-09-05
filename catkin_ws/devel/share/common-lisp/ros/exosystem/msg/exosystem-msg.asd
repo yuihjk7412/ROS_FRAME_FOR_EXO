@@ -10,4 +10,6 @@
     (:file "_package_Limbpos" :depends-on ("_package"))
     (:file "Motor_Force" :depends-on ("_package_Motor_Force"))
     (:file "_package_Motor_Force" :depends-on ("_package"))
+    (:file "Sysstatus" :depends-on ("_package_Sysstatus"))
+    (:file "_package_Sysstatus" :depends-on ("_package"))
   ))

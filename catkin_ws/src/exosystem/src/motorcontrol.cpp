@@ -17,6 +17,7 @@
 #include "exosystem/Encoder.h"
 #include "std_msgs/Float32.h"
 #include "exosystem/Motor_Force.h"
+#include "exosystem/Sysstatus.h"
 
 float Td_ad, Td_cf; //根据上肢位姿计算出来的理想力矩值
 float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
@@ -25,25 +26,22 @@ float Ks = 0.0856; //扭簧K值单位（Nm/degree）
 float theta_l1, theta_l2; //扭簧末端扭转角
 int* monitor_switch, *updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
 VCI_CAN_OBJ* temp_buf; //存放
+const int control_period = 1000; //定义控制周期常量
+int32_t theta_m_i1; //初始的电机位置
+float theta_l_i1; //初始的弹簧末端位置
 
-/*PID控制程序结构体 */
-/*定义结构体和公用体*/
-typedef struct
-{
-  float setpoint;       //设定值
-  float proportiongain;     //比例系数
-  float integralgain;      //积分系数
-  float derivativegain;    //微分系数
-  float lasterror;     //前一拍偏差
-  float preerror;     //前两拍偏差
-  float deadband;     //死区
-  float result; //输出值
-}PID;
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
 int count=0;//数据列表中，用来存储列表序号。
 VCI_BOARD_INFO pInfo1 [50];
 int num=0;
+
+struct param
+{
+	int run;
+	motor * motor1;
+};
+
 
 void chatterCallbackForce(const std_msgs::Float32::ConstPtr& msg)
 {
@@ -85,20 +83,20 @@ void *receive_func(void* param)  //接收线程。
 		{
 			for(j=0;j<reclen;j++)
 			{
-				printf("Index:%04d  ",count);count++;//序号递增
-				printf("CAN%d RX ID:0x%08X", ind+1, rec[j].ID);//ID
-				if(rec[j].ExternFlag==0) printf(" Standard ");//帧格式：标准帧
-				if(rec[j].ExternFlag==1) printf(" Extend   ");//帧格式：扩展帧
-				if(rec[j].RemoteFlag==0) printf(" Data   ");//帧类型：数据帧
-				if(rec[j].RemoteFlag==1) printf(" Remote ");//帧类型：远程帧
-				printf("DLC:0x%02X",rec[j].DataLen);//帧长度
-				printf(" data:0x");	//数据 */
-				for(i = 0; i < rec[j].DataLen; i++)
-				{
-					printf(" %02X", rec[j].Data[i]);
-				}
-				printf(" TimeStamp:0x%08X",rec[j].TimeStamp);//时间标识。
-				printf("\n");
+				// printf("Index:%04d  ",count);count++;//序号递增
+				// printf("CAN%d RX ID:0x%08X", ind+1, rec[j].ID);//ID
+				// if(rec[j].ExternFlag==0) printf(" Standard ");//帧格式：标准帧
+				// if(rec[j].ExternFlag==1) printf(" Extend   ");//帧格式：扩展帧
+				// if(rec[j].RemoteFlag==0) printf(" Data   ");//帧类型：数据帧
+				// if(rec[j].RemoteFlag==1) printf(" Remote ");//帧类型：远程帧
+				// printf("DLC:0x%02X",rec[j].DataLen);//帧长度
+				// printf(" data:0x");	//数据 */
+				// for(i = 0; i < rec[j].DataLen; i++)
+				// {
+				// 	printf(" %02X", rec[j].Data[i]);
+				// }
+				// printf(" TimeStamp:0x%08X",rec[j].TimeStamp);//时间标识。
+				// printf("\n");
 				//printf("%d\r\n",*monitor_switch);
 				if (*monitor_switch == 1)
 				{
@@ -122,6 +120,27 @@ void *receive_ROS_func(void* param)
 	ros::Subscriber sub2 = n.subscribe("encoder_topic", 10, chatterCallbackEncoder);
 	ros::MultiThreadedSpinner s(3);  //多线程
     ros::spin(s);  
+}
+
+void *pub_status(void* param)
+{
+	struct param * output;
+	output = (struct param *)param;
+	ros::NodeHandle n;
+	ros::Publisher chatter_pub = n.advertise<exosystem::Sysstatus>("system_status", 1000);
+	ros::Rate loop_rate(50);
+	while (ros::ok() && (output->run)&0x0f)
+	{			
+		exosystem::Sysstatus msg;
+		msg.theta_m1 = (float)(output->motor1->Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
+		msg.theta_l1 = theta_l1 - theta_l_i1;
+		msg.delta_theta_r1 = msg.theta_m1 - msg.theta_l1;
+		msg.Trr_ad = Tr_ad - Ti_ad;
+		chatter_pub.publish(msg);
+		ros::spinOnce();
+		loop_rate.sleep();
+	}
+	
 }
 
 int initialize_can_adaptor(void)
@@ -268,26 +287,6 @@ int initialize_can_adaptor(void)
 	}
 }
 
-/*PID增量控制算法 */
-void PIDRegulation(PID *vPID, float processValue)
-{
-  float thisError;
-  float increment;
-  float pError,dError,iError;
- 
-  thisError=vPID->setpoint-processValue; //得到偏差值
-  pError=thisError-vPID->lasterror;
-  iError=thisError;
-  dError=thisError-2*(vPID->lasterror)+vPID->preerror;
-  increment=vPID->proportiongain*pError+vPID->integralgain*iError+vPID->derivativegain*dError;   //增量计算
- 
-  vPID->preerror=vPID->lasterror;  //存放偏差用于下次运算
-  vPID->lasterror=thisError;
-  vPID->result+=increment;
-}
-
-
-
 
 main(int argc, char **argv)
 {
@@ -300,10 +299,10 @@ main(int argc, char **argv)
 	int ret0;
 	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);//启动线程读取节点上传的数据
 	
-	int m_run0=1;
+	int m_run0 = 1;
 	pthread_t threadid;
 	int ret;
-	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);//启动接收线程
+	ret = pthread_create(&threadid,NULL,receive_func, &m_run0);//启动接收线程
 
 	// /*定义力矩控制PID结构体 */
 	// PID torque_ad_m; //力矩控制的PID环节
@@ -321,8 +320,6 @@ main(int argc, char **argv)
 
 	float delta_theta_d1; //理想的转角差
 	float delta_theta_r1; //实际的转角差
-	int32_t theta_m_i1; //初始的电机位置
-	float theta_l_i1; //初始的弹簧末端位置
 	float Trr_ad; //相对零点的实测力矩值
 	float theta_m1; //电机实际相对转角
 	float torque_result;
@@ -347,6 +344,13 @@ main(int argc, char **argv)
 	Ti_ad = Tr_ad; //记录初始力矩值
 	usleep(1000000); //延时1秒
 
+	struct param cache;
+	cache.run = 1;
+	cache.motor1 = &motor1;
+	pthread_t threadid1;
+	int ret1;
+	ret1 = pthread_create(&threadid1,NULL,pub_status, &cache);//启动接收线程
+
 	while (ros::ok())
 	{
 		/* code */
@@ -365,97 +369,24 @@ main(int argc, char **argv)
 
 	//将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
 	//下面为控制回路
-	while (ros::ok())
-	{
-		// 力控制回路 
-		//torque_ad_m.setpoint = Td_ad;	//设置PID理想力矩值
-		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
-		//PIDRegulation(&torque_ad_m, Trr_ad);//力矩值经过PID调制
-		torque_result = torque_ad_m.pid_control(Td_ad, Trr_ad);
-		delta_theta_d1 = torque_result / Ks; //理想的转角差
-		//delta_theta_m1.setpoint = delta_theta_d1;	///设置PID理想转角差
-		float theta_m1; //电机实际相对转角
-		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
-		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
-		//PIDRegulation(&delta_theta_m1, delta_theta_r1);	//转角差经过PID调制
-		delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1);
-		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_result) / 360 * (128.0*500.0*4.0) + theta_m_i1));			
-		usleep(1000000);//延时
-	}
+	// while (ros::ok())
+	// {
+	// 	// 力控制回路 
+	// 	//torque_ad_m.setpoint = Td_ad;	//设置PID理想力矩值
+	// 	Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
+	// 	//PIDRegulation(&torque_ad_m, Trr_ad);//力矩值经过PID调制
+	// 	torque_result = torque_ad_m.pid_control(Td_ad, Trr_ad);
+	// 	delta_theta_d1 = torque_result / Ks; //理想的转角差
+	// 	//delta_theta_m1.setpoint = delta_theta_d1;	///设置PID理想转角差
+	// 	theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
+	// 	delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
+	// 	//PIDRegulation(&delta_theta_m1, delta_theta_r1);	//转角差经过PID调制
+	// 	delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1);
+	// 	motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_result) / 360 * (128.0*500.0*4.0) + theta_m_i1));			
+	// 	usleep(control_period);//延时
+	// }
 	
-
-	/*motor motor1(1);
-	motor1.Initialize_Can();
-	motor1.Motor_Disable();
-	motor1.Motor_Mode(2);//选择速度模式
-	motor1.Motor_Enable();
-	motor1.Motor_Speed(128000);
-	motor1.Motor_Begin();
-	usleep(5000000);
-	motor1.Motor_Stop(); */
-	//需要发送的帧，结构体设置
-	VCI_CAN_OBJ send[1];
-	send[0].ID=0;
-	send[0].SendType=0;
-	send[0].RemoteFlag=0;
-	send[0].ExternFlag=1;
-	send[0].DataLen=8;
-	
-	int i=0;
-	for(i = 0; i < send[0].DataLen; i++)
-	{
-		send[0].Data[i] = i;
-	}
-
-	
-
-	int times = 5;
-	while(times--)
-	{
-		if(VCI_Transmit(VCI_USBCAN2, 0, 0, send, 1) == 1)
-		{
-			printf("Index:%04d  ",count);count++;
-			printf("CAN1 TX ID:0x%08X",send[0].ID);
-			if(send[0].ExternFlag==0) printf(" Standard ");
-			if(send[0].ExternFlag==1) printf(" Extend   ");
-			if(send[0].RemoteFlag==0) printf(" Data   ");
-			if(send[0].RemoteFlag==1) printf(" Remote ");
-			printf("DLC:0x%02X",send[0].DataLen);
-			printf(" data:0x");
-
-			for(i=0;i<send[0].DataLen;i++)
-			{
-				printf(" %02X",send[0].Data[i]);
-			}
-
-			printf("\n");
-			send[0].ID+=1;
-		}
-		else
-		{
-			break;
-		}
-		
-		if(VCI_Transmit(VCI_USBCAN2, 0, 1, send, 1) == 1)
-		{
-			printf("Index:%04d  ",count);count++;
-			printf("CAN2 TX ID:0x%08X", send[0].ID);
-			if(send[0].ExternFlag==0) printf(" Standard ");
-			if(send[0].ExternFlag==1) printf(" Extend   ");
-			if(send[0].RemoteFlag==0) printf(" Data   ");
-			if(send[0].RemoteFlag==1) printf(" Remote ");
-			printf("DLC:0x%02X",send[0].DataLen);
-			printf(" data:0x");			
-			for(i = 0; i < send[0].DataLen; i++)
-			{
-				printf(" %02X", send[0].Data[i]);
-			}
-			printf("\n");
-			send[0].ID+=1;
-		}
-		else	break;
-	}
-	usleep(10000000);//延时单位us，这里设置 10 000 000=10s    10s后关闭接收线程，并退出主程序。
+	usleep(1000000);//延时单位us，这里设置 10 000 000=10s    10s后关闭接收线程，并退出主程序。
 	m_run0=0;//线程关闭指令。
 	pthread_join(threadid,NULL);//等待线程关闭。
 	usleep(100000);//延时100ms。

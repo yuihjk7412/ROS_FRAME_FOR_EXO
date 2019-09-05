@@ -53,35 +53,42 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 # Include the progress variables for this target.
 include exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/progress.make
 
-exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Motor_Force.l
-exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Limbpos.l
 exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Encoder.l
+exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Motor_Force.l
+exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Sysstatus.l
+exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Limbpos.l
 exosystem/CMakeFiles/exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/manifest.l
 
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Encoder.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Encoder.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from exosystem/Encoder.msg"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg
+
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Motor_Force.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Motor_Force.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Motor_Force.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from exosystem/Motor_Force.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from exosystem/Motor_Force.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Motor_Force.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg
+
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Sysstatus.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Sysstatus.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Sysstatus.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from exosystem/Sysstatus.msg"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Sysstatus.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Limbpos.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Limbpos.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Limbpos.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from exosystem/Limbpos.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from exosystem/Limbpos.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Limbpos.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg
 
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Encoder.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Encoder.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from exosystem/Encoder.msg"
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg/Encoder.msg -Iexosystem:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p exosystem -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg
-
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/manifest.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp manifest code for exosystem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for exosystem"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem exosystem std_msgs
 
 exosystem_generate_messages_eus: exosystem/CMakeFiles/exosystem_generate_messages_eus
-exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Motor_Force.l
-exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Limbpos.l
 exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Encoder.l
+exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Motor_Force.l
+exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Sysstatus.l
+exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/msg/Limbpos.l
 exosystem_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/exosystem/manifest.l
 exosystem_generate_messages_eus: exosystem/CMakeFiles/exosystem_generate_messages_eus.dir/build.make
 
