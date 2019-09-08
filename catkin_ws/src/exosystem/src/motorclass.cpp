@@ -2,7 +2,7 @@
 
 
 /*初始化motor类，需要提供驱动器can节点号以及外部计数器 */
-motor::motor(u_int32_t id, int * count)
+motor::motor(u_int32_t id, int * count, const VCI_CAN_OBJ * temp_data)
 {
 	ID = id;
 	speed_limit_H = 496666;
@@ -10,6 +10,7 @@ motor::motor(u_int32_t id, int * count)
 	data_coming = 0;
 	data_updated = 0;
     m_count = count;
+	m_temp_data = temp_data;
 }
 
 int motor::Initialize_Can()
@@ -237,6 +238,22 @@ int motor::Motor_Main_Pos()
 			}			
 		}			
 	}
+	// while (data_coming && ros::ok())
+	// {
+	// 	/* code */
+	// 	if (*m_temp_data->ID == 0x280 + ID && data_updated)
+	// 	{
+	// 		//printf("it is my boy\r\n");
+	// 		/* code */
+	// 		if (*m_temp_data->Data[0]==0x50 && *m_temp_data->Data[1]==0x58)
+	// 		{
+	// 			/* code */
+	// 			data_coming = 0;
+	// 			data_updated = 0;
+	// 			break;
+	// 		}			
+	// 	}			
+	// }
 	int32_t main_pos;
 	memcpy(&main_pos, &(rec_data.Data[4]), 4 * sizeof(BYTE));
 	return main_pos;
