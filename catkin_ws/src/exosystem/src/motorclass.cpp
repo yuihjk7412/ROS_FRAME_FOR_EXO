@@ -204,7 +204,7 @@ int motor::Motor_Speed_for_PTP(int32_t speed)
 	command.DataLen = 8;
 	BYTE speed_array[4];
 	memcpy(speed_array, &speed, 4 * sizeof(BYTE));
-	BYTE Data[command.DataLen] = {0x53, 0x44, 0x00, 0x00, speed_array[0], speed_array[1], speed_array[2], speed_array[3]};
+	BYTE Data[command.DataLen] = {0x53, 0x50, 0x00, 0x00, speed_array[0], speed_array[1], speed_array[2], speed_array[3]};
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
 	return(Send_Command(&command));	
 }

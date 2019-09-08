@@ -26,7 +26,7 @@ float Ks = 0.0856; //扭簧K值单位（Nm/degree）
 float theta_l1, theta_l2; //扭簧末端扭转角
 int* monitor_switch, *updated_flag; //can收发器监视开关，为0时不监测数据，1时监测数据
 VCI_CAN_OBJ* temp_buf; //存放
-const int control_period = 1000; //定义控制周期常量
+const int control_period = 1000; //定义控制周期常量,目前定义为1ms
 int32_t theta_m_i1; //初始的电机位置
 float theta_l_i1; //初始的弹簧末端位置
 
@@ -303,17 +303,6 @@ main(int argc, char **argv)
 	pthread_t threadid;
 	int ret;
 	ret = pthread_create(&threadid,NULL,receive_func, &m_run0);//启动接收线程
-
-	// /*定义力矩控制PID结构体 */
-	// PID torque_ad_m; //力矩控制的PID环节
-	// torque_ad_m.proportiongain = 1;
-	// torque_ad_m.derivativegain = 0;
-	// torque_ad_m.integralgain = 0;
-	/*定义转角控制PID结构体 */
-	// PID delta_theta_m1; //转角的PID环节
-	// delta_theta_m1.proportiongain = 1;
-	// delta_theta_m1.derivativegain = 0;
-	// delta_theta_m1.integralgain = 0;
 	
 	PID_position torque_ad_m(1, 0, 0);
 	PID_position delta_theta_m1(1, 0, 0);
@@ -340,10 +329,9 @@ main(int argc, char **argv)
 	/*记录初始状态值 */
 	theta_m_i1 = motor1.Motor_Main_Pos(); //电机的初始位置
 	theta_l_i1 = theta_l1; //弹簧末端的初始位置
-	printf("theta_l_i1:%f\r\n",theta_l_i1);
+	//printf("theta_l_i1:%f\r\n",theta_l_i1);
 	Ti_ad = Tr_ad; //记录初始力矩值
 	usleep(1000000); //延时1秒
-
 	struct param cache;
 	cache.run = 1;
 	cache.motor1 = &motor1;
@@ -351,43 +339,57 @@ main(int argc, char **argv)
 	int ret1;
 	ret1 = pthread_create(&threadid1,NULL,pub_status, &cache);//启动接收线程
 
-	while (ros::ok())
-	{
-		/* code */
-		float degree;
-		printf("Input the degree you want to move:");
-		scanf("%f",&degree);
-		usleep(100000); //延时0.1秒
-		motor1.Move_To((int32_t)((degree + theta_m1) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
-		usleep(1000000); //延时一秒
-		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
-		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差		
-		Trr_ad = Tr_ad - Ti_ad;
-		printf("电机转角：%-8.3f末端转角：%-8.3f差值：%-8.3f输出扭矩：%-8.3f\r\n",theta_m1, (theta_l1 - theta_l_i1), delta_theta_r1, Trr_ad);
-		usleep(100000); //延时一秒
-	}	
 
-	//将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
-	//下面为控制回路
+	// //下面为用于调试作用
+	// while (ros::ok())
+	// {
+	// 	float degree;
+	// 	printf("Input the degree you want to move:");
+	// 	scanf("%f",&degree);
+	// 	usleep(100000); //延时0.1秒
+	// 	motor1.Move_To((int32_t)((degree + theta_m1) / 360 * (128.0*500.0*4.0)+ theta_m_i1));
+	// 	usleep(1000000); //延时一秒
+	// 	theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
+	// 	delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差		
+	// 	Trr_ad = Tr_ad - Ti_ad;
+	// 	printf("电机转角：%-8.3f末端转角：%-8.3f差值：%-8.3f输出扭矩：%-8.3f\r\n",theta_m1, (theta_l1 - theta_l_i1), delta_theta_r1, Trr_ad);
+	// 	usleep(100000); //延时一秒
+	// }	
+
+	// //将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
+	// //下面为控制回路
 	// while (ros::ok())
 	// {
 	// 	// 力控制回路 
-	// 	//torque_ad_m.setpoint = Td_ad;	//设置PID理想力矩值
 	// 	Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
-	// 	//PIDRegulation(&torque_ad_m, Trr_ad);//力矩值经过PID调制
 	// 	torque_result = torque_ad_m.pid_control(Td_ad, Trr_ad);
 	// 	delta_theta_d1 = torque_result / Ks; //理想的转角差
-	// 	//delta_theta_m1.setpoint = delta_theta_d1;	///设置PID理想转角差
 	// 	theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
 	// 	delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
-	// 	//PIDRegulation(&delta_theta_m1, delta_theta_r1);	//转角差经过PID调制
-	// 	delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1);
+	// 	delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1); //转角PID控制器输出的结果
 	// 	motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_result) / 360 * (128.0*500.0*4.0) + theta_m_i1));			
 	// 	usleep(control_period);//延时
 	// }
+
+	//将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
+	//下面测试力控效果，输入固定的控制目标
+	float T_tar = 0.3 //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
+	while (ros::ok())
+	{
+		// 力控制回路 
+		
+		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
+		torque_result = torque_ad_m.pid_control(T_tar, Trr_ad);
+		delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
+		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
+		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
+		delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1); //转角PID控制器输出的结果
+		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_result + delta_theta_d1) / 360 * (128.0*500.0*4.0) + theta_m_i1));			
+		usleep(control_period);//延时
+	}
 	
 	usleep(1000000);//延时单位us，这里设置 10 000 000=10s    10s后关闭接收线程，并退出主程序。
-	m_run0=0;//线程关闭指令。
+	m_run0=0;cache.run=0;//线程关闭指令。
 	pthread_join(threadid,NULL);//等待线程关闭。
 	usleep(100000);//延时100ms。
 	VCI_ResetCAN(VCI_USBCAN2, 0, 0);//复位CAN1通道。

@@ -12,21 +12,42 @@ if __name__ == '__main__':
     port_Num = input('PLEASE INPUT THE PORT NUMBER(/dev/ttyUSB*):')
     request_Command = bytes.fromhex('01 03 01 C2 00 08 E4 0C')
     with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
+        ser.write(request_Command)  #发出请求
+        buf = ser.read(21)          #接收回复
+        if len(buf) < 21:
+            raise serial.SerialTimeoutException
         print("Serial Port OK!")
-    ser.close()
+
     pub = rospy.Publisher('force_topic', Float32, queue_size=10)
     rospy.init_node('force_talker', anonymous=True)
-    rate = rospy.Rate(100)
+    rate = rospy.Rate(60)
+    
+    #打开串口
+    ser = serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None)
+
+    exception_flag = 0  #标志错误发生
+    
     while not rospy.is_shutdown():
-        with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None) as ser:
-            ser.write(request_Command)
-            buf = ser.read(21)
+        # with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None) as ser:
+        #     ser.write(request_Command)
+        #     buf = ser.read(21)
+
+        ser.write(request_Command)  #发出请求
+        buf = ser.read(21)          #接收回复
 
         if len(buf) < 21:
-                continue
+            # ser.flushInput()
+            # exception_flag += 1
+            # if exception_flag == 10:
+            #     print("Time out error. Please check the connection.")
+            #     break
+            # else:
+            #     print("read error")
+            continue
         if buf[0] == 0x01:
             force_val = int.from_bytes(buf[3:7], signed=True, byteorder='big')
             pub.publish(-force_val * 0.1 * 0.03)
             rospy.loginfo("force:%d"%force_val)
             #print(int.from_bytes(buf[3:7], signed=True, byteorder='big'))
             rate.sleep()
+    ser.close()

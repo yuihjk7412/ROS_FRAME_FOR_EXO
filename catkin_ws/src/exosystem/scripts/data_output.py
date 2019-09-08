@@ -122,12 +122,11 @@ def Quat2R(q0,q1,q2,q3):
 
 def Cur_Quat2Relative_R(Relative_Zero_Points, Current_Points, REu2Es, RSs2Js, Total_Arr_Length = 32):
 
-    assert (Current_Points.shape == (1,Total_Arr_Length))
-    assert (Relative_Zero_Points.shape == (1,Total_Arr_Length))
     RSs02e= Quat2R(Relative_Zero_Points[0,0],Relative_Zero_Points[0,1],Relative_Zero_Points[0,2],Relative_Zero_Points[0,3])
     RSu02e = Quat2R(Relative_Zero_Points[0,4],Relative_Zero_Points[0,5],Relative_Zero_Points[0,6],Relative_Zero_Points[0,7])
     RSs2e = Quat2R(Current_Points[0,0],Current_Points[0,1],Current_Points[0,2],Current_Points[0,3])
     RSu2e = Quat2R(Current_Points[0,4],Current_Points[0,5],Current_Points[0,6],Current_Points[0,7])
+    
     RSs2Ss0 = np.dot(np.linalg.inv(RSs02e), RSs2e)
     RSu2Su0 = np.dot(np.linalg.inv(RSu02e),RSu2e)
 
@@ -174,27 +173,6 @@ def Get_Euler_Angle(Rot_Mat):
     ztheta = np.degrees(np.arctan2(-Rot_Mat[0][1], Rot_Mat[0][0]))
     return [xtheta, ytheta, ztheta]
 
-def Draw_the_Euler(xpos, ypos, zpos):
-    plt.figure("Euler Angle")
-    plt.ion()
-
-    plt.ylabel('Angle/deg')
-    plt.xlabel('counts/times')
-    plt.title('Euler angle')
-    plt.ylim(-100, 100)
-    if len(xtheta) > Maxium_Graph_Length:
-        graph_Start_Index = len(xtheta) - Maxium_Graph_Length
-    else:
-        graph_Start_Index = 0
-
-    plt.clf()
-    plt.plot(Points_Num[graph_Start_Index:-1], xtheta[graph_Start_Index:-1], 'r', label='xtheta')
-    plt.plot(Points_Num[graph_Start_Index:-1], ytheta[graph_Start_Index:-1], 'g', label='ytheta')
-    plt.plot(Points_Num[graph_Start_Index:-1], ztheta[graph_Start_Index:-1], 'b', label='ztheta')
-    plt.grid(True)
-    plt.show()
-
-    print('yew i did')
 
 def cal_RSsJs(q0,q1,q2,q3):
     '''这个地方可以进行修改以提高精度'''
