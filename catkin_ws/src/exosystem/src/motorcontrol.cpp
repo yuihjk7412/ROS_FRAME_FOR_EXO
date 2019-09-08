@@ -307,7 +307,7 @@ main(int argc, char **argv)
 	int ret;
 	ret = pthread_create(&threadid,NULL,receive_func, &m_run0);//启动接收线程
 	
-	PID_position torque_ad_m(0.2, 0, 0);
+	PID_position torque_ad_m(0.4, 0, 0);
 	PID_position delta_theta_m1(0, 0, 0);
 
 	float delta_theta_d1; //理想的转角差
@@ -385,22 +385,35 @@ main(int argc, char **argv)
 
 	//将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
 	//下面测试力控效果，输入固定的控制目标
-	float T_tar = 0.4; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
+	float T_tar = 0.3; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
+	delta_theta_d1 = 0;
+	int32_t pos_Limit = theta_m_i1 + (128.0*500.0*4.0) * 2; //设置位置上下限
 	while (ros::ok())
 	{
-		// 力控制回路 
-		
+		// 力控制回路 		
 		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
 		torque_result = torque_ad_m.pid_control(T_tar, Trr_ad);
-		delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
+		//delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
+		delta_theta_d1 = (torque_result) / Ks + delta_theta_d1; //理想的转角差
 		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
 		delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1); //转角PID控制器输出的结果
-		motor1.Move_To((int32_t)(((theta_l1 - theta_l_i1) + delta_result + delta_theta_d1) / 360 * (128.0*500.0*4.0) + theta_m_i1));
-		printf("实测拉力值:%f\r\n",Trr_ad);			
-		usleep(control_period);//延时
+		int32_t pos = (int32_t)(((theta_l1 - theta_l_i1) + delta_result + delta_theta_d1) / 360 * (128.0*500.0*4.0) + theta_m_i1);
+		//检测位置是否超限
+		if (pos > pos_Limit || pos < -pos_Limit)
+		{
+			printf("POSITION out of the range！\r\n");
+			motor1.Motor_Stop();
+			motor1.Motor_Disable();
+			break;
+		}
+		motor1.Move_To(pos);
+		printf("实测拉力值:%f\t理论角度偏差:%f\t实际角度偏差:%f\r\n",Trr_ad, delta_theta_d1, delta_theta_r1);
+		usleep(control_period*2);//延时
 	}
 	
+	motor1.Motor_Stop();
+	motor1.Motor_Disable();
 	usleep(1000000);//延时单位us，这里设置 10 000 000=10s    10s后关闭接收线程，并退出主程序。
 	m_run0=0;cache.run=0;//线程关闭指令。
 	pthread_join(threadid,NULL);//等待线程关闭。
