@@ -178,8 +178,8 @@ def cal_RSsJs(q0,q1,q2,q3):
     '''这个地方可以进行修改以提高精度'''
     # 放置与躯干传感器默认Y轴与关节Y轴平行，放置于胸前，Z轴指向身体外
     RSs2Js = Quat2R(q0,q1,q2,q3)
-    yta = np.arcsin(-RSs2Js[2,0])
     xta = np.arctan2(RSs2Js[2,1], RSs2Js[2,2])
+    yta = np.arcsin(-RSs2Js[2,0])
     yta = np.squeeze(yta)
     xta = np.squeeze(xta)
     RSs2Js = np.array([[np.cos(yta),np.sin(xta)*np.sin(yta), np.sin(yta)*np.cos(xta)],[0,np.cos(xta),-np.sin(xta)],
@@ -225,6 +225,29 @@ def Cal_Motor_Force(Rot_Mat_u2s):
     Tcf = (189*(409**(1/2))*(Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]))/(20*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,2] - Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,2] + Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,0] + Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,0]))
     return [Tad,Tcf]
 
+def Bias_Minimize(RSs2Js):
+    print("请水平外展手臂\r\n")
+    time.sleep(1)
+    theta_bias_z = 100
+    while np.degrees(theta_bias_z)>2:
+        theta_bias_z = 0
+        for i in range(5):
+            Get_Quat(Quat)
+            Rot_Mat_u2s = Cur_Quat2Relative_R(Quat_Relative_Zero_Point, (np.asarray(Quat)).reshape((1,-1)), REu2Es, RSs2Js)
+            upper_o = Get_Limb_Pos(Rot_Mat_u2s)
+            print("X:%-8.3fY:%-8.3fZ:%-8.3f\r\n"%(upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]))
+            x_bias = upper_o[0][0,0]
+            y_bias = upper_o[0][1,0]
+            theta_bias_z = np.arctan(x_bias / y_bias) / 5 + theta_bias_z
+            print("x_bias:%-8.3fy_bias:%-8.3f"%(x_bias,y_bias))
+            time.sleep(1)
+        bias_matrix = np.array([[np.cos(theta_bias_z),-np.sin(theta_bias_z), 0],[np.sin(theta_bias_z),np.cos(theta_bias_z),0],
+                       [0,0,1]])
+        RSs2Js = np.dot(bias_matrix, RSs2Js)
+        print("角度偏差：%f\r\n"%theta_bias_z)
+    return RSs2Js
+
+
 if __name__ == '__main__':
 
 
@@ -258,7 +281,7 @@ if __name__ == '__main__':
     pub = rospy.Publisher('pos_topic', Limbpos, queue_size=10)
     pub_f = rospy.Publisher('motor_force_topic', Motor_Force, queue_size=10)
     rospy.init_node('pos_talker', anonymous=True)
-    rate = rospy.Rate(50)
+    rate = rospy.Rate(100)
 
     temp = input("统一IMU参考系?(Y/N)")
     if temp == 'Y' or temp == 'y':
@@ -271,7 +294,9 @@ if __name__ == '__main__':
         if temp == 'Y' or temp == 'y':
             break
     Quat_Relative_Zero_Point = Set_Initial_Pos() #获得初始状态值
+    print(Quat_Relative_Zero_Point[0,0],Quat_Relative_Zero_Point[0,1],Quat_Relative_Zero_Point[0,2],Quat_Relative_Zero_Point[0,3])
     RSs2Js = cal_RSsJs(Quat_Relative_Zero_Point[0,0],Quat_Relative_Zero_Point[0,1],Quat_Relative_Zero_Point[0,2],Quat_Relative_Zero_Point[0,3])
+    RSs2Js = Bias_Minimize(RSs2Js)
     # 是否记录数据
     Flag_Data_Record = input("Record the data?(Y/N)")
     if Flag_Data_Record == 'Y' or Flag_Data_Record == 'y':
@@ -303,9 +328,9 @@ if __name__ == '__main__':
         #msg_pub.ytheta = ytheta_temp
         #msg_pub.ztheta = ztheta_temp
         #pub.publish(msg_pub)
-        rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
-        #print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
-        #%(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
+        #rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
+        print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
+        %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
 
         #Points_Num = list(range(len(xtheta)))
         if Flag_Data_Record:
