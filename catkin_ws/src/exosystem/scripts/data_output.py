@@ -69,8 +69,8 @@ def Set_Initial_Pos():
         assert (Max_Dif.shape == (1,32))
         if ((Max_Dif > Initialize_Threshold).any()):
             i = 0
-            print(Max_Dif > Initialize_Threshold)
-            print("Initialization Failure!Please stay still!")
+            # print(Max_Dif > Initialize_Threshold)
+            print("\nInitialization Failure!Please stay still!\n")
             temp = np.zeros([1, 32])
             continue
         time.sleep(0.5)
@@ -88,15 +88,22 @@ def Set_Initial_Pos():
     return average
 
 def Serial_Read():
+    # ser = serial.Serial("/dev/ttyUSB%d"%int(Port_Num), 115200)
     while not rospy.is_shutdown():
         with serial.Serial("/dev/ttyUSB%d"%int(Port_Num), 115200) as ser:
             time.sleep(0.01)
             num = ser.in_waiting
             buf = ser.read(num)
+        
+        # time.sleep(0.01)
+        # num = ser.in_waiting
+        # buf = ser.read(num)
 
         if num:
             for i in range(num):
                 Packet_Decode_w(buf[i])
+    
+    print("EXIT SERIAL_READ THREAD")
 
 def Quat2R(q0,q1,q2,q3):
     '''
@@ -225,17 +232,17 @@ def Cal_Motor_Force(Rot_Mat_u2s):
     Tcf = (189*(409**(1/2))*(Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]))/(20*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,2] - Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,2] + Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,0] + Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,0]))
     return [Tad,Tcf]
 
-def Bias_Minimize(RSs2Js):
+def Bias_Minimize(R):
     print("请水平外展手臂\r\n")
-    time.sleep(1)
+    time.sleep(2)
     theta_bias_z = 100
-    while np.degrees(theta_bias_z)>2:
+    while np.absolute(np.degrees(theta_bias_z)) > 2 and not rospy.is_shutdown() :
         theta_bias_z = 0
         for i in range(5):
             Get_Quat(Quat)
-            Rot_Mat_u2s = Cur_Quat2Relative_R(Quat_Relative_Zero_Point, (np.asarray(Quat)).reshape((1,-1)), REu2Es, RSs2Js)
+            Rot_Mat_u2s = Cur_Quat2Relative_R(Quat_Relative_Zero_Point, (np.asarray(Quat)).reshape((1,-1)), REu2Es, R)
             upper_o = Get_Limb_Pos(Rot_Mat_u2s)
-            print("X:%-8.3fY:%-8.3fZ:%-8.3f\r\n"%(upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]))
+            print("X:%-8.3fY:%-8.3fZ:%-8.3f"%(upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]))
             x_bias = upper_o[0][0,0]
             y_bias = upper_o[0][1,0]
             theta_bias_z = np.arctan(x_bias / y_bias) / 5 + theta_bias_z
@@ -243,9 +250,9 @@ def Bias_Minimize(RSs2Js):
             time.sleep(1)
         bias_matrix = np.array([[np.cos(theta_bias_z),-np.sin(theta_bias_z), 0],[np.sin(theta_bias_z),np.cos(theta_bias_z),0],
                        [0,0,1]])
-        RSs2Js = np.dot(bias_matrix, RSs2Js)
-        print("角度偏差：%f\r\n"%theta_bias_z)
-    return RSs2Js
+        R = np.dot(bias_matrix, R)
+        print("角度偏差：%f\n"%theta_bias_z)
+    return R
 
 
 if __name__ == '__main__':
@@ -315,8 +322,8 @@ if __name__ == '__main__':
         msg_pub = Motor_Force()
         [msg_pub.motor1_force,msg_pub.motor2_force] = Cal_Motor_Force(Rot_Mat_u2s)
         pub_f.publish(msg_pub)#发布计算出来的拉力结果
-        upper_o = Get_Limb_Pos(Rot_Mat_u2s)
-        [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
+        # upper_o = Get_Limb_Pos(Rot_Mat_u2s)
+        # [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
         '''xtheta.append(xtheta_temp)
         ytheta.append(ytheta_temp)
         ztheta.append(ztheta_temp)
@@ -329,14 +336,15 @@ if __name__ == '__main__':
         #msg_pub.ztheta = ztheta_temp
         #pub.publish(msg_pub)
         #rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
-        print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
-        %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
+        # print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
+        # %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
 
         #Points_Num = list(range(len(xtheta)))
-        if Flag_Data_Record:
-            df = DataFrame([[xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]]])
-            df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
+        # if Flag_Data_Record:
+        #     df = DataFrame([[xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]]])
+        #     df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
 
         rate.sleep()
     
     ts.join()
+    print("")
