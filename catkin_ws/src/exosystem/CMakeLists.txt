@@ -54,6 +54,7 @@ add_message_files(
   Encoder.msg
   Motor_Force.msg
   Sysstatus.msg
+  Torque.msg
 #  Message2.msg
 )
 

@@ -9,5 +9,7 @@
    "MOTOR_FORCE"
    "<SYSSTATUS>"
    "SYSSTATUS"
+   "<TORQUE>"
+   "TORQUE"
   ))
 

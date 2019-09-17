@@ -18,6 +18,7 @@
 #include "std_msgs/Float32.h"
 #include "exosystem/Motor_Force.h"
 #include "exosystem/Sysstatus.h"
+#include "exosystem/Torque.h"
 
 float Td_ad, Td_cf; //根据上肢位姿计算出来的理想力矩值
 float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
@@ -44,9 +45,10 @@ struct param
 };
 
 
-void chatterCallbackForce(const std_msgs::Float32::ConstPtr& msg)
+void chatterCallbackForce(const exosystem::Torque::ConstPtr& msg)
 {
-	Tr_ad = msg->data; //实际测量的拉力值换算成扭矩
+	Tr_ad = msg->torque1; //实际测量的拉力值换算成扭矩
+	Tr_cf = msg->torque2;
   	//ROS_INFO("Force: [%d]", msg->data);
 }
 

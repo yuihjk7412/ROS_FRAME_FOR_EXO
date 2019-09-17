@@ -6,6 +6,7 @@ import threading
 import binascii
 import rospy
 from std_msgs.msg import Float32
+from exosystem.msg import Torque
 
 
 if __name__ == '__main__':
@@ -45,9 +46,11 @@ if __name__ == '__main__':
             #     print("read error")
             continue
         if buf[0] == 0x01:
-            force_val = int.from_bytes(buf[3:7], signed=True, byteorder='big')
-            pub.publish(-force_val * 0.1 * 0.03)
-            rospy.loginfo("force:%d"%force_val)
+            pub_msg = Torque()            
+            pub_msg.torque1 = -(int.from_bytes(buf[3:7], signed=True, byteorder='big')) * 0.1 * 0.03
+            pub_msg.torque2 = -(int.from_bytes(buf[7:11], signed=True, byteorder='big')) * 0.1 * 0.03
+            pub.publish(pub_msg)
+            rospy.loginfo("force1:%d\tforce2:%d"%(pub_msg.torque1,pub_msg.torque2))
             #print(int.from_bytes(buf[3:7], signed=True, byteorder='big'))
             rate.sleep()
     ser.close()

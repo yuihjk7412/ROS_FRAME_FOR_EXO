@@ -12,4 +12,6 @@
     (:file "_package_Motor_Force" :depends-on ("_package"))
     (:file "Sysstatus" :depends-on ("_package_Sysstatus"))
     (:file "_package_Sysstatus" :depends-on ("_package"))
+    (:file "Torque" :depends-on ("_package_Torque"))
+    (:file "_package_Torque" :depends-on ("_package"))
   ))
