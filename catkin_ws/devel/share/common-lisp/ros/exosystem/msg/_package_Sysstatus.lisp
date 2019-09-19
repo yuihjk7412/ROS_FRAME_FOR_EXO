@@ -1,5 +1,7 @@
 (cl:in-package exosystem-msg)
-(cl:export '(THETA_M1-VAL
+(cl:export '(RECORD_FLAG-VAL
+          RECORD_FLAG
+          THETA_M1-VAL
           THETA_M1
           THETA_L1-VAL
           THETA_L1

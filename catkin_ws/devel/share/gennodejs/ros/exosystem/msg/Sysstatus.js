@@ -18,12 +18,19 @@ class Sysstatus {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.record_flag = null;
       this.theta_m1 = null;
       this.theta_l1 = null;
       this.delta_theta_r1 = null;
       this.Trr_ad = null;
     }
     else {
+      if (initObj.hasOwnProperty('record_flag')) {
+        this.record_flag = initObj.record_flag
+      }
+      else {
+        this.record_flag = 0;
+      }
       if (initObj.hasOwnProperty('theta_m1')) {
         this.theta_m1 = initObj.theta_m1
       }
@@ -53,6 +60,8 @@ class Sysstatus {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type Sysstatus
+    // Serialize message field [record_flag]
+    bufferOffset = _serializer.int16(obj.record_flag, buffer, bufferOffset);
     // Serialize message field [theta_m1]
     bufferOffset = _serializer.float32(obj.theta_m1, buffer, bufferOffset);
     // Serialize message field [theta_l1]
@@ -68,6 +77,8 @@ class Sysstatus {
     //deserializes a message object of type Sysstatus
     let len;
     let data = new Sysstatus(null);
+    // Deserialize message field [record_flag]
+    data.record_flag = _deserializer.int16(buffer, bufferOffset);
     // Deserialize message field [theta_m1]
     data.theta_m1 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [theta_l1]
@@ -80,7 +91,7 @@ class Sysstatus {
   }
 
   static getMessageSize(object) {
-    return 16;
+    return 18;
   }
 
   static datatype() {
@@ -90,12 +101,13 @@ class Sysstatus {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'd950118da79c144be1aca147a9c90400';
+    return '9b07148f0fffa09945818d05f1c2a079';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
+    int16 record_flag
     float32 theta_m1
     float32 theta_l1
     float32 delta_theta_r1
@@ -109,6 +121,13 @@ class Sysstatus {
       msg = {};
     }
     const resolved = new Sysstatus(null);
+    if (msg.record_flag !== undefined) {
+      resolved.record_flag = msg.record_flag;
+    }
+    else {
+      resolved.record_flag = 0
+    }
+
     if (msg.theta_m1 !== undefined) {
       resolved.theta_m1 = msg.theta_m1;
     }

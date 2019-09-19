@@ -24,13 +24,15 @@ struct Sysstatus_
   typedef Sysstatus_<ContainerAllocator> Type;
 
   Sysstatus_()
-    : theta_m1(0.0)
+    : record_flag(0)
+    , theta_m1(0.0)
     , theta_l1(0.0)
     , delta_theta_r1(0.0)
     , Trr_ad(0.0)  {
     }
   Sysstatus_(const ContainerAllocator& _alloc)
-    : theta_m1(0.0)
+    : record_flag(0)
+    , theta_m1(0.0)
     , theta_l1(0.0)
     , delta_theta_r1(0.0)
     , Trr_ad(0.0)  {
@@ -38,6 +40,9 @@ struct Sysstatus_
     }
 
 
+
+   typedef int16_t _record_flag_type;
+  _record_flag_type record_flag;
 
    typedef float _theta_m1_type;
   _theta_m1_type theta_m1;
@@ -85,23 +90,13 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'HasHeader': False, 'IsFixedSize': True, 'IsMessage': True}
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'exosystem': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
-
-template <class ContainerAllocator>
-struct HasHeader< ::exosystem::Sysstatus_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::exosystem::Sysstatus_<ContainerAllocator> const>
-  : FalseType
-  { };
 
 template <class ContainerAllocator>
 struct IsFixedSize< ::exosystem::Sysstatus_<ContainerAllocator> >
@@ -123,18 +118,28 @@ struct IsMessage< ::exosystem::Sysstatus_<ContainerAllocator> const>
   : TrueType
   { };
 
+template <class ContainerAllocator>
+struct HasHeader< ::exosystem::Sysstatus_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct HasHeader< ::exosystem::Sysstatus_<ContainerAllocator> const>
+  : FalseType
+  { };
+
 
 template<class ContainerAllocator>
 struct MD5Sum< ::exosystem::Sysstatus_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "d950118da79c144be1aca147a9c90400";
+    return "9b07148f0fffa09945818d05f1c2a079";
   }
 
   static const char* value(const ::exosystem::Sysstatus_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xd950118da79c144bULL;
-  static const uint64_t static_value2 = 0xe1aca147a9c90400ULL;
+  static const uint64_t static_value1 = 0x9b07148f0fffa099ULL;
+  static const uint64_t static_value2 = 0x45818d05f1c2a079ULL;
 };
 
 template<class ContainerAllocator>
@@ -153,7 +158,8 @@ struct Definition< ::exosystem::Sysstatus_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float32 theta_m1\n\
+    return "int16 record_flag\n\
+float32 theta_m1\n\
 float32 theta_l1\n\
 float32 delta_theta_r1\n\
 float32 Trr_ad\n\
@@ -175,6 +181,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.record_flag);
       stream.next(m.theta_m1);
       stream.next(m.theta_l1);
       stream.next(m.delta_theta_r1);
@@ -197,6 +204,8 @@ struct Printer< ::exosystem::Sysstatus_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::exosystem::Sysstatus_<ContainerAllocator>& v)
   {
+    s << indent << "record_flag: ";
+    Printer<int16_t>::stream(s, indent + "  ", v.record_flag);
     s << indent << "theta_m1: ";
     Printer<float>::stream(s, indent + "  ", v.theta_m1);
     s << indent << "theta_l1: ";

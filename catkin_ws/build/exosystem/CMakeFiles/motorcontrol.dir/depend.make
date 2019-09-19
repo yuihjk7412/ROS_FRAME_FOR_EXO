@@ -66,6 +66,7 @@ exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_F
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Limbpos.h
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Motor_Force.h
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Sysstatus.h
+exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Torque.h
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/include/controlcan.h
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/include/motorclass.h
 exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.o: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/include/pidclass.h

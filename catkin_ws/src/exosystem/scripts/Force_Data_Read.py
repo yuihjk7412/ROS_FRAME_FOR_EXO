@@ -19,7 +19,7 @@ if __name__ == '__main__':
             raise serial.SerialTimeoutException
         print("Serial Port OK!")
 
-    pub = rospy.Publisher('force_topic', Float32, queue_size=10)
+    pub = rospy.Publisher('force_topic', Torque, queue_size=10)
     rospy.init_node('force_talker', anonymous=True)
     rate = rospy.Rate(60)
     
@@ -50,7 +50,7 @@ if __name__ == '__main__':
             pub_msg.torque1 = -(int.from_bytes(buf[3:7], signed=True, byteorder='big')) * 0.1 * 0.03
             pub_msg.torque2 = -(int.from_bytes(buf[7:11], signed=True, byteorder='big')) * 0.1 * 0.03
             pub.publish(pub_msg)
-            rospy.loginfo("force1:%d\tforce2:%d"%(pub_msg.torque1,pub_msg.torque2))
+            rospy.loginfo("force1:%f\tforce2:%f"%(pub_msg.torque1,pub_msg.torque2))
             #print(int.from_bytes(buf[3:7], signed=True, byteorder='big'))
             rate.sleep()
     ser.close()

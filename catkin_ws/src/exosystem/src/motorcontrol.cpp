@@ -31,6 +31,7 @@ VCI_CAN_OBJ buf;
 const int control_period = 1000; //定义控制周期常量,目前定义为1ms
 int32_t theta_m_i1; //初始的电机位置
 float theta_l_i1; //初始的弹簧末端位置
+int16_t record_flag = 0;
 
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
@@ -137,6 +138,7 @@ void *pub_status(void* param)
 	while (ros::ok() && (output->run)&0x0f)
 	{			
 		exosystem::Sysstatus msg;
+		msg.record_flag = record_flag;
 		msg.theta_m1 = (float)(output->motor1->Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角(单位为degree)
 		msg.theta_l1 = theta_l1 - theta_l_i1;
 		msg.delta_theta_r1 = msg.theta_m1 - msg.theta_l1;
@@ -390,6 +392,9 @@ main(int argc, char **argv)
 	float T_tar = 0.3; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
 	delta_theta_d1 = 0;
 	int32_t pos_Limit = theta_m_i1 + (128.0*500.0*4.0) * 2; //设置位置上下限
+
+	record_flag = 1;//开始记录
+	
 	while (ros::ok())
 	{
 		// 力控制回路 		
@@ -413,7 +418,9 @@ main(int argc, char **argv)
 		printf("实测拉力值:%f\t理论角度偏差:%f\t实际角度偏差:%f\r\n",Trr_ad, delta_theta_d1, delta_theta_r1);
 		usleep(control_period*2);//延时
 	}
-	
+
+	record_flag = 0;//停止记录
+
 	motor1.Motor_Stop();
 	motor1.Motor_Disable();
 	usleep(1000000);//延时单位us，这里设置 10 000 000=10s    10s后关闭接收线程，并退出主程序。
