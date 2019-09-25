@@ -6,8 +6,11 @@ from pandas import DataFrame
 import time
 import os
 i = 0
+Current_Time = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
 
 def callback(data):
+    global i
+    global Current_Time
     if data.record_flag:
         if i == 0:
             Current_Time = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
