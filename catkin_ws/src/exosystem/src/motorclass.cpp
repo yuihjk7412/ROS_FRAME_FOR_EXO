@@ -1,5 +1,12 @@
 #include "motorclass.h"
 
+int64_t getCurrentTime() //直接调用这个函数就行了，返回值最好是int64_t，long long应该也可以
+{
+
+struct timeval tv; 
+gettimeofday(&tv,NULL); //该函数在sys/time.h头文件中
+return ((long long)tv.tv_sec) * 1000000 + tv.tv_usec; 
+} 
 
 /*初始化motor类，需要提供驱动器can节点号以及外部计数器 */
 motor::motor(u_int32_t id, int * count, const VCI_CAN_OBJ * temp_data)
@@ -222,12 +229,21 @@ int motor::Motor_Main_Pos()
 	memcpy(command.Data, Data, command.DataLen * sizeof(BYTE));
 	data_coming = 1;
 	Send_Command(&command);
+	int64_t start_time = getCurrentTime();
 	while (data_coming && ros::ok())
 	{
+		int64_t process_time = getCurrentTime();
+		if (process_time - start_time >= 5000)
+		{
+			// printf("resend");
+			Send_Command(&command);
+			start_time = getCurrentTime();
+		}
+		
 		/* code */
 		if (rec_data.ID == 0x280 + ID && data_updated)
 		{
-			//printf("it is my boy\r\n");
+			// printf("waiting\r\n");
 			/* code */
 			if (rec_data.Data[0]==0x50 && rec_data.Data[1]==0x58)
 			{

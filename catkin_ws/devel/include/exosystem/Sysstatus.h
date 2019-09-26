@@ -28,14 +28,22 @@ struct Sysstatus_
     , theta_m1(0.0)
     , theta_l1(0.0)
     , delta_theta_r1(0.0)
-    , Trr_ad(0.0)  {
+    , Trr_ad(0.0)
+    , theta_m2(0.0)
+    , theta_l2(0.0)
+    , delta_theta_r2(0.0)
+    , Trr_cf(0.0)  {
     }
   Sysstatus_(const ContainerAllocator& _alloc)
     : record_flag(0)
     , theta_m1(0.0)
     , theta_l1(0.0)
     , delta_theta_r1(0.0)
-    , Trr_ad(0.0)  {
+    , Trr_ad(0.0)
+    , theta_m2(0.0)
+    , theta_l2(0.0)
+    , delta_theta_r2(0.0)
+    , Trr_cf(0.0)  {
   (void)_alloc;
     }
 
@@ -55,6 +63,18 @@ struct Sysstatus_
 
    typedef float _Trr_ad_type;
   _Trr_ad_type Trr_ad;
+
+   typedef float _theta_m2_type;
+  _theta_m2_type theta_m2;
+
+   typedef float _theta_l2_type;
+  _theta_l2_type theta_l2;
+
+   typedef float _delta_theta_r2_type;
+  _delta_theta_r2_type delta_theta_r2;
+
+   typedef float _Trr_cf_type;
+  _Trr_cf_type Trr_cf;
 
 
 
@@ -90,23 +110,13 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
+// BOOLTRAITS {'IsMessage': True, 'HasHeader': False, 'IsFixedSize': True}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'exosystem': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::exosystem::Sysstatus_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsFixedSize< ::exosystem::Sysstatus_<ContainerAllocator> const>
-  : TrueType
-  { };
 
 template <class ContainerAllocator>
 struct IsMessage< ::exosystem::Sysstatus_<ContainerAllocator> >
@@ -128,18 +138,28 @@ struct HasHeader< ::exosystem::Sysstatus_<ContainerAllocator> const>
   : FalseType
   { };
 
+template <class ContainerAllocator>
+struct IsFixedSize< ::exosystem::Sysstatus_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsFixedSize< ::exosystem::Sysstatus_<ContainerAllocator> const>
+  : TrueType
+  { };
+
 
 template<class ContainerAllocator>
 struct MD5Sum< ::exosystem::Sysstatus_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "9b07148f0fffa09945818d05f1c2a079";
+    return "a24a13feba27c82997977933cd4b8af4";
   }
 
   static const char* value(const ::exosystem::Sysstatus_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x9b07148f0fffa099ULL;
-  static const uint64_t static_value2 = 0x45818d05f1c2a079ULL;
+  static const uint64_t static_value1 = 0xa24a13feba27c829ULL;
+  static const uint64_t static_value2 = 0x97977933cd4b8af4ULL;
 };
 
 template<class ContainerAllocator>
@@ -163,6 +183,10 @@ float32 theta_m1\n\
 float32 theta_l1\n\
 float32 delta_theta_r1\n\
 float32 Trr_ad\n\
+float32 theta_m2\n\
+float32 theta_l2\n\
+float32 delta_theta_r2\n\
+float32 Trr_cf\n\
 ";
   }
 
@@ -186,6 +210,10 @@ namespace serialization
       stream.next(m.theta_l1);
       stream.next(m.delta_theta_r1);
       stream.next(m.Trr_ad);
+      stream.next(m.theta_m2);
+      stream.next(m.theta_l2);
+      stream.next(m.delta_theta_r2);
+      stream.next(m.Trr_cf);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -214,6 +242,14 @@ struct Printer< ::exosystem::Sysstatus_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.delta_theta_r1);
     s << indent << "Trr_ad: ";
     Printer<float>::stream(s, indent + "  ", v.Trr_ad);
+    s << indent << "theta_m2: ";
+    Printer<float>::stream(s, indent + "  ", v.theta_m2);
+    s << indent << "theta_l2: ";
+    Printer<float>::stream(s, indent + "  ", v.theta_l2);
+    s << indent << "delta_theta_r2: ";
+    Printer<float>::stream(s, indent + "  ", v.delta_theta_r2);
+    s << indent << "Trr_cf: ";
+    Printer<float>::stream(s, indent + "  ", v.Trr_cf);
   }
 };
 

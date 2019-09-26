@@ -7,16 +7,20 @@ import struct
 
 
 class Sysstatus(genpy.Message):
-  _md5sum = "9b07148f0fffa09945818d05f1c2a079"
+  _md5sum = "a24a13feba27c82997977933cd4b8af4"
   _type = "exosystem/Sysstatus"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """int16 record_flag
 float32 theta_m1
 float32 theta_l1
 float32 delta_theta_r1
-float32 Trr_ad"""
-  __slots__ = ['record_flag','theta_m1','theta_l1','delta_theta_r1','Trr_ad']
-  _slot_types = ['int16','float32','float32','float32','float32']
+float32 Trr_ad
+float32 theta_m2
+float32 theta_l2
+float32 delta_theta_r2
+float32 Trr_cf"""
+  __slots__ = ['record_flag','theta_m1','theta_l1','delta_theta_r1','Trr_ad','theta_m2','theta_l2','delta_theta_r2','Trr_cf']
+  _slot_types = ['int16','float32','float32','float32','float32','float32','float32','float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -26,7 +30,7 @@ float32 Trr_ad"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       record_flag,theta_m1,theta_l1,delta_theta_r1,Trr_ad
+       record_flag,theta_m1,theta_l1,delta_theta_r1,Trr_ad,theta_m2,theta_l2,delta_theta_r2,Trr_cf
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -45,12 +49,24 @@ float32 Trr_ad"""
         self.delta_theta_r1 = 0.
       if self.Trr_ad is None:
         self.Trr_ad = 0.
+      if self.theta_m2 is None:
+        self.theta_m2 = 0.
+      if self.theta_l2 is None:
+        self.theta_l2 = 0.
+      if self.delta_theta_r2 is None:
+        self.delta_theta_r2 = 0.
+      if self.Trr_cf is None:
+        self.Trr_cf = 0.
     else:
       self.record_flag = 0
       self.theta_m1 = 0.
       self.theta_l1 = 0.
       self.delta_theta_r1 = 0.
       self.Trr_ad = 0.
+      self.theta_m2 = 0.
+      self.theta_l2 = 0.
+      self.delta_theta_r2 = 0.
+      self.Trr_cf = 0.
 
   def _get_types(self):
     """
@@ -65,7 +81,7 @@ float32 Trr_ad"""
     """
     try:
       _x = self
-      buff.write(_get_struct_h4f().pack(_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad))
+      buff.write(_get_struct_h8f().pack(_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad, _x.theta_m2, _x.theta_l2, _x.delta_theta_r2, _x.Trr_cf))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -78,8 +94,8 @@ float32 Trr_ad"""
       end = 0
       _x = self
       start = end
-      end += 18
-      (_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad,) = _get_struct_h4f().unpack(str[start:end])
+      end += 34
+      (_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad, _x.theta_m2, _x.theta_l2, _x.delta_theta_r2, _x.Trr_cf,) = _get_struct_h8f().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -93,7 +109,7 @@ float32 Trr_ad"""
     """
     try:
       _x = self
-      buff.write(_get_struct_h4f().pack(_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad))
+      buff.write(_get_struct_h8f().pack(_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad, _x.theta_m2, _x.theta_l2, _x.delta_theta_r2, _x.Trr_cf))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -107,8 +123,8 @@ float32 Trr_ad"""
       end = 0
       _x = self
       start = end
-      end += 18
-      (_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad,) = _get_struct_h4f().unpack(str[start:end])
+      end += 34
+      (_x.record_flag, _x.theta_m1, _x.theta_l1, _x.delta_theta_r1, _x.Trr_ad, _x.theta_m2, _x.theta_l2, _x.delta_theta_r2, _x.Trr_cf,) = _get_struct_h8f().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -117,9 +133,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_h4f = None
-def _get_struct_h4f():
-    global _struct_h4f
-    if _struct_h4f is None:
-        _struct_h4f = struct.Struct("<h4f")
-    return _struct_h4f
+_struct_h8f = None
+def _get_struct_h8f():
+    global _struct_h8f
+    if _struct_h8f is None:
+        _struct_h8f = struct.Struct("<h8f")
+    return _struct_h8f

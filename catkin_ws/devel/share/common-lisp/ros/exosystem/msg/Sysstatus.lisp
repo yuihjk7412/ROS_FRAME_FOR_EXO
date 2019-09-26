@@ -31,6 +31,26 @@
     :reader Trr_ad
     :initarg :Trr_ad
     :type cl:float
+    :initform 0.0)
+   (theta_m2
+    :reader theta_m2
+    :initarg :theta_m2
+    :type cl:float
+    :initform 0.0)
+   (theta_l2
+    :reader theta_l2
+    :initarg :theta_l2
+    :type cl:float
+    :initform 0.0)
+   (delta_theta_r2
+    :reader delta_theta_r2
+    :initarg :delta_theta_r2
+    :type cl:float
+    :initform 0.0)
+   (Trr_cf
+    :reader Trr_cf
+    :initarg :Trr_cf
+    :type cl:float
     :initform 0.0))
 )
 
@@ -66,6 +86,26 @@
 (cl:defmethod Trr_ad-val ((m <Sysstatus>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader exosystem-msg:Trr_ad-val is deprecated.  Use exosystem-msg:Trr_ad instead.")
   (Trr_ad m))
+
+(cl:ensure-generic-function 'theta_m2-val :lambda-list '(m))
+(cl:defmethod theta_m2-val ((m <Sysstatus>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader exosystem-msg:theta_m2-val is deprecated.  Use exosystem-msg:theta_m2 instead.")
+  (theta_m2 m))
+
+(cl:ensure-generic-function 'theta_l2-val :lambda-list '(m))
+(cl:defmethod theta_l2-val ((m <Sysstatus>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader exosystem-msg:theta_l2-val is deprecated.  Use exosystem-msg:theta_l2 instead.")
+  (theta_l2 m))
+
+(cl:ensure-generic-function 'delta_theta_r2-val :lambda-list '(m))
+(cl:defmethod delta_theta_r2-val ((m <Sysstatus>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader exosystem-msg:delta_theta_r2-val is deprecated.  Use exosystem-msg:delta_theta_r2 instead.")
+  (delta_theta_r2 m))
+
+(cl:ensure-generic-function 'Trr_cf-val :lambda-list '(m))
+(cl:defmethod Trr_cf-val ((m <Sysstatus>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader exosystem-msg:Trr_cf-val is deprecated.  Use exosystem-msg:Trr_cf instead.")
+  (Trr_cf m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Sysstatus>) ostream)
   "Serializes a message object of type '<Sysstatus>"
   (cl:let* ((signed (cl:slot-value msg 'record_flag)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 65536) signed)))
@@ -88,6 +128,26 @@
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'Trr_ad))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'theta_m2))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'theta_l2))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'delta_theta_r2))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'Trr_cf))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -123,6 +183,30 @@
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'Trr_ad) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'theta_m2) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'theta_l2) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'delta_theta_r2) (roslisp-utils:decode-single-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'Trr_cf) (roslisp-utils:decode-single-float-bits bits)))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Sysstatus>)))
@@ -133,19 +217,23 @@
   "exosystem/Sysstatus")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Sysstatus>)))
   "Returns md5sum for a message object of type '<Sysstatus>"
-  "9b07148f0fffa09945818d05f1c2a079")
+  "a24a13feba27c82997977933cd4b8af4")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Sysstatus)))
   "Returns md5sum for a message object of type 'Sysstatus"
-  "9b07148f0fffa09945818d05f1c2a079")
+  "a24a13feba27c82997977933cd4b8af4")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Sysstatus>)))
   "Returns full string definition for message of type '<Sysstatus>"
-  (cl:format cl:nil "int16 record_flag~%float32 theta_m1~%float32 theta_l1~%float32 delta_theta_r1~%float32 Trr_ad~%~%"))
+  (cl:format cl:nil "int16 record_flag~%float32 theta_m1~%float32 theta_l1~%float32 delta_theta_r1~%float32 Trr_ad~%float32 theta_m2~%float32 theta_l2~%float32 delta_theta_r2~%float32 Trr_cf~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Sysstatus)))
   "Returns full string definition for message of type 'Sysstatus"
-  (cl:format cl:nil "int16 record_flag~%float32 theta_m1~%float32 theta_l1~%float32 delta_theta_r1~%float32 Trr_ad~%~%"))
+  (cl:format cl:nil "int16 record_flag~%float32 theta_m1~%float32 theta_l1~%float32 delta_theta_r1~%float32 Trr_ad~%float32 theta_m2~%float32 theta_l2~%float32 delta_theta_r2~%float32 Trr_cf~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Sysstatus>))
   (cl:+ 0
      2
+     4
+     4
+     4
+     4
      4
      4
      4
@@ -159,4 +247,8 @@
     (cl:cons ':theta_l1 (theta_l1 msg))
     (cl:cons ':delta_theta_r1 (delta_theta_r1 msg))
     (cl:cons ':Trr_ad (Trr_ad msg))
+    (cl:cons ':theta_m2 (theta_m2 msg))
+    (cl:cons ':theta_l2 (theta_l2 msg))
+    (cl:cons ':delta_theta_r2 (delta_theta_r2 msg))
+    (cl:cons ':Trr_cf (Trr_cf msg))
 ))

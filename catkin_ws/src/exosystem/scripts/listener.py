@@ -15,8 +15,10 @@ def callback(data):
         if i == 0:
             Current_Time = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
             os.mknod('%s.csv' % Current_Time)
+            df = DataFrame([['i','data.theta_m1','data.theta_l1','data.delta_theta_r1','data.Trr_ad','data.theta_m2','data.theta_l2','data.delta_theta_r2','data.Trr_cf']])
+            df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
             print("Start recording")
-        df = DataFrame([[i,data.theta_m1,data.theta_l1,data.delta_theta_r1,data.Trr_ad]])
+        df = DataFrame([[i,data.theta_m1,data.theta_l1,data.delta_theta_r1,data.Trr_ad,data.theta_m2,data.theta_l2,data.delta_theta_r2,data.Trr_cf]])
         df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
         i = i + 1
     else:
