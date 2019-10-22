@@ -335,7 +335,7 @@ if __name__ == '__main__':
         #msg_pub.ytheta = ytheta_temp
         #msg_pub.ztheta = ztheta_temp
         #pub.publish(msg_pub)
-        #rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
+        rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
         # print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
         # %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
 

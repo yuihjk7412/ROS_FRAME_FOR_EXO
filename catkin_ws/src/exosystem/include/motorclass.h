@@ -18,6 +18,7 @@
 // #include "std_msgs/Float32.h"
 // #include "exosystem/Motor_Force.h"
 
+int64_t getCurrentTime();
 
 class motor
 {
