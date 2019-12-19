@@ -57,6 +57,7 @@ def Print_Quat_Info():
 def Set_Initial_Pos():
     temp = np.zeros([1,32])
     print("Initialization Processing")
+    print("请保持双臂紧贴于身体两侧，手掌贴于身体两侧且拇指指向身体前方")
     i = 0
     while i < Initialize_Num:
         Get_Quat(Quat)
@@ -227,6 +228,7 @@ def Norm_Cordinate():
     REu2Es = np.dot(RSs2Es,np.linalg.inv(RSu2Eu))
     return REu2Es 
 
+"""根据位姿计算两路绳系的拉力值"""
 def Cal_Motor_Force(Rot_Mat_u2s):
     Tad = (189*(409**(1/2))*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]))/(20*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,2] - Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,2] + Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,0] + Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,0]))
     Tcf = (189*(409**(1/2))*(Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]))/(20*(Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,2] - Rot_Mat_u2s[0,0]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,2] + Rot_Mat_u2s[0,1]*Rot_Mat_u2s[1,2]*Rot_Mat_u2s[2,0] + Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,0]*Rot_Mat_u2s[2,1] - Rot_Mat_u2s[0,2]*Rot_Mat_u2s[1,1]*Rot_Mat_u2s[2,0]))
@@ -251,7 +253,7 @@ def Bias_Minimize(R):
         bias_matrix = np.array([[np.cos(theta_bias_z),-np.sin(theta_bias_z), 0],[np.sin(theta_bias_z),np.cos(theta_bias_z),0],
                        [0,0,1]])
         R = np.dot(bias_matrix, R)
-        print("角度偏差：%f\n"%theta_bias_z)
+        print("角度偏差：%f\n"%np.degrees(theta_bias_z))
     return R
 
 
@@ -322,8 +324,8 @@ if __name__ == '__main__':
         msg_pub = Motor_Force()
         [msg_pub.motor1_force,msg_pub.motor2_force] = Cal_Motor_Force(Rot_Mat_u2s)
         pub_f.publish(msg_pub)#发布计算出来的拉力结果
-        # upper_o = Get_Limb_Pos(Rot_Mat_u2s)
-        # [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
+        upper_o = Get_Limb_Pos(Rot_Mat_u2s)
+        [xtheta_temp, ytheta_temp, ztheta_temp] = Get_Euler_Angle(Rot_Mat_u2s)
         '''xtheta.append(xtheta_temp)
         ytheta.append(ytheta_temp)
         ztheta.append(ztheta_temp)
@@ -335,9 +337,9 @@ if __name__ == '__main__':
         #msg_pub.ytheta = ytheta_temp
         #msg_pub.ztheta = ztheta_temp
         #pub.publish(msg_pub)
-        rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
-        # print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
-        # %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
+        # rospy.loginfo("Tad:%-8.2fTcf:%-8.2f"%(msg_pub.motor1_force,msg_pub.motor2_force))
+        print("\r xtheta:%-8.2fytheta:%-8.2fztheta:%-8.2fxpos:%-8.2fypos:%-8.2fzpos:%-8.2fTad:%-8.2fTcf:%-8.2f"\
+        %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
 
         #Points_Num = list(range(len(xtheta)))
         # if Flag_Data_Record:

@@ -1,4 +1,12 @@
-﻿#include <stdio.h>
+﻿/*
+ * @Author: your name
+ * @Date: 2019-10-23 16:54:05
+ * @LastEditTime: 2019-10-31 15:02:31
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/src/motorcontrol.cpp
+ */
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -32,6 +40,11 @@ const int control_period = 1000; //定义控制周期常量,目前定义为1ms
 int32_t theta_m_i1,theta_m_i2; //初始的电机位置
 float theta_l_i1, theta_l_i2; //初始的弹簧末端位置
 int16_t record_flag = 0;
+const float proportionality_coefficient = 0.3;	//适当的缩小协助力矩，基于安全的考虑
+const float minimal_force = 2;	//设定最小的拉力值，避免出现松弛的现象
+const float minimal_torque = minimal_force * 0.03;	//设定的最小扭矩	
+const double reduction_ratio = 128.0;//减速器减速比128:1
+const double encoder_line_num = 500;//编码器线数500线
 
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
@@ -46,6 +59,11 @@ struct param
 	motor * motor2;
 };
 
+/**
+ * @description: 利用select函数改写usleep()函数，使得定时精度更高
+ * @param {type} ：unsigned long usec
+ * @return: void
+ */
 void usecsleep(unsigned long usec)
 {
     struct timeval tv;
@@ -72,8 +90,25 @@ void chatterCallbackLimbpos(const exosystem::Limbpos::ConstPtr& msg)
 
 void chatterCallbackMotorForce(const exosystem::Motor_Force::ConstPtr& msg)
 {
-	Td_ad = msg->motor1_force * 0.03;
-	Td_cf = msg->motor2_force * 0.03; //末端输出理想转矩
+	// Td_ad = msg->motor1_force * 0.03;
+	// Td_cf = msg->motor2_force * 0.03; //末端输出理想转矩
+	if (msg->motor1_force * 0.03 <= minimal_torque)
+	{
+		Td_ad = minimal_torque;
+	}
+	else
+	{
+		Td_ad = msg->motor1_force * 0.03 * proportionality_coefficient;
+	}
+	
+	if (msg->motor2_force * 0.03 <= minimal_torque)
+	{
+		Td_cf = minimal_torque;
+	}
+	else
+	{
+		Td_cf = msg->motor2_force * 0.03 * proportionality_coefficient;
+	}	
 	//ROS_INFO("motor1: [%f]motor2: [%f]", msg->motor1_force, msg->motor2_force);
 }
 
@@ -324,21 +359,20 @@ int initialize_can_adaptor(void)
 
 main(int argc, char **argv)
 {
-	printf(">>programme running\r\n");//指示程序已运行
+	printf(">>programme running\r\n");	
+	printf(">>程序开始运行\r\n");//指示程序已运行
 
 	initialize_can_adaptor();//初始化Can Adaptor设备
 	
-	ros::init(argc, argv, "motorcontrol");
+	ros::init(argc, argv, "motorcontrol");//初始化ros节点
 	pthread_t threadid0;
 	int ret0;
-	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);//启动线程读取节点上传的数据
-	
-	
+	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);//启动线程读取节点上传的数据	
 	
 	PID_position torque_ad_m(0.6, 0.005, 0);
 	PID_position delta_theta_m1(0, 0, 0);
 	PID_position torque_cf_m(0.6, 0.005, 0);
-	PID_position delta_theta_m2(0, 0, 0);
+	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数
 
 	float delta_theta_d1, delta_theta_d2; //理想的转角差
 	float delta_theta_r1, delta_theta_r2; //实际的转角差
@@ -349,12 +383,12 @@ main(int argc, char **argv)
 
 
 	usecsleep(1000000);//延时1秒
-	motor motor1(1, &(count), &buf);//
-	monitor_switch1 = &(motor1.data_coming);
-	updated_flag1 = &(motor1.data_updated);
-	temp_buf1 = &(motor1.rec_data);	
+	motor motor1(1, &(count), &buf);//初始化电机1
+	monitor_switch1 = &(motor1.data_coming);//初始化监视器标志
+	updated_flag1 = &(motor1.data_updated);//初始化更新数据标志
+	temp_buf1 = &(motor1.rec_data);	//连接暂存数组
 
-	motor motor2(2, &(count), &buf);//
+	motor motor2(2, &(count), &buf);//初始化电机2
 	monitor_switch2 = &(motor2.data_coming);
 	updated_flag2 = &(motor2.data_updated);
 	temp_buf2 = &(motor2.rec_data);
@@ -368,7 +402,7 @@ main(int argc, char **argv)
 	motor1.Motor_Disable();//失能电机
 	motor1.Motor_Mode(5);//选择位置模式
 	motor1.Motor_Enable();//使能电机
-	motor1.Motor_Speed_for_PTP(496665);//设置位置模式下电机运转速度
+	motor1.Motor_Speed_for_PTP(496665);//设置位置模式下电机运转速度，为保证最快速度内到达指定位置，采用最高速度
 
 	motor2.Motor_Disable();//失能电机
 	motor2.Motor_Mode(5);//选择位置模式
@@ -434,8 +468,8 @@ main(int argc, char **argv)
 	//下面测试力控效果，输入固定的控制目标
 	float T_tar = 0.3; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
 	delta_theta_d1 = 0;
-	int32_t pos_Limit1 = (128.0*500.0*4.0) * 2; //设置位置上下限
-	int32_t pos_Limit2 = (128.0*500.0*4.0) * 2; //设置位置上下限
+	const int32_t pos_Limit1 = (reduction_ratio*encoder_line_num*4.0) * 2; //设置位置上下限
+	const int32_t pos_Limit2 = (reduction_ratio*encoder_line_num*4.0) * 2; //设置位置上下限
 	
 	printf("theta_m_i2:%d\r\n",theta_m_i2);
 	printf("theta_m_i1:%d\r\n",theta_m_i1);
@@ -487,7 +521,7 @@ main(int argc, char **argv)
 		usecsleep(200);
 
 		int64_t f_time = getCurrentTime();
-		if (f_time - s_time > 10000000)
+		if (f_time - s_time > 10000000)//时间大于10秒，控制回路终止
 		{
 			break;
 		}

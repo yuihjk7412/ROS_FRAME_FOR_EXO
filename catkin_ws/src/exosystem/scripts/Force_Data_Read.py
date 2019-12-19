@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+#读取拉力值，经过转换为实测力矩值，发布话题
 import serial
 import time
 import numpy as np
