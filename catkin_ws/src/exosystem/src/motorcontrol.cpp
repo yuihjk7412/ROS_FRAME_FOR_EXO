@@ -369,10 +369,10 @@ main(int argc, char **argv)
 	int ret0;
 	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);//启动线程读取节点上传的数据	
 	
-	PID_position torque_ad_m(0.6, 0.005, 0);
+	PID_position torque_ad_m(0.4, 0, 1);
 	PID_position delta_theta_m1(0, 0, 0);
-	PID_position torque_cf_m(0.6, 0.005, 0);
-	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数
+	PID_position torque_cf_m(0.4, 0, 1);
+	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数 为避免累计误差均采用PD控制
 
 	float delta_theta_d1, delta_theta_d2; //理想的转角差
 	float delta_theta_r1, delta_theta_r2; //实际的转角差
@@ -501,7 +501,7 @@ main(int argc, char **argv)
 		//delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
 		delta_theta_d1 = (torque_result) / Ks + delta_theta_d1; //理想的转角差
 		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
-		usecsleep(200);
+		// usecsleep(200);
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
 		delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1); //转角PID控制器输出的结果
 		int32_t pos1 = (int32_t)(((theta_l1 - theta_l_i1) + delta_result + delta_theta_d1) / 360 * (128.0*500.0*4.0) + theta_m_i1);
