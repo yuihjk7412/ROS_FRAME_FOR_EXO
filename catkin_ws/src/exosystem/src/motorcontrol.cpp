@@ -31,7 +31,7 @@
 float Td_ad, Td_cf; //根据上肢位姿计算出来的理想力矩值
 float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
 float Ti_ad, Ti_cf; //初始换算出来的扭力值
-float Ks = 0.0856; //扭簧K值单位（Nm/degree）
+const float Ks = 0.0856; //扭簧K值单位（Nm/degree）
 float theta_l1, theta_l2; //扭簧末端扭转角
 int* monitor_switch1, *updated_flag1, *monitor_switch2, *updated_flag2; //can收发器监视开关，为0时不监测数据，1时监测数据
 VCI_CAN_OBJ* temp_buf1, *temp_buf2; //存放
@@ -41,10 +41,11 @@ int32_t theta_m_i1,theta_m_i2; //初始的电机位置
 float theta_l_i1, theta_l_i2; //初始的弹簧末端位置
 int16_t record_flag = 0;
 const float proportionality_coefficient = 0.3;	//适当的缩小协助力矩，基于安全的考虑
-const float minimal_force = 2;	//设定最小的拉力值，避免出现松弛的现象
+const float minimal_force = 5;	//设定最小的拉力值，避免出现松弛的现象
 const float minimal_torque = minimal_force * 0.03;	//设定的最小扭矩	
-const double reduction_ratio = 128.0;//减速器减速比128:1
-const double encoder_line_num = 500;//编码器线数500线
+const double reduction_ratio = 128.0; //减速器减速比128:1
+const double encoder_line_num = 500; //编码器线数500线
+const double cnt_per_circle = reduction_ratio * encoder_line_num * 4; //电机末端转一圈，编码器接收到的脉冲数
 
 
 VCI_BOARD_INFO pInfo;//用来获取设备信息。
@@ -369,10 +370,15 @@ main(int argc, char **argv)
 	int ret0;
 	ret0 = pthread_create(&threadid0,NULL,receive_ROS_func, NULL);//启动线程读取节点上传的数据	
 	
-	PID_position torque_ad_m(0.4, 0, 1);
+	PID_position torque_ad_m(0.4, 0, 20);
 	PID_position delta_theta_m1(0, 0, 0);
-	PID_position torque_cf_m(0.4, 0, 1);
-	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数 为避免累计误差均采用PD控制
+	PID_position torque_cf_m(0.4, 0, 20);
+	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数 为避免累计误差均采用位置式PD控制
+
+	// PID_incremental torque_ad_m(0.5, 0.2, 1);
+	// PID_incremental delta_theta_m1(0, 0, 0);
+	// PID_incremental torque_cf_m(0.5, 0.2, 1);
+	// PID_incremental delta_theta_m2(0, 0, 0);//设置PID控制参数 为避免累计误差均采用增量式PD控制
 
 	float delta_theta_d1, delta_theta_d2; //理想的转角差
 	float delta_theta_r1, delta_theta_r2; //实际的转角差
@@ -410,20 +416,22 @@ main(int argc, char **argv)
 	motor2.Motor_Speed_for_PTP(496665);//设置位置模式下电机运转速度
 
 	usecsleep(500);
-
 	printf("start record\r\n");
+
 	/*记录初始状态值 */
 	theta_m_i1 = motor1.Motor_Main_Pos(); //电机的初始位置
-	printf("1\r\n");
+	printf("theta_m_i1:%d\r\n",theta_m_i1);
 	usecsleep(1000);
 	theta_m_i2 = motor2.Motor_Main_Pos();
-	printf("INI\r\n");
+	printf("theta_m_i2:%d\r\n",theta_m_i2);
 	theta_l_i1 = theta_l1; //弹簧末端的初始位置
-	theta_l_i2 = theta_l2;
+	theta_l_i2 = theta_l2; //弹簧末端的初始位置
 	//printf("theta_l_i1:%f\r\n",theta_l_i1);
 	Ti_ad = Tr_ad; //记录初始力矩值
-	Ti_cf = Tr_cf;
+	Ti_cf = Tr_cf; //记录初始力矩值
 	usecsleep(1000000); //延时1秒
+	/*         */
+
 	struct param cache;
 	cache.run = 1;
 	cache.motor1 = &motor1;
@@ -431,6 +439,63 @@ main(int argc, char **argv)
 	pthread_t threadid1;
 	int ret1;
 	ret1 = pthread_create(&threadid1,NULL,pub_status, &cache);//启动接收线程
+
+	//////预张紧/////////////////////
+	printf("开始预张紧\r\n");
+	motor1.Motor_Speed_for_PTP(25600);//设置预张紧速度为0.1r/s
+	usecsleep(500);
+	int32_t theta_temp = motor1.Motor_Main_Pos();
+	usecsleep(500);
+	motor1.Move_To(theta_temp + 2 * cnt_per_circle);
+	int64_t s_time_temp = getCurrentTime();
+	while (Tr_ad - Ti_ad < minimal_torque)
+	{
+		int64_t f_time_temp = getCurrentTime();
+		if (f_time_temp - s_time_temp > 10000000)//时间大于10秒，控制回路终止
+		{
+			break;
+		}
+	}
+	motor1.Motor_Stop();
+	printf("预张紧结束\r\n");
+
+	// motor2.Motor_Speed_for_PTP(25600);//设置预张紧速度为0.1r/s
+	// usecsleep(500);
+	// theta_temp = motor2.Motor_Main_Pos();
+	// usecsleep(500);
+	// motor2.Move_To(theta_temp + 2 * cnt_per_circle);
+	// s_time_temp = getCurrentTime();
+	// while (Tr_cf - Ti_cf < minimal_torque)
+	// {
+	// 	int64_t f_time_temp = getCurrentTime();
+	// 	if (f_time_temp - s_time_temp > 10000000)//时间大于10秒，控制回路终止
+	// 	{
+	// 		break;
+	// 	}
+	// }
+	// motor2.Motor_Stop();
+	///////////////////////////////////////////
+
+	/*记录预张紧后的初始状态值 */
+	printf("记录预张紧后的初始状态值\r\n");
+	theta_m_i1 = motor1.Motor_Main_Pos(); //电机的初始位置
+	printf("theta_m_i1:%d\r\n",theta_m_i1);
+	usecsleep(1000);
+	theta_m_i2 = motor2.Motor_Main_Pos();
+	printf("theta_m_i2:%d\r\n",theta_m_i2);
+	theta_l_i1 = theta_l1; //弹簧末端的初始位置
+	theta_l_i2 = theta_l2; //弹簧末端的初始位置
+	//printf("theta_l_i1:%f\r\n",theta_l_i1);
+	Ti_ad = Tr_ad; //记录初始力矩值
+	Ti_cf = Tr_cf; //记录初始力矩值
+	printf("电机1的初始角度theta_m_i1:%d\r\n",theta_m_i1);
+	printf("电机2的初始角度theta_m_i2:%d\r\n",theta_m_i2);
+	printf("弹簧1末端初始角度theta_l_i1:%f\r\n",theta_l_i1);
+	printf("弹簧1末端初始角度theta_l_i2:%f\r\n",theta_l_i2);
+	printf("电机1的初始力矩:Ti_ad:%f\r\n",Ti_ad);
+	printf("电机1的初始力矩:Ti_cf:%f\r\n",Ti_cf);
+	usecsleep(1000000); //延时1秒
+	/*         */
 
 
 	// //下面为用于调试作用
@@ -468,11 +533,8 @@ main(int argc, char **argv)
 	//下面测试力控效果，输入固定的控制目标
 	float T_tar = 0.3; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
 	delta_theta_d1 = 0;
-	const int32_t pos_Limit1 = (reduction_ratio*encoder_line_num*4.0) * 2; //设置位置上下限
-	const int32_t pos_Limit2 = (reduction_ratio*encoder_line_num*4.0) * 2; //设置位置上下限
-	
-	printf("theta_m_i2:%d\r\n",theta_m_i2);
-	printf("theta_m_i1:%d\r\n",theta_m_i1);
+	const int32_t pos_Limit1 = cnt_per_circle * 2; //设置位置上下限,2圈
+	const int32_t pos_Limit2 = cnt_per_circle * 2; //设置位置上下限,2圈
 
 	record_flag = 1;//开始记录
 
@@ -500,7 +562,7 @@ main(int argc, char **argv)
 		torque_result = torque_ad_m.pid_control(T_tar, Trr_ad);
 		//delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
 		delta_theta_d1 = (torque_result) / Ks + delta_theta_d1; //理想的转角差
-		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / (128.0*500.0*4.0) * 360.0; //电机实际相对转角
+		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / cnt_per_circle * 360.0; //电机实际相对转角
 		// usecsleep(200);
 		delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
 		delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1); //转角PID控制器输出的结果
