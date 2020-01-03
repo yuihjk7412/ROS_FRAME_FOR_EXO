@@ -219,6 +219,7 @@ int motor::Motor_Speed_for_PTP(int32_t speed)
 
 int motor::Motor_Main_Pos()
 {
+	int32_t main_pos;
 	VCI_CAN_OBJ command;
 	command.ID = (u_int32_t)0x300 + ID;
 	command.SendType = 1;
@@ -250,6 +251,7 @@ int motor::Motor_Main_Pos()
 				/* code */
 				data_coming = 0;
 				data_updated = 0;
+				memcpy(&main_pos, &(rec_data.Data[4]), 4 * sizeof(BYTE));				
 				break;
 			}			
 		}			
@@ -270,8 +272,6 @@ int motor::Motor_Main_Pos()
 	// 		}			
 	// 	}			
 	// }
-	int32_t main_pos;
-	memcpy(&main_pos, &(rec_data.Data[4]), 4 * sizeof(BYTE));
 	return main_pos;
 
 }
