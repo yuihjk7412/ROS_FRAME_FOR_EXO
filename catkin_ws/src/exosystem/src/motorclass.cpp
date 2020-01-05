@@ -234,7 +234,7 @@ int motor::Motor_Main_Pos()
 	while (data_coming && ros::ok())
 	{
 		int64_t process_time = getCurrentTime();
-		if (process_time - start_time >= 5000)
+		if (process_time - start_time >= 5000)	//超过5ms未接收到返回指令，重新发送请求
 		{
 			// printf("resend");
 			Send_Command(&command);

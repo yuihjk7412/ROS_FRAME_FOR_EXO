@@ -4,14 +4,31 @@ from exosystem.msg import Encoder
 import serial
 
 if __name__ == '__main__':
-    port_Num = input('PLEASE INPUT THE PORT NUMBER(/dev/ttyUSB*):')
+    # port_Num = input('PLEASE INPUT THE PORT NUMBER(/dev/ttyUSB*):')
     request_Command = bytes.fromhex('7ff7')
-    with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
-        ser.write(request_Command)  #发出请求
-        buf = ser.read(6)          #接收回复
-        if len(buf) < 6:
+    port_Num = 10
+
+    # 遍历串口找到合适的串口
+    while 1:
+        if port_Num < 0:
             raise serial.SerialTimeoutException
-        print("Serial Port OK!")
+        try:
+            with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
+                ser.write(request_Command)  #发出请求
+                buf = ser.read(6)          #接收回复
+                if len(buf) >= 6:
+                    break
+        except serial.serialutil.SerialException as ex:
+            pass
+        port_Num = port_Num - 1
+    print("Serial Port %d OK!"%port_Num)
+
+    # with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
+    #     ser.write(request_Command)  #发出请求
+    #     buf = ser.read(6)          #接收回复
+    #     if len(buf) < 6:
+    #         raise serial.SerialTimeoutException
+    #     print("Serial Port OK!")
     
     pub = rospy.Publisher('encoder_topic', Encoder, queue_size=10)
     rospy.init_node('encoder_talker', anonymous=True)

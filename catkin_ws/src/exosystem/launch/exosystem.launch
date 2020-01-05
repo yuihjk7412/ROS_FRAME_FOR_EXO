@@ -1,0 +1,6 @@
+<launch>
+    <node name="listener" pkg = "exosystem" type = "listener.py"  launch-prefix="xterm -e" respawn="true"/>
+    <node name="encoder_talker" pkg = "exosystem" type = "Encoder_read.py" launch-prefix="xterm -e" required="true"/>
+    <node name="motorcontrol" pkg = "exosystem" type = "motorcontrol" launch-prefix="xterm -e" required="true"/>
+    <node name="force_talker" pkg = "exosystem" type = "Force_Data_Read.py" launch-prefix="xterm -e" required="true"/>
+</launch>
