@@ -496,6 +496,7 @@ main(int argc, char **argv)
 	printf("theta_m_i1:%d\r\n",theta_m_i1);
 	usecsleep(100000);
 	theta_m_i2 = motor2.Motor_Main_Pos();
+	// usecsleep(100000);
 	printf("theta_m_i2:%d\r\n",theta_m_i2);
 	theta_l_i1 = theta_l1; //弹簧末端的初始位置
 	theta_l_i2 = theta_l2; //弹簧末端的初始位置
@@ -508,7 +509,7 @@ main(int argc, char **argv)
 	printf("弹簧1末端初始角度theta_l_i2:%f\r\n",theta_l_i2);
 	printf("电机1的初始力矩:Ti_ad:%f\r\n",Ti_ad);
 	printf("电机1的初始力矩:Ti_cf:%f\r\n",Ti_cf);
-	usecsleep(1000000); //延时1秒
+	// usecsleep(10000); //延时0.01秒
 	/*         */
 
 	//将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
@@ -523,10 +524,53 @@ main(int argc, char **argv)
 	int64_t s_time = getCurrentTime();
 	float theta_m1_prev = 0;
 	float theta_m2_prev = 0;//前一节拍的电机位置
+	theta_m_i2 = motor2.Motor_Main_Pos();
 	
 	while (ros::ok())
 	{
 		record_flag = 1;//开始记录
+
+		// M2力控制回路 		
+		Trr_cf = Tr_cf - Ti_cf;	//实测相对力矩值
+		torque_result = torque_cf_m.pid_control(T_tar, Trr_cf);
+		//delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
+		delta_theta_d2 = (torque_result) / Ks + delta_theta_d2; //理想的转角差
+		while (ros::ok())	//引入对电机位置的判断，消除电机位置奇异点
+		{
+			theta_m2 = (float)(motor2.Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角
+			if (abs(theta_m2 - theta_m2_prev) < 10)//非奇异点
+			{
+				break;
+			}
+			printf("strange point! theta_m2:%f\ttheta_m_i2:%f\r\n", theta_m2, theta_m_i2/cnt_per_circle*360.0);			
+		}
+		theta_m2_prev = theta_m2;
+		// theta_m2 = (float)(motor2.Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角
+		//usecsleep(200);
+		delta_theta_r2 = theta_m2 - (theta_l2 - theta_l_i2); //实际的转角差
+		delta_result = delta_theta_m2.pid_control(delta_theta_d2, delta_theta_r2); //转角PID控制器输出的结果
+		int32_t pos2 = (int32_t)(((theta_l2 - theta_l_i2) + delta_result + delta_theta_d2) / 360 * cnt_per_circle + theta_m_i2);
+		printf("电机2：实测拉力值:%f\t理论角度偏差:%f\t实际角度偏差:%f\r\n",Trr_cf, delta_theta_d2, delta_theta_r2);
+		//检测位置是否超限
+		if (pos2 > theta_m_i2 + pos_Limit2 || pos2 < theta_m_i2 - pos_Limit2)
+		{
+			printf("POSITION2 out of the range！\r\n");
+			motor2.Motor_Stop();
+			usecsleep(1000);
+			motor1.Motor_Stop();
+			usecsleep(1000);
+			motor2.Motor_Disable();
+			usecsleep(1000);
+			motor1.Motor_Disable();
+			usecsleep(1000);
+			break;
+		}
+
+		// motor1.Move_To(pos1);
+		// usecsleep(200);
+
+		motor2.Move_To(pos2);
+		usecsleep(500);
 
 		// M1力控制回路 		
 		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
@@ -568,47 +612,7 @@ main(int argc, char **argv)
 		usecsleep(500);
 
 		
-		// M2力控制回路 		
-		Trr_cf = Tr_cf - Ti_cf;	//实测相对力矩值
-		torque_result = torque_cf_m.pid_control(T_tar, Trr_cf);
-		//delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
-		delta_theta_d2 = (torque_result) / Ks + delta_theta_d2; //理想的转角差
-		// while (ros::ok())	//引入对电机位置的判断，消除电机位置奇异点
-		// {
-		// 	theta_m2 = (float)(motor2.Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角
-		// 	if (abs(theta_m2 - theta_m2_prev) < 10)//非奇异点
-		// 	{
-		// 		break;
-		// 	}
-		// 	printf("strange point! theta_m2:%f\ttheta_m2_prev:%f\r\n", theta_m2, theta_m2_prev);			
-		// }
-		// theta_m2_prev = theta_m2;
-		theta_m2 = (float)(motor2.Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角
-		//usecsleep(200);
-		delta_theta_r2 = theta_m2 - (theta_l2 - theta_l_i2); //实际的转角差
-		delta_result = delta_theta_m2.pid_control(delta_theta_d2, delta_theta_r2); //转角PID控制器输出的结果
-		int32_t pos2 = (int32_t)(((theta_l2 - theta_l_i2) + delta_result + delta_theta_d2) / 360 * cnt_per_circle + theta_m_i2);
-		printf("电机2：实测拉力值:%f\t理论角度偏差:%f\t实际角度偏差:%f\r\n",Trr_cf, delta_theta_d2, delta_theta_r2);
-		//检测位置是否超限
-		if (pos2 > theta_m_i2 + pos_Limit2 || pos2 < theta_m_i2 - pos_Limit2)
-		{
-			printf("POSITION2 out of the range！\r\n");
-			motor2.Motor_Stop();
-			usecsleep(1000);
-			motor1.Motor_Stop();
-			usecsleep(1000);
-			motor2.Motor_Disable();
-			usecsleep(1000);
-			motor1.Motor_Disable();
-			usecsleep(1000);
-			break;
-		}
-
-		// motor1.Move_To(pos1);
-		// usecsleep(200);
-
-		motor2.Move_To(pos2);
-		usecsleep(500);
+		
 		
 		//倒计时
 		int64_t f_time = getCurrentTime();
@@ -646,7 +650,7 @@ main(int argc, char **argv)
 	VCI_CloseDevice(VCI_USBCAN2,0);//关闭设备。
 	//除收发函数外，其它的函数调用前后，最好加个毫秒级的延时，即不影响程序的运行，又可以让USBCAN设备有充分的时间处理指令。
 	//goto ext;
-	std::cout<<"programme end. press ctrl and c to exit the process..."
+	std::cout<<"programme end. press ctrl and c to exit the process...";
 	while (ros::ok())
 	{
 		;
