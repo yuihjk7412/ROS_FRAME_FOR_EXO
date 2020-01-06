@@ -313,6 +313,8 @@ if __name__ == '__main__':
         # 获取当前时间作为文件名，建立空白.csv文档
         Current_Time = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
         os.mknod('%s.csv' % Current_Time)
+        df = DataFrame([['xtheta','ytheta','ztheta','xpos','ypos','zpos','Tad','Tcf']])
+        df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
     else:
         Flag_Data_Record = False
 
@@ -342,9 +344,9 @@ if __name__ == '__main__':
         %(xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force), end="")
 
         #Points_Num = list(range(len(xtheta)))
-        # if Flag_Data_Record:
-        #     df = DataFrame([[xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0]]])
-        #     df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
+        if Flag_Data_Record:
+            df = DataFrame([[xtheta_temp,ytheta_temp,ztheta_temp,upper_o[0][0,0],upper_o[0][1,0],upper_o[0][2,0],msg_pub.motor1_force,msg_pub.motor2_force]])
+            df.to_csv('%s.csv'%Current_Time,mode='a',header=False,index=False)
 
         rate.sleep()
     

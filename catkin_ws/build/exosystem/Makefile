@@ -166,6 +166,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+exosystem/CMakeFiles/motorcontrolfle.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/motorcontrolfle.dir/rule
+.PHONY : exosystem/CMakeFiles/motorcontrolfle.dir/rule
+
+# Convenience name for target.
+motorcontrolfle: exosystem/CMakeFiles/motorcontrolfle.dir/rule
+
+.PHONY : motorcontrolfle
+
+# fast build rule for target.
+motorcontrolfle/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/build
+.PHONY : motorcontrolfle/fast
+
+# Convenience name for target.
 exosystem/CMakeFiles/exosystem_genpy.dir/rule:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/exosystem_genpy.dir/rule
 .PHONY : exosystem/CMakeFiles/exosystem_genpy.dir/rule
@@ -541,6 +556,21 @@ std_msgs_generate_messages_lisp/fast:
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+exosystem/CMakeFiles/motorcontrolabd.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/motorcontrolabd.dir/rule
+.PHONY : exosystem/CMakeFiles/motorcontrolabd.dir/rule
+
+# Convenience name for target.
+motorcontrolabd: exosystem/CMakeFiles/motorcontrolabd.dir/rule
+
+.PHONY : motorcontrolabd
+
+# fast build rule for target.
+motorcontrolabd/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/build
+.PHONY : motorcontrolabd/fast
+
+# Convenience name for target.
 exosystem/CMakeFiles/motorcontrol.dir/rule:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/motorcontrol.dir/rule
 .PHONY : exosystem/CMakeFiles/motorcontrol.dir/rule
@@ -569,6 +599,36 @@ exosystem_generate_messages: exosystem/CMakeFiles/exosystem_generate_messages.di
 exosystem_generate_messages/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/exosystem_generate_messages.dir/build.make exosystem/CMakeFiles/exosystem_generate_messages.dir/build
 .PHONY : exosystem_generate_messages/fast
+
+# Convenience name for target.
+exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
+.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
+
+# Convenience name for target.
+_exosystem_generate_messages_check_deps_Torque: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
+
+.PHONY : _exosystem_generate_messages_check_deps_Torque
+
+# fast build rule for target.
+_exosystem_generate_messages_check_deps_Torque/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build
+.PHONY : _exosystem_generate_messages_check_deps_Torque/fast
 
 # Convenience name for target.
 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule:
@@ -615,42 +675,14 @@ _exosystem_generate_messages_check_deps_Limbpos/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/build
 .PHONY : _exosystem_generate_messages_check_deps_Limbpos/fast
 
-# Convenience name for target.
-exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
-.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
-
-# Convenience name for target.
-_exosystem_generate_messages_check_deps_Torque: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
-
-.PHONY : _exosystem_generate_messages_check_deps_Torque
-
-# fast build rule for target.
-_exosystem_generate_messages_check_deps_Torque/fast:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build
-.PHONY : _exosystem_generate_messages_check_deps_Torque/fast
-
 src/motorclass.o: src/motorclass.cpp.o
 
 .PHONY : src/motorclass.o
 
 # target to build an object file
 src/motorclass.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/motorclass.cpp.o
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/motorclass.cpp.o
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorclass.cpp.o
 .PHONY : src/motorclass.cpp.o
 
@@ -660,6 +692,8 @@ src/motorclass.i: src/motorclass.cpp.i
 
 # target to preprocess a source file
 src/motorclass.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/motorclass.cpp.i
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/motorclass.cpp.i
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorclass.cpp.i
 .PHONY : src/motorclass.cpp.i
 
@@ -669,6 +703,8 @@ src/motorclass.s: src/motorclass.cpp.s
 
 # target to generate assembly for a file
 src/motorclass.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/motorclass.cpp.s
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/motorclass.cpp.s
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorclass.cpp.s
 .PHONY : src/motorclass.cpp.s
 
@@ -699,12 +735,68 @@ src/motorcontrol.cpp.s:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/motorcontrol.cpp.s
 .PHONY : src/motorcontrol.cpp.s
 
+src/motorcontrolabd.o: src/motorcontrolabd.cpp.o
+
+.PHONY : src/motorcontrolabd.o
+
+# target to build an object file
+src/motorcontrolabd.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/motorcontrolabd.cpp.o
+.PHONY : src/motorcontrolabd.cpp.o
+
+src/motorcontrolabd.i: src/motorcontrolabd.cpp.i
+
+.PHONY : src/motorcontrolabd.i
+
+# target to preprocess a source file
+src/motorcontrolabd.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/motorcontrolabd.cpp.i
+.PHONY : src/motorcontrolabd.cpp.i
+
+src/motorcontrolabd.s: src/motorcontrolabd.cpp.s
+
+.PHONY : src/motorcontrolabd.s
+
+# target to generate assembly for a file
+src/motorcontrolabd.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/motorcontrolabd.cpp.s
+.PHONY : src/motorcontrolabd.cpp.s
+
+src/motorcontrolfle.o: src/motorcontrolfle.cpp.o
+
+.PHONY : src/motorcontrolfle.o
+
+# target to build an object file
+src/motorcontrolfle.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/motorcontrolfle.cpp.o
+.PHONY : src/motorcontrolfle.cpp.o
+
+src/motorcontrolfle.i: src/motorcontrolfle.cpp.i
+
+.PHONY : src/motorcontrolfle.i
+
+# target to preprocess a source file
+src/motorcontrolfle.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/motorcontrolfle.cpp.i
+.PHONY : src/motorcontrolfle.cpp.i
+
+src/motorcontrolfle.s: src/motorcontrolfle.cpp.s
+
+.PHONY : src/motorcontrolfle.s
+
+# target to generate assembly for a file
+src/motorcontrolfle.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/motorcontrolfle.cpp.s
+.PHONY : src/motorcontrolfle.cpp.s
+
 src/pidclass.o: src/pidclass.cpp.o
 
 .PHONY : src/pidclass.o
 
 # target to build an object file
 src/pidclass.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/pidclass.cpp.o
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/pidclass.cpp.o
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.o
 .PHONY : src/pidclass.cpp.o
 
@@ -714,6 +806,8 @@ src/pidclass.i: src/pidclass.cpp.i
 
 # target to preprocess a source file
 src/pidclass.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/pidclass.cpp.i
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/pidclass.cpp.i
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.i
 .PHONY : src/pidclass.cpp.i
 
@@ -723,6 +817,8 @@ src/pidclass.s: src/pidclass.cpp.s
 
 # target to generate assembly for a file
 src/pidclass.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/src/pidclass.cpp.s
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/src/pidclass.cpp.s
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/motorcontrol.dir/build.make exosystem/CMakeFiles/motorcontrol.dir/src/pidclass.cpp.s
 .PHONY : src/pidclass.cpp.s
 
@@ -737,6 +833,7 @@ help:
 	@echo "... test"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... motorcontrolfle"
 	@echo "... rebuild_cache"
 	@echo "... exosystem_genpy"
 	@echo "... exosystem_generate_messages_py"
@@ -764,19 +861,26 @@ help:
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... exosystem_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... motorcontrolabd"
 	@echo "... motorcontrol"
 	@echo "... exosystem_generate_messages"
+	@echo "... roscpp_generate_messages_cpp"
+	@echo "... _exosystem_generate_messages_check_deps_Torque"
 	@echo "... _exosystem_generate_messages_check_deps_Encoder"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... _exosystem_generate_messages_check_deps_Limbpos"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... _exosystem_generate_messages_check_deps_Torque"
 	@echo "... src/motorclass.o"
 	@echo "... src/motorclass.i"
 	@echo "... src/motorclass.s"
 	@echo "... src/motorcontrol.o"
 	@echo "... src/motorcontrol.i"
 	@echo "... src/motorcontrol.s"
+	@echo "... src/motorcontrolabd.o"
+	@echo "... src/motorcontrolabd.i"
+	@echo "... src/motorcontrolabd.s"
+	@echo "... src/motorcontrolfle.o"
+	@echo "... src/motorcontrolfle.i"
+	@echo "... src/motorcontrolfle.s"
 	@echo "... src/pidclass.o"
 	@echo "... src/pidclass.i"
 	@echo "... src/pidclass.s"

@@ -206,3 +206,11 @@ include_directories(
 add_executable(motorcontrol src/motorcontrol.cpp src/motorclass.cpp include/motorclass.h src/pidclass.cpp include/pidclass.h)
 target_link_libraries(motorcontrol ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib/libcontrolcan.so)
 add_dependencies(motorcontrol exosystem_generate_messages_cpp)
+
+add_executable(motorcontrolabd src/motorcontrolabd.cpp src/motorclass.cpp include/motorclass.h src/pidclass.cpp include/pidclass.h)
+target_link_libraries(motorcontrolabd ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib/libcontrolcan.so)
+add_dependencies(motorcontrolabd exosystem_generate_messages_cpp)
+
+add_executable(motorcontrolfle src/motorcontrolfle.cpp src/motorclass.cpp include/motorclass.h src/pidclass.cpp include/pidclass.h)
+target_link_libraries(motorcontrolfle ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib/libcontrolcan.so)
+add_dependencies(motorcontrolfle exosystem_generate_messages_cpp)
