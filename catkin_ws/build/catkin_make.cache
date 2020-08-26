@@ -1,2 +1,2 @@
-exosystem
+exosystem:shoulderexo
 -DCATKIN_DEVEL_PREFIX=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/install -G Unix Makefiles

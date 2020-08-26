@@ -127,6 +127,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/gtest/cmake_install.cmake")
   include("/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/exosystem/cmake_install.cmake")
+  include("/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo/cmake_install.cmake")
 
 endif()
 

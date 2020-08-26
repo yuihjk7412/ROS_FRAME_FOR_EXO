@@ -526,7 +526,7 @@ main(int argc, char **argv)
 
 	//将电机视为理想位置源，通过控制扭簧两端的形变，控制输出的力 
 	//下面测试力控效果，输入固定的控制目标
-	float T_tar = 0.5; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
+	float T_tar = 0.8; //控制末端输出力为10N，则弹簧末端输出扭矩为0.3Nm
 	delta_theta_d1 = 0;delta_theta_d2=0;
 	const int32_t pos_Limit1 = cnt_per_circle * 3; //设置位置上下限,2圈
 	const int32_t pos_Limit2 = cnt_per_circle * 3; //设置位置上下限,2圈

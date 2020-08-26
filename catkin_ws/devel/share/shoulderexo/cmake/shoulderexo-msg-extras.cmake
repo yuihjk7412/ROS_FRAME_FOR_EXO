@@ -1,0 +1,2 @@
+set(shoulderexo_MESSAGE_FILES "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg;/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg")
+set(shoulderexo_SERVICE_FILES "")

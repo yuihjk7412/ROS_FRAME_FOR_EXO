@@ -25,11 +25,17 @@ struct Motor_Force_
 
   Motor_Force_()
     : motor1_force(0.0)
-    , motor2_force(0.0)  {
+    , motor2_force(0.0)
+    , xtheta(0.0)
+    , ytheta(0.0)
+    , ztheta(0.0)  {
     }
   Motor_Force_(const ContainerAllocator& _alloc)
     : motor1_force(0.0)
-    , motor2_force(0.0)  {
+    , motor2_force(0.0)
+    , xtheta(0.0)
+    , ytheta(0.0)
+    , ztheta(0.0)  {
   (void)_alloc;
     }
 
@@ -40,6 +46,15 @@ struct Motor_Force_
 
    typedef float _motor2_force_type;
   _motor2_force_type motor2_force;
+
+   typedef float _xtheta_type;
+  _xtheta_type xtheta;
+
+   typedef float _ytheta_type;
+  _ytheta_type ytheta;
+
+   typedef float _ztheta_type;
+  _ztheta_type ztheta;
 
 
 
@@ -75,23 +90,13 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsMessage': True, 'HasHeader': False, 'IsFixedSize': True}
+// BOOLTRAITS {'HasHeader': False, 'IsFixedSize': True, 'IsMessage': True}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'exosystem': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/exosystem/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
 
 
-
-template <class ContainerAllocator>
-struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> const>
-  : TrueType
-  { };
 
 template <class ContainerAllocator>
 struct HasHeader< ::exosystem::Motor_Force_<ContainerAllocator> >
@@ -113,18 +118,28 @@ struct IsFixedSize< ::exosystem::Motor_Force_<ContainerAllocator> const>
   : TrueType
   { };
 
+template <class ContainerAllocator>
+struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::exosystem::Motor_Force_<ContainerAllocator> const>
+  : TrueType
+  { };
+
 
 template<class ContainerAllocator>
 struct MD5Sum< ::exosystem::Motor_Force_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "dce6fb85721e943607acc3d3dab6c114";
+    return "c76d4ea67ee1d454970fb9cd2fed9654";
   }
 
   static const char* value(const ::exosystem::Motor_Force_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xdce6fb85721e9436ULL;
-  static const uint64_t static_value2 = 0x07acc3d3dab6c114ULL;
+  static const uint64_t static_value1 = 0xc76d4ea67ee1d454ULL;
+  static const uint64_t static_value2 = 0x970fb9cd2fed9654ULL;
 };
 
 template<class ContainerAllocator>
@@ -145,6 +160,9 @@ struct Definition< ::exosystem::Motor_Force_<ContainerAllocator> >
   {
     return "float32 motor1_force\n\
 float32 motor2_force\n\
+float32 xtheta\n\
+float32 ytheta\n\
+float32 ztheta\n\
 ";
   }
 
@@ -165,6 +183,9 @@ namespace serialization
     {
       stream.next(m.motor1_force);
       stream.next(m.motor2_force);
+      stream.next(m.xtheta);
+      stream.next(m.ytheta);
+      stream.next(m.ztheta);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -187,6 +208,12 @@ struct Printer< ::exosystem::Motor_Force_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.motor1_force);
     s << indent << "motor2_force: ";
     Printer<float>::stream(s, indent + "  ", v.motor2_force);
+    s << indent << "xtheta: ";
+    Printer<float>::stream(s, indent + "  ", v.xtheta);
+    s << indent << "ytheta: ";
+    Printer<float>::stream(s, indent + "  ", v.ytheta);
+    s << indent << "ztheta: ";
+    Printer<float>::stream(s, indent + "  ", v.ztheta);
   }
 };
 

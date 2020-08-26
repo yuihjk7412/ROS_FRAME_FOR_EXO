@@ -20,6 +20,9 @@ class Motor_Force {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.motor1_force = null;
       this.motor2_force = null;
+      this.xtheta = null;
+      this.ytheta = null;
+      this.ztheta = null;
     }
     else {
       if (initObj.hasOwnProperty('motor1_force')) {
@@ -34,6 +37,24 @@ class Motor_Force {
       else {
         this.motor2_force = 0.0;
       }
+      if (initObj.hasOwnProperty('xtheta')) {
+        this.xtheta = initObj.xtheta
+      }
+      else {
+        this.xtheta = 0.0;
+      }
+      if (initObj.hasOwnProperty('ytheta')) {
+        this.ytheta = initObj.ytheta
+      }
+      else {
+        this.ytheta = 0.0;
+      }
+      if (initObj.hasOwnProperty('ztheta')) {
+        this.ztheta = initObj.ztheta
+      }
+      else {
+        this.ztheta = 0.0;
+      }
     }
   }
 
@@ -43,6 +64,12 @@ class Motor_Force {
     bufferOffset = _serializer.float32(obj.motor1_force, buffer, bufferOffset);
     // Serialize message field [motor2_force]
     bufferOffset = _serializer.float32(obj.motor2_force, buffer, bufferOffset);
+    // Serialize message field [xtheta]
+    bufferOffset = _serializer.float32(obj.xtheta, buffer, bufferOffset);
+    // Serialize message field [ytheta]
+    bufferOffset = _serializer.float32(obj.ytheta, buffer, bufferOffset);
+    // Serialize message field [ztheta]
+    bufferOffset = _serializer.float32(obj.ztheta, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -54,11 +81,17 @@ class Motor_Force {
     data.motor1_force = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [motor2_force]
     data.motor2_force = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [xtheta]
+    data.xtheta = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [ytheta]
+    data.ytheta = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [ztheta]
+    data.ztheta = _deserializer.float32(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 8;
+    return 20;
   }
 
   static datatype() {
@@ -68,7 +101,7 @@ class Motor_Force {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'dce6fb85721e943607acc3d3dab6c114';
+    return 'c76d4ea67ee1d454970fb9cd2fed9654';
   }
 
   static messageDefinition() {
@@ -76,6 +109,9 @@ class Motor_Force {
     return `
     float32 motor1_force
     float32 motor2_force
+    float32 xtheta
+    float32 ytheta
+    float32 ztheta
     `;
   }
 
@@ -97,6 +133,27 @@ class Motor_Force {
     }
     else {
       resolved.motor2_force = 0.0
+    }
+
+    if (msg.xtheta !== undefined) {
+      resolved.xtheta = msg.xtheta;
+    }
+    else {
+      resolved.xtheta = 0.0
+    }
+
+    if (msg.ytheta !== undefined) {
+      resolved.ytheta = msg.ytheta;
+    }
+    else {
+      resolved.ytheta = 0.0
+    }
+
+    if (msg.ztheta !== undefined) {
+      resolved.ztheta = msg.ztheta;
+    }
+    else {
+      resolved.ztheta = 0.0
     }
 
     return resolved;

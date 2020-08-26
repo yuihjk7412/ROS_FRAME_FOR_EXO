@@ -601,51 +601,6 @@ exosystem_generate_messages/fast:
 .PHONY : exosystem_generate_messages/fast
 
 # Convenience name for target.
-exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
-.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
-
-# Convenience name for target.
-_exosystem_generate_messages_check_deps_Torque: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
-
-.PHONY : _exosystem_generate_messages_check_deps_Torque
-
-# fast build rule for target.
-_exosystem_generate_messages_check_deps_Torque/fast:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build
-.PHONY : _exosystem_generate_messages_check_deps_Torque/fast
-
-# Convenience name for target.
-exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
-.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
-
-# Convenience name for target.
-_exosystem_generate_messages_check_deps_Encoder: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
-
-.PHONY : _exosystem_generate_messages_check_deps_Encoder
-
-# fast build rule for target.
-_exosystem_generate_messages_check_deps_Encoder/fast:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build
-.PHONY : _exosystem_generate_messages_check_deps_Encoder/fast
-
-# Convenience name for target.
 exosystem/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : exosystem/CMakeFiles/roscpp_generate_messages_eus.dir/rule
@@ -674,6 +629,51 @@ _exosystem_generate_messages_check_deps_Limbpos: exosystem/CMakeFiles/_exosystem
 _exosystem_generate_messages_check_deps_Limbpos/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Limbpos.dir/build
 .PHONY : _exosystem_generate_messages_check_deps_Limbpos/fast
+
+# Convenience name for target.
+exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
+.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
+
+# Convenience name for target.
+_exosystem_generate_messages_check_deps_Encoder: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/rule
+
+.PHONY : _exosystem_generate_messages_check_deps_Encoder
+
+# fast build rule for target.
+_exosystem_generate_messages_check_deps_Encoder/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Encoder.dir/build
+.PHONY : _exosystem_generate_messages_check_deps_Encoder/fast
+
+# Convenience name for target.
+exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+.PHONY : exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_cpp: exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+
+.PHONY : roscpp_generate_messages_cpp
+
+# fast build rule for target.
+roscpp_generate_messages_cpp/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make exosystem/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+.PHONY : roscpp_generate_messages_cpp/fast
+
+# Convenience name for target.
+exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
+.PHONY : exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
+
+# Convenience name for target.
+_exosystem_generate_messages_check_deps_Torque: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/rule
+
+.PHONY : _exosystem_generate_messages_check_deps_Torque
+
+# fast build rule for target.
+_exosystem_generate_messages_check_deps_Torque/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build.make exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/build
+.PHONY : _exosystem_generate_messages_check_deps_Torque/fast
 
 src/motorclass.o: src/motorclass.cpp.o
 
@@ -864,11 +864,11 @@ help:
 	@echo "... motorcontrolabd"
 	@echo "... motorcontrol"
 	@echo "... exosystem_generate_messages"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... _exosystem_generate_messages_check_deps_Torque"
-	@echo "... _exosystem_generate_messages_check_deps_Encoder"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... _exosystem_generate_messages_check_deps_Limbpos"
+	@echo "... _exosystem_generate_messages_check_deps_Encoder"
+	@echo "... roscpp_generate_messages_cpp"
+	@echo "... _exosystem_generate_messages_check_deps_Torque"
 	@echo "... src/motorclass.o"
 	@echo "... src/motorclass.i"
 	@echo "... src/motorclass.s"

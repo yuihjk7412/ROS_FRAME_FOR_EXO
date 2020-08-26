@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/exosystem_generate_messages_cpp"
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Torque.h"
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Sysstatus.h"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Motor_Force.h"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Limbpos.h"
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Sysstatus.h"
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Encoder.h"
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/include/exosystem/Torque.h"
 )
 
 # Per-language clean rules from dependency scanning.
