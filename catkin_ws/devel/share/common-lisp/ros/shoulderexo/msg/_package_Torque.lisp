@@ -3,4 +3,6 @@
           TORQUE1
           TORQUE2-VAL
           TORQUE2
+          PORT_NUM-VAL
+          PORT_NUM
 ))

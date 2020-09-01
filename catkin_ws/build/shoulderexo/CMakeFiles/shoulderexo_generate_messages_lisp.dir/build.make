@@ -53,32 +53,32 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 # Include the progress variables for this target.
 include shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/progress.make
 
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Limbpos.lisp
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Encoder.lisp
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Sysstatus.lisp
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Motor_Force.lisp
 
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from shoulderexo/Torque.msg"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg
+
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Limbpos.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Limbpos.lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Lisp code from shoulderexo/Limbpos.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from shoulderexo/Limbpos.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Encoder.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Encoder.lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Lisp code from shoulderexo/Encoder.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from shoulderexo/Encoder.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Sysstatus.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Sysstatus.lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from shoulderexo/Sysstatus.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from shoulderexo/Sysstatus.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg
-
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from shoulderexo/Torque.msg"
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Motor_Force.lisp: /opt/ros/kinetic/lib/genlisp/gen_lisp.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Motor_Force.lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg
@@ -86,10 +86,10 @@ shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAM
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg
 
 shoulderexo_generate_messages_lisp: shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp
+shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp
 shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Limbpos.lisp
 shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Encoder.lisp
 shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Sysstatus.lisp
-shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Torque.lisp
 shoulderexo_generate_messages_lisp: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/common-lisp/ros/shoulderexo/msg/Motor_Force.lisp
 shoulderexo_generate_messages_lisp: shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/build.make
 

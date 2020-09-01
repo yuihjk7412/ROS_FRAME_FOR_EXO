@@ -53,33 +53,33 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 # Include the progress variables for this target.
 include shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/progress.make
 
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Limbpos.py
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Encoder.py
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Sysstatus.py
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Motor_Force.py
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py
 
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG shoulderexo/Torque"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg
+
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Limbpos.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Limbpos.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG shoulderexo/Limbpos"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG shoulderexo/Limbpos"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Encoder.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Encoder.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG shoulderexo/Encoder"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG shoulderexo/Encoder"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Sysstatus.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Sysstatus.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG shoulderexo/Sysstatus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG shoulderexo/Sysstatus"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg
-
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG shoulderexo/Torque"
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Motor_Force.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Motor_Force.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg
@@ -87,19 +87,19 @@ shoulderexo/CMakeFiles/shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Limbpos.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Encoder.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Sysstatus.py
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Motor_Force.py
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating Python msg __init__.py for shoulderexo"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg --initpy
 
 shoulderexo_generate_messages_py: shoulderexo/CMakeFiles/shoulderexo_generate_messages_py
+shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py
 shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Limbpos.py
 shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Encoder.py
 shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Sysstatus.py
-shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Torque.py
 shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/_Motor_Force.py
 shoulderexo_generate_messages_py: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/lib/python3/dist-packages/shoulderexo/msg/__init__.py
 shoulderexo_generate_messages_py: shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/build.make

@@ -53,32 +53,32 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 # Include the progress variables for this target.
 include shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/progress.make
 
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Limbpos.js
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Encoder.js
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Sysstatus.js
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Motor_Force.js
 
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from shoulderexo/Torque.msg"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg
+
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Limbpos.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Limbpos.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from shoulderexo/Limbpos.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from shoulderexo/Limbpos.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Encoder.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Encoder.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from shoulderexo/Encoder.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from shoulderexo/Encoder.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Sysstatus.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Sysstatus.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Javascript code from shoulderexo/Sysstatus.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from shoulderexo/Sysstatus.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg
-
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Javascript code from shoulderexo/Torque.msg"
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Motor_Force.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Motor_Force.js: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg
@@ -86,10 +86,10 @@ shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FR
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg
 
 shoulderexo_generate_messages_nodejs: shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs
+shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js
 shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Limbpos.js
 shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Encoder.js
 shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Sysstatus.js
-shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Torque.js
 shoulderexo_generate_messages_nodejs: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/gennodejs/ros/shoulderexo/msg/Motor_Force.js
 shoulderexo_generate_messages_nodejs: shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/build.make
 

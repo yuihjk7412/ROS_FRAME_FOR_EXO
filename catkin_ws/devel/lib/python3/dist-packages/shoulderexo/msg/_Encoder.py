@@ -7,14 +7,15 @@ import struct
 
 
 class Encoder(genpy.Message):
-  _md5sum = "5c2f5cd41268c3b81a9a0b5972ee0639"
+  _md5sum = "87b6536489d17685402d604f766db88a"
   _type = "shoulderexo/Encoder"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32 encoder1
 float32 encoder2
+int32 port_num
 """
-  __slots__ = ['encoder1','encoder2']
-  _slot_types = ['float32','float32']
+  __slots__ = ['encoder1','encoder2','port_num']
+  _slot_types = ['float32','float32','int32']
 
   def __init__(self, *args, **kwds):
     """
@@ -24,7 +25,7 @@ float32 encoder2
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       encoder1,encoder2
+       encoder1,encoder2,port_num
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -37,9 +38,12 @@ float32 encoder2
         self.encoder1 = 0.
       if self.encoder2 is None:
         self.encoder2 = 0.
+      if self.port_num is None:
+        self.port_num = 0
     else:
       self.encoder1 = 0.
       self.encoder2 = 0.
+      self.port_num = 0
 
   def _get_types(self):
     """
@@ -54,7 +58,7 @@ float32 encoder2
     """
     try:
       _x = self
-      buff.write(_get_struct_2f().pack(_x.encoder1, _x.encoder2))
+      buff.write(_get_struct_2fi().pack(_x.encoder1, _x.encoder2, _x.port_num))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -67,8 +71,8 @@ float32 encoder2
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.encoder1, _x.encoder2,) = _get_struct_2f().unpack(str[start:end])
+      end += 12
+      (_x.encoder1, _x.encoder2, _x.port_num,) = _get_struct_2fi().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,7 +86,7 @@ float32 encoder2
     """
     try:
       _x = self
-      buff.write(_get_struct_2f().pack(_x.encoder1, _x.encoder2))
+      buff.write(_get_struct_2fi().pack(_x.encoder1, _x.encoder2, _x.port_num))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -96,8 +100,8 @@ float32 encoder2
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.encoder1, _x.encoder2,) = _get_struct_2f().unpack(str[start:end])
+      end += 12
+      (_x.encoder1, _x.encoder2, _x.port_num,) = _get_struct_2fi().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -106,9 +110,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2f = None
-def _get_struct_2f():
-    global _struct_2f
-    if _struct_2f is None:
-        _struct_2f = struct.Struct("<2f")
-    return _struct_2f
+_struct_2fi = None
+def _get_struct_2fi():
+    global _struct_2fi
+    if _struct_2fi is None:
+        _struct_2fi = struct.Struct("<2fi")
+    return _struct_2fi

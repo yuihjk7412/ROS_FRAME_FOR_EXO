@@ -1,17 +1,33 @@
 #! /usr/bin/env python
 import rospy
-from exosystem.msg import Encoder
+from shoulderexo.msg import Encoder
 import serial
+import threading    
+from shoulderexo.msg import Torque
+import eventlet  #导入eventlet这个模块
 
 if __name__ == '__main__':
+    rospy.init_node('encoder_talker', anonymous=True)
+    eventlet.monkey_patch()   #必须加这条代码
     # port_Num = input('PLEASE INPUT THE PORT NUMBER(/dev/ttyUSB*):')
     request_Command = bytes.fromhex('7ff7')
     port_Num = 10
+    force_port_num = -1
+
+    try:
+        encoder_message = rospy.wait_for_message('encoder_topic',Encoder,timeout=1)
+        force_port_num = encoder_message.port_num
+        print(force_port_num)
+    except rospy.exceptions.ROSException as ex:
+        pass
 
     # 遍历串口找到合适的串口
     while 1:
         if port_Num < 0:
             raise serial.SerialTimeoutException
+        if port_Num == force_port_num:
+            port_Num = port_Num + 1
+            continue
         try:
             with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
                 ser.write(request_Command)  #发出请求
@@ -22,26 +38,31 @@ if __name__ == '__main__':
             pass
         port_Num = port_Num - 1
     print("Serial Port %d OK!"%port_Num)
-
-    # with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=0.2) as ser:
-    #     ser.write(request_Command)  #发出请求
-    #     buf = ser.read(6)          #接收回复
-    #     if len(buf) < 6:
-    #         raise serial.SerialTimeoutException
-    #     print("Serial Port OK!")
     
     pub = rospy.Publisher('encoder_topic', Encoder, queue_size=10)
-    rospy.init_node('encoder_talker', anonymous=True)
     rate = rospy.Rate(100)
 
     ser = serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None)
 
+    ser.write(request_Command)
+    buf = ser.read(6)
+    # t.start()
+    exception_flag = 0
+
     while not rospy.is_shutdown():
         # with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None) as ser:
-        ser.write(request_Command)
-        buf = ser.read(6)
+        exception_flag = 1
+        with eventlet.Timeout(0.1,False):
+            ser.write(request_Command)  #发出请求
+            buf = ser.read(6)          #接收回复
+            exception_flag = 0
+        if exception_flag:
+            ser.flushInput()
+        # ser.write(request_Command)
+        # buf = ser.read(6)      
         
         if len(buf) < 6:
+            print("less than ok")
             continue
         if buf[0] == 0x7f and buf[-1] == 0xf7:
             #print("found data")

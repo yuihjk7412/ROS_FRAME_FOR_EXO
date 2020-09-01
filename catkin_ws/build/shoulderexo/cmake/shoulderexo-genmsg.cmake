@@ -17,6 +17,16 @@ add_custom_target(shoulderexo_generate_messages ALL)
 
 
 
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
+add_custom_target(_shoulderexo_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "shoulderexo" "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" ""
+)
+
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
+add_custom_target(_shoulderexo_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "shoulderexo" "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" ""
+)
+
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" NAME_WE)
 add_custom_target(_shoulderexo_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "shoulderexo" "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" ""
@@ -32,22 +42,18 @@ add_custom_target(_shoulderexo_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "shoulderexo" "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg" ""
 )
 
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
-add_custom_target(_shoulderexo_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "shoulderexo" "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" ""
-)
-
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
-add_custom_target(_shoulderexo_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "shoulderexo" "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" ""
-)
-
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
 
 ### Section generating for lang: gencpp
 ### Generating Messages
+_generate_msg_cpp(shoulderexo
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/shoulderexo
+)
 _generate_msg_cpp(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg"
   "${MSG_I_FLAGS}"
@@ -62,12 +68,6 @@ _generate_msg_cpp(shoulderexo
 )
 _generate_msg_cpp(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg"
-  "${MSG_I_FLAGS}"
-  ""
-  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/shoulderexo
-)
-_generate_msg_cpp(shoulderexo
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/shoulderexo
@@ -93,15 +93,15 @@ add_custom_target(shoulderexo_generate_messages_cpp
 add_dependencies(shoulderexo_generate_messages shoulderexo_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_cpp _shoulderexo_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -113,6 +113,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS shoulderexo_generate_messages_cpp)
 
 ### Section generating for lang: geneus
 ### Generating Messages
+_generate_msg_eus(shoulderexo
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/shoulderexo
+)
 _generate_msg_eus(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg"
   "${MSG_I_FLAGS}"
@@ -127,12 +133,6 @@ _generate_msg_eus(shoulderexo
 )
 _generate_msg_eus(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg"
-  "${MSG_I_FLAGS}"
-  ""
-  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/shoulderexo
-)
-_generate_msg_eus(shoulderexo
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/shoulderexo
@@ -158,15 +158,15 @@ add_custom_target(shoulderexo_generate_messages_eus
 add_dependencies(shoulderexo_generate_messages shoulderexo_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_eus _shoulderexo_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -178,6 +178,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS shoulderexo_generate_messages_eus)
 
 ### Section generating for lang: genlisp
 ### Generating Messages
+_generate_msg_lisp(shoulderexo
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/shoulderexo
+)
 _generate_msg_lisp(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg"
   "${MSG_I_FLAGS}"
@@ -192,12 +198,6 @@ _generate_msg_lisp(shoulderexo
 )
 _generate_msg_lisp(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg"
-  "${MSG_I_FLAGS}"
-  ""
-  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/shoulderexo
-)
-_generate_msg_lisp(shoulderexo
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/shoulderexo
@@ -223,15 +223,15 @@ add_custom_target(shoulderexo_generate_messages_lisp
 add_dependencies(shoulderexo_generate_messages shoulderexo_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_lisp _shoulderexo_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -243,6 +243,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS shoulderexo_generate_messages_lisp)
 
 ### Section generating for lang: gennodejs
 ### Generating Messages
+_generate_msg_nodejs(shoulderexo
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/shoulderexo
+)
 _generate_msg_nodejs(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg"
   "${MSG_I_FLAGS}"
@@ -257,12 +263,6 @@ _generate_msg_nodejs(shoulderexo
 )
 _generate_msg_nodejs(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg"
-  "${MSG_I_FLAGS}"
-  ""
-  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/shoulderexo
-)
-_generate_msg_nodejs(shoulderexo
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/shoulderexo
@@ -288,15 +288,15 @@ add_custom_target(shoulderexo_generate_messages_nodejs
 add_dependencies(shoulderexo_generate_messages shoulderexo_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_nodejs _shoulderexo_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -308,6 +308,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS shoulderexo_generate_messages_nodej
 
 ### Section generating for lang: genpy
 ### Generating Messages
+_generate_msg_py(shoulderexo
+  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/shoulderexo
+)
 _generate_msg_py(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg"
   "${MSG_I_FLAGS}"
@@ -322,12 +328,6 @@ _generate_msg_py(shoulderexo
 )
 _generate_msg_py(shoulderexo
   "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg"
-  "${MSG_I_FLAGS}"
-  ""
-  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/shoulderexo
-)
-_generate_msg_py(shoulderexo
-  "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/shoulderexo
@@ -353,15 +353,15 @@ add_custom_target(shoulderexo_generate_messages_py
 add_dependencies(shoulderexo_generate_messages shoulderexo_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
+add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg" NAME_WE)
-add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg" NAME_WE)
 add_dependencies(shoulderexo_generate_messages_py _shoulderexo_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

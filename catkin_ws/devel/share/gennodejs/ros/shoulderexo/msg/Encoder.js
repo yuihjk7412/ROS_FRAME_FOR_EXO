@@ -20,6 +20,7 @@ class Encoder {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.encoder1 = null;
       this.encoder2 = null;
+      this.port_num = null;
     }
     else {
       if (initObj.hasOwnProperty('encoder1')) {
@@ -34,6 +35,12 @@ class Encoder {
       else {
         this.encoder2 = 0.0;
       }
+      if (initObj.hasOwnProperty('port_num')) {
+        this.port_num = initObj.port_num
+      }
+      else {
+        this.port_num = 0;
+      }
     }
   }
 
@@ -43,6 +50,8 @@ class Encoder {
     bufferOffset = _serializer.float32(obj.encoder1, buffer, bufferOffset);
     // Serialize message field [encoder2]
     bufferOffset = _serializer.float32(obj.encoder2, buffer, bufferOffset);
+    // Serialize message field [port_num]
+    bufferOffset = _serializer.int32(obj.port_num, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -54,11 +63,13 @@ class Encoder {
     data.encoder1 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [encoder2]
     data.encoder2 = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [port_num]
+    data.port_num = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 8;
+    return 12;
   }
 
   static datatype() {
@@ -68,7 +79,7 @@ class Encoder {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '5c2f5cd41268c3b81a9a0b5972ee0639';
+    return '87b6536489d17685402d604f766db88a';
   }
 
   static messageDefinition() {
@@ -76,6 +87,7 @@ class Encoder {
     return `
     float32 encoder1
     float32 encoder2
+    int32 port_num
     
     `;
   }
@@ -98,6 +110,13 @@ class Encoder {
     }
     else {
       resolved.encoder2 = 0.0
+    }
+
+    if (msg.port_num !== undefined) {
+      resolved.port_num = msg.port_num;
+    }
+    else {
+      resolved.port_num = 0
     }
 
     return resolved;

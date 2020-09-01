@@ -56,16 +56,6 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -77,6 +67,16 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -226,6 +226,21 @@ shoulderexo_genpy/fast:
 .PHONY : shoulderexo_genpy/fast
 
 # Convenience name for target.
+shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
+.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
+
+# Convenience name for target.
+_shoulderexo_generate_messages_check_deps_Sysstatus: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
+
+.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus
+
+# fast build rule for target.
+_shoulderexo_generate_messages_check_deps_Sysstatus/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build
+.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus/fast
+
+# Convenience name for target.
 shoulderexo/CMakeFiles/shoulderexo_geneus.dir/rule:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/shoulderexo_geneus.dir/rule
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_geneus.dir/rule
@@ -269,21 +284,6 @@ _shoulderexo_generate_messages_check_deps_Motor_Force: shoulderexo/CMakeFiles/_s
 _shoulderexo_generate_messages_check_deps_Motor_Force/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/build
 .PHONY : _shoulderexo_generate_messages_check_deps_Motor_Force/fast
-
-# Convenience name for target.
-shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
-.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
-
-# Convenience name for target.
-_shoulderexo_generate_messages_check_deps_Sysstatus: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
-
-.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus
-
-# fast build rule for target.
-_shoulderexo_generate_messages_check_deps_Sysstatus/fast:
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build
-.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus/fast
 
 # Convenience name for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages.dir/rule:
@@ -391,6 +391,21 @@ shoulderexo_gennodejs/fast:
 .PHONY : shoulderexo_gennodejs/fast
 
 # Convenience name for target.
+shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule
+.PHONY : shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule
+
+# Convenience name for target.
+motorcontrol_shoulderexo: shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule
+
+.PHONY : motorcontrol_shoulderexo
+
+# fast build rule for target.
+motorcontrol_shoulderexo/fast:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build
+.PHONY : motorcontrol_shoulderexo/fast
+
+# Convenience name for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/rule:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/rule
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/rule
@@ -405,35 +420,126 @@ shoulderexo_generate_messages_cpp/fast:
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/build
 .PHONY : shoulderexo_generate_messages_cpp/fast
 
+src/motorclass.o: src/motorclass.cpp.o
+
+.PHONY : src/motorclass.o
+
+# target to build an object file
+src/motorclass.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/motorclass.cpp.o
+.PHONY : src/motorclass.cpp.o
+
+src/motorclass.i: src/motorclass.cpp.i
+
+.PHONY : src/motorclass.i
+
+# target to preprocess a source file
+src/motorclass.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/motorclass.cpp.i
+.PHONY : src/motorclass.cpp.i
+
+src/motorclass.s: src/motorclass.cpp.s
+
+.PHONY : src/motorclass.s
+
+# target to generate assembly for a file
+src/motorclass.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/motorclass.cpp.s
+.PHONY : src/motorclass.cpp.s
+
+src/motorcontrol_shoulderexo.o: src/motorcontrol_shoulderexo.cpp.o
+
+.PHONY : src/motorcontrol_shoulderexo.o
+
+# target to build an object file
+src/motorcontrol_shoulderexo.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/motorcontrol_shoulderexo.cpp.o
+.PHONY : src/motorcontrol_shoulderexo.cpp.o
+
+src/motorcontrol_shoulderexo.i: src/motorcontrol_shoulderexo.cpp.i
+
+.PHONY : src/motorcontrol_shoulderexo.i
+
+# target to preprocess a source file
+src/motorcontrol_shoulderexo.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/motorcontrol_shoulderexo.cpp.i
+.PHONY : src/motorcontrol_shoulderexo.cpp.i
+
+src/motorcontrol_shoulderexo.s: src/motorcontrol_shoulderexo.cpp.s
+
+.PHONY : src/motorcontrol_shoulderexo.s
+
+# target to generate assembly for a file
+src/motorcontrol_shoulderexo.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/motorcontrol_shoulderexo.cpp.s
+.PHONY : src/motorcontrol_shoulderexo.cpp.s
+
+src/pidclass.o: src/pidclass.cpp.o
+
+.PHONY : src/pidclass.o
+
+# target to build an object file
+src/pidclass.cpp.o:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/pidclass.cpp.o
+.PHONY : src/pidclass.cpp.o
+
+src/pidclass.i: src/pidclass.cpp.i
+
+.PHONY : src/pidclass.i
+
+# target to preprocess a source file
+src/pidclass.cpp.i:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/pidclass.cpp.i
+.PHONY : src/pidclass.cpp.i
+
+src/pidclass.s: src/pidclass.cpp.s
+
+.PHONY : src/pidclass.s
+
+# target to generate assembly for a file
+src/pidclass.cpp.s:
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build && $(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/src/pidclass.cpp.s
+.PHONY : src/pidclass.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install"
 	@echo "... shoulderexo_generate_messages_eus"
 	@echo "... shoulderexo_gencpp"
 	@echo "... _shoulderexo_generate_messages_check_deps_Encoder"
 	@echo "... shoulderexo_genpy"
+	@echo "... _shoulderexo_generate_messages_check_deps_Sysstatus"
 	@echo "... shoulderexo_geneus"
 	@echo "... shoulderexo_generate_messages_lisp"
 	@echo "... _shoulderexo_generate_messages_check_deps_Motor_Force"
-	@echo "... _shoulderexo_generate_messages_check_deps_Sysstatus"
 	@echo "... shoulderexo_generate_messages"
 	@echo "... shoulderexo_generate_messages_py"
 	@echo "... list_install_components"
 	@echo "... _shoulderexo_generate_messages_check_deps_Torque"
 	@echo "... _shoulderexo_generate_messages_check_deps_Limbpos"
 	@echo "... shoulderexo_genlisp"
-	@echo "... install"
 	@echo "... shoulderexo_generate_messages_nodejs"
 	@echo "... shoulderexo_gennodejs"
 	@echo "... rebuild_cache"
+	@echo "... motorcontrol_shoulderexo"
 	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... shoulderexo_generate_messages_cpp"
 	@echo "... test"
 	@echo "... edit_cache"
+	@echo "... src/motorclass.o"
+	@echo "... src/motorclass.i"
+	@echo "... src/motorclass.s"
+	@echo "... src/motorcontrol_shoulderexo.o"
+	@echo "... src/motorcontrol_shoulderexo.i"
+	@echo "... src/motorcontrol_shoulderexo.s"
+	@echo "... src/pidclass.o"
+	@echo "... src/pidclass.i"
+	@echo "... src/pidclass.s"
 .PHONY : help
 
 

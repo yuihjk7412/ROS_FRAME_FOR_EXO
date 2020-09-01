@@ -25,11 +25,13 @@ struct Encoder_
 
   Encoder_()
     : encoder1(0.0)
-    , encoder2(0.0)  {
+    , encoder2(0.0)
+    , port_num(0)  {
     }
   Encoder_(const ContainerAllocator& _alloc)
     : encoder1(0.0)
-    , encoder2(0.0)  {
+    , encoder2(0.0)
+    , port_num(0)  {
   (void)_alloc;
     }
 
@@ -40,6 +42,9 @@ struct Encoder_
 
    typedef float _encoder2_type;
   _encoder2_type encoder2;
+
+   typedef int32_t _port_num_type;
+  _port_num_type port_num;
 
 
 
@@ -75,7 +80,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'IsFixedSize': True, 'HasHeader': False, 'IsMessage': True}
+// BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'shoulderexo': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -94,16 +99,6 @@ struct IsFixedSize< ::shoulderexo::Encoder_<ContainerAllocator> const>
   { };
 
 template <class ContainerAllocator>
-struct HasHeader< ::shoulderexo::Encoder_<ContainerAllocator> >
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
-struct HasHeader< ::shoulderexo::Encoder_<ContainerAllocator> const>
-  : FalseType
-  { };
-
-template <class ContainerAllocator>
 struct IsMessage< ::shoulderexo::Encoder_<ContainerAllocator> >
   : TrueType
   { };
@@ -113,18 +108,28 @@ struct IsMessage< ::shoulderexo::Encoder_<ContainerAllocator> const>
   : TrueType
   { };
 
+template <class ContainerAllocator>
+struct HasHeader< ::shoulderexo::Encoder_<ContainerAllocator> >
+  : FalseType
+  { };
+
+template <class ContainerAllocator>
+struct HasHeader< ::shoulderexo::Encoder_<ContainerAllocator> const>
+  : FalseType
+  { };
+
 
 template<class ContainerAllocator>
 struct MD5Sum< ::shoulderexo::Encoder_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "5c2f5cd41268c3b81a9a0b5972ee0639";
+    return "87b6536489d17685402d604f766db88a";
   }
 
   static const char* value(const ::shoulderexo::Encoder_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x5c2f5cd41268c3b8ULL;
-  static const uint64_t static_value2 = 0x1a9a0b5972ee0639ULL;
+  static const uint64_t static_value1 = 0x87b6536489d17685ULL;
+  static const uint64_t static_value2 = 0x402d604f766db88aULL;
 };
 
 template<class ContainerAllocator>
@@ -145,6 +150,7 @@ struct Definition< ::shoulderexo::Encoder_<ContainerAllocator> >
   {
     return "float32 encoder1\n\
 float32 encoder2\n\
+int32 port_num\n\
 ";
   }
 
@@ -165,6 +171,7 @@ namespace serialization
     {
       stream.next(m.encoder1);
       stream.next(m.encoder2);
+      stream.next(m.port_num);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -187,6 +194,8 @@ struct Printer< ::shoulderexo::Encoder_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.encoder1);
     s << indent << "encoder2: ";
     Printer<float>::stream(s, indent + "  ", v.encoder2);
+    s << indent << "port_num: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.port_num);
   }
 };
 

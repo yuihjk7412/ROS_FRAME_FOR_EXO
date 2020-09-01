@@ -53,33 +53,33 @@ CMAKE_BINARY_DIR = /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build
 # Include the progress variables for this target.
 include shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/progress.make
 
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Limbpos.l
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Encoder.l
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Sysstatus.l
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Motor_Force.l
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/manifest.l
 
 
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from shoulderexo/Torque.msg"
+	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg
+
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Limbpos.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Limbpos.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from shoulderexo/Limbpos.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from shoulderexo/Limbpos.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Limbpos.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Encoder.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Encoder.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from shoulderexo/Encoder.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from shoulderexo/Encoder.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Encoder.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Sysstatus.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Sysstatus.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from shoulderexo/Sysstatus.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from shoulderexo/Sysstatus.msg"
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Sysstatus.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg
-
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from shoulderexo/Torque.msg"
-	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Torque.msg -Ishoulderexo:/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p shoulderexo -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg
 
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Motor_Force.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Motor_Force.l: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg/Motor_Force.msg
@@ -91,10 +91,10 @@ shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME
 	cd /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/shoulderexo && ../catkin_generated/env_cached.sh /home/jackho/anaconda3/bin/python /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo shoulderexo std_msgs
 
 shoulderexo_generate_messages_eus: shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus
+shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l
 shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Limbpos.l
 shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Encoder.l
 shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Sysstatus.l
-shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Torque.l
 shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/msg/Motor_Force.l
 shoulderexo_generate_messages_eus: /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/devel/share/roseus/ros/shoulderexo/manifest.l
 shoulderexo_generate_messages_eus: shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/build.make

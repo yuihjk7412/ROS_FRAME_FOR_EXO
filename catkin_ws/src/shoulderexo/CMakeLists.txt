@@ -201,6 +201,6 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-#add_executable(motorcontrol src/motorcontrol.cpp src/motorclass.cpp include/motorclass.h src/pidclass.cpp include/pidclass.h)
-#target_link_libraries(motorcontrol ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib/libcontrolcan.so)
-#add_dependencies(motorcontrol shoulderexo_generate_messages_cpp)
+add_executable(motorcontrol_shoulderexo src/motorcontrol_shoulderexo.cpp src/motorclass.cpp include/motorclass.h src/pidclass.cpp include/pidclass.h)
+target_link_libraries(motorcontrol_shoulderexo ${catkin_LIBRARIES} ${PROJECT_SOURCE_DIR}/lib/libcontrolcan.so)
+add_dependencies(motorcontrol_shoulderexo shoulderexo_generate_messages_cpp)

@@ -25,11 +25,13 @@ struct Torque_
 
   Torque_()
     : torque1(0.0)
-    , torque2(0.0)  {
+    , torque2(0.0)
+    , port_num(0)  {
     }
   Torque_(const ContainerAllocator& _alloc)
     : torque1(0.0)
-    , torque2(0.0)  {
+    , torque2(0.0)
+    , port_num(0)  {
   (void)_alloc;
     }
 
@@ -40,6 +42,9 @@ struct Torque_
 
    typedef float _torque2_type;
   _torque2_type torque2;
+
+   typedef int32_t _port_num_type;
+  _port_num_type port_num;
 
 
 
@@ -75,7 +80,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'HasHeader': False, 'IsFixedSize': True, 'IsMessage': True}
+// BOOLTRAITS {'IsMessage': True, 'IsFixedSize': True, 'HasHeader': False}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'shoulderexo': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -84,13 +89,13 @@ namespace message_traits
 
 
 template <class ContainerAllocator>
-struct HasHeader< ::shoulderexo::Torque_<ContainerAllocator> >
-  : FalseType
+struct IsMessage< ::shoulderexo::Torque_<ContainerAllocator> >
+  : TrueType
   { };
 
 template <class ContainerAllocator>
-struct HasHeader< ::shoulderexo::Torque_<ContainerAllocator> const>
-  : FalseType
+struct IsMessage< ::shoulderexo::Torque_<ContainerAllocator> const>
+  : TrueType
   { };
 
 template <class ContainerAllocator>
@@ -104,13 +109,13 @@ struct IsFixedSize< ::shoulderexo::Torque_<ContainerAllocator> const>
   { };
 
 template <class ContainerAllocator>
-struct IsMessage< ::shoulderexo::Torque_<ContainerAllocator> >
-  : TrueType
+struct HasHeader< ::shoulderexo::Torque_<ContainerAllocator> >
+  : FalseType
   { };
 
 template <class ContainerAllocator>
-struct IsMessage< ::shoulderexo::Torque_<ContainerAllocator> const>
-  : TrueType
+struct HasHeader< ::shoulderexo::Torque_<ContainerAllocator> const>
+  : FalseType
   { };
 
 
@@ -119,12 +124,12 @@ struct MD5Sum< ::shoulderexo::Torque_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "4352967d78fc540447ece6189f8160cf";
+    return "67e3a742abd7e4b159e23cb00d1df783";
   }
 
   static const char* value(const ::shoulderexo::Torque_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x4352967d78fc5404ULL;
-  static const uint64_t static_value2 = 0x47ece6189f8160cfULL;
+  static const uint64_t static_value1 = 0x67e3a742abd7e4b1ULL;
+  static const uint64_t static_value2 = 0x59e23cb00d1df783ULL;
 };
 
 template<class ContainerAllocator>
@@ -145,6 +150,7 @@ struct Definition< ::shoulderexo::Torque_<ContainerAllocator> >
   {
     return "float32 torque1\n\
 float32 torque2\n\
+int32 port_num\n\
 ";
   }
 
@@ -165,6 +171,7 @@ namespace serialization
     {
       stream.next(m.torque1);
       stream.next(m.torque2);
+      stream.next(m.port_num);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -187,6 +194,8 @@ struct Printer< ::shoulderexo::Torque_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.torque1);
     s << indent << "torque2: ";
     Printer<float>::stream(s, indent + "  ", v.torque2);
+    s << indent << "port_num: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.port_num);
   }
 };
 

@@ -7,13 +7,15 @@ import struct
 
 
 class Torque(genpy.Message):
-  _md5sum = "4352967d78fc540447ece6189f8160cf"
+  _md5sum = "67e3a742abd7e4b159e23cb00d1df783"
   _type = "shoulderexo/Torque"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """float32 torque1
-float32 torque2"""
-  __slots__ = ['torque1','torque2']
-  _slot_types = ['float32','float32']
+float32 torque2
+int32 port_num
+"""
+  __slots__ = ['torque1','torque2','port_num']
+  _slot_types = ['float32','float32','int32']
 
   def __init__(self, *args, **kwds):
     """
@@ -23,7 +25,7 @@ float32 torque2"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       torque1,torque2
+       torque1,torque2,port_num
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -36,9 +38,12 @@ float32 torque2"""
         self.torque1 = 0.
       if self.torque2 is None:
         self.torque2 = 0.
+      if self.port_num is None:
+        self.port_num = 0
     else:
       self.torque1 = 0.
       self.torque2 = 0.
+      self.port_num = 0
 
   def _get_types(self):
     """
@@ -53,7 +58,7 @@ float32 torque2"""
     """
     try:
       _x = self
-      buff.write(_get_struct_2f().pack(_x.torque1, _x.torque2))
+      buff.write(_get_struct_2fi().pack(_x.torque1, _x.torque2, _x.port_num))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -66,8 +71,8 @@ float32 torque2"""
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.torque1, _x.torque2,) = _get_struct_2f().unpack(str[start:end])
+      end += 12
+      (_x.torque1, _x.torque2, _x.port_num,) = _get_struct_2fi().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -81,7 +86,7 @@ float32 torque2"""
     """
     try:
       _x = self
-      buff.write(_get_struct_2f().pack(_x.torque1, _x.torque2))
+      buff.write(_get_struct_2fi().pack(_x.torque1, _x.torque2, _x.port_num))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -95,8 +100,8 @@ float32 torque2"""
       end = 0
       _x = self
       start = end
-      end += 8
-      (_x.torque1, _x.torque2,) = _get_struct_2f().unpack(str[start:end])
+      end += 12
+      (_x.torque1, _x.torque2, _x.port_num,) = _get_struct_2fi().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -105,9 +110,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2f = None
-def _get_struct_2f():
-    global _struct_2f
-    if _struct_2f is None:
-        _struct_2f = struct.Struct("<2f")
-    return _struct_2f
+_struct_2fi = None
+def _get_struct_2fi():
+    global _struct_2fi
+    if _struct_2fi is None:
+        _struct_2fi = struct.Struct("<2fi")
+    return _struct_2fi

@@ -20,6 +20,7 @@ class Torque {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.torque1 = null;
       this.torque2 = null;
+      this.port_num = null;
     }
     else {
       if (initObj.hasOwnProperty('torque1')) {
@@ -34,6 +35,12 @@ class Torque {
       else {
         this.torque2 = 0.0;
       }
+      if (initObj.hasOwnProperty('port_num')) {
+        this.port_num = initObj.port_num
+      }
+      else {
+        this.port_num = 0;
+      }
     }
   }
 
@@ -43,6 +50,8 @@ class Torque {
     bufferOffset = _serializer.float32(obj.torque1, buffer, bufferOffset);
     // Serialize message field [torque2]
     bufferOffset = _serializer.float32(obj.torque2, buffer, bufferOffset);
+    // Serialize message field [port_num]
+    bufferOffset = _serializer.int32(obj.port_num, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -54,11 +63,13 @@ class Torque {
     data.torque1 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [torque2]
     data.torque2 = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [port_num]
+    data.port_num = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 8;
+    return 12;
   }
 
   static datatype() {
@@ -68,7 +79,7 @@ class Torque {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '4352967d78fc540447ece6189f8160cf';
+    return '67e3a742abd7e4b159e23cb00d1df783';
   }
 
   static messageDefinition() {
@@ -76,6 +87,8 @@ class Torque {
     return `
     float32 torque1
     float32 torque2
+    int32 port_num
+    
     `;
   }
 
@@ -97,6 +110,13 @@ class Torque {
     }
     else {
       resolved.torque2 = 0.0
+    }
+
+    if (msg.port_num !== undefined) {
+      resolved.port_num = msg.port_num;
+    }
+    else {
+      resolved.port_num = 0
     }
 
     return resolved;

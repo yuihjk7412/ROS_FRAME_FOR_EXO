@@ -447,7 +447,7 @@ exosystem/preinstall:
 exosystem/CMakeFiles/motorcontrolfle.dir/all: exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrolfle.dir/build.make exosystem/CMakeFiles/motorcontrolfle.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=47,48,49,50 "Built target motorcontrolfle"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=51,52,53,54 "Built target motorcontrolfle"
 .PHONY : exosystem/CMakeFiles/motorcontrolfle.dir/all
 
 # Include target in all.
@@ -1309,7 +1309,7 @@ clean: exosystem/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 exosystem/CMakeFiles/motorcontrolabd.dir/all: exosystem/CMakeFiles/exosystem_generate_messages_cpp.dir/all
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/depend
 	$(MAKE) -f exosystem/CMakeFiles/motorcontrolabd.dir/build.make exosystem/CMakeFiles/motorcontrolabd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=43,44,45,46 "Built target motorcontrolabd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=47,48,49,50 "Built target motorcontrolabd"
 .PHONY : exosystem/CMakeFiles/motorcontrolabd.dir/all
 
 # Include target in all.
@@ -1582,6 +1582,7 @@ clean: exosystem/CMakeFiles/_exosystem_generate_messages_check_deps_Torque.dir/c
 
 # Convenience name for "all" pass in the directory.
 shoulderexo/all: shoulderexo/CMakeFiles/shoulderexo_generate_messages.dir/all
+shoulderexo/all: shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/all
 
 .PHONY : shoulderexo/all
 
@@ -1590,10 +1591,10 @@ shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_gencpp.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Encoder.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_genpy.dir/clean
+shoulderexo/clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_geneus.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/clean
-shoulderexo/clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Torque.dir/clean
@@ -1601,6 +1602,7 @@ shoulderexo/clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_d
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_genlisp.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_gennodejs.dir/clean
+shoulderexo/clean: shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/clean
 shoulderexo/clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/clean
 
 .PHONY : shoulderexo/clean
@@ -1616,13 +1618,13 @@ shoulderexo/preinstall:
 # All Build rule for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_eus.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Encoder.dir/all
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Torque.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Limbpos.dir/all
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/depend
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=56,57,58,59,60,61 "Built target shoulderexo_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=60,61,62,63,64,65 "Built target shoulderexo_generate_messages_eus"
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1744,6 +1746,38 @@ clean: shoulderexo/CMakeFiles/shoulderexo_genpy.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir
+
+# All Build rule for target.
+shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all:
+	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/depend
+	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num= "Built target _shoulderexo_generate_messages_check_deps_Sysstatus"
+.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+
+# Build rule for subdir invocation for target.
+shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
+.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
+
+# Convenience name for target.
+_shoulderexo_generate_messages_check_deps_Sysstatus: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
+
+.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus
+
+# clean rule for target.
+shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean:
+	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
+.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
+
+# clean rule for target.
+clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target shoulderexo/CMakeFiles/shoulderexo_geneus.dir
 
 # All Build rule for target.
@@ -1781,13 +1815,13 @@ clean: shoulderexo/CMakeFiles/shoulderexo_geneus.dir/clean
 # All Build rule for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Encoder.dir/all
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Torque.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Limbpos.dir/all
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/depend
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=62,63,64,65,66 "Built target shoulderexo_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=66,67,68,69,70 "Built target shoulderexo_generate_messages_lisp"
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1845,38 +1879,6 @@ clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Fo
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir
-
-# All Build rule for target.
-shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all:
-	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/depend
-	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num= "Built target _shoulderexo_generate_messages_check_deps_Sysstatus"
-.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
-
-# Build rule for subdir invocation for target.
-shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
-.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
-
-# Convenience name for target.
-_shoulderexo_generate_messages_check_deps_Sysstatus: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/rule
-
-.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus
-
-# clean rule for target.
-shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean:
-	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
-.PHONY : shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
-
-# clean rule for target.
-clean: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target shoulderexo/CMakeFiles/shoulderexo_generate_messages.dir
 
 # All Build rule for target.
@@ -1923,13 +1925,13 @@ clean: shoulderexo/CMakeFiles/shoulderexo_generate_messages.dir/clean
 # All Build rule for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_py.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Encoder.dir/all
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Torque.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Limbpos.dir/all
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/depend
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=72,73,74,75,76,77 "Built target shoulderexo_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=76,77,78,79,80,81 "Built target shoulderexo_generate_messages_py"
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2056,13 +2058,13 @@ clean: shoulderexo/CMakeFiles/shoulderexo_genlisp.dir/clean
 # All Build rule for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Encoder.dir/all
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Torque.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Limbpos.dir/all
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/depend
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=67,68,69,70,71 "Built target shoulderexo_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=71,72,73,74,75 "Built target shoulderexo_generate_messages_nodejs"
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2120,18 +2122,55 @@ clean: shoulderexo/CMakeFiles/shoulderexo_gennodejs.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir
+
+# All Build rule for target.
+shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/all: shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all
+	$(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/depend
+	$(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=43,44,45,46 "Built target motorcontrol_shoulderexo"
+.PHONY : shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/all
+
+# Include target in all.
+all: shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 9
+	$(MAKE) -f CMakeFiles/Makefile2 shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles 0
+.PHONY : shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule
+
+# Convenience name for target.
+motorcontrol_shoulderexo: shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/rule
+
+.PHONY : motorcontrol_shoulderexo
+
+# clean rule for target.
+shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/clean:
+	$(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/clean
+.PHONY : shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/clean
+
+# clean rule for target.
+clean: shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir
 
 # All Build rule for target.
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: exosystem/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Encoder.dir/all
-shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/all
+shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Torque.dir/all
 shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all: shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Limbpos.dir/all
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/depend
 	$(MAKE) -f shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/build.make shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=51,52,53,54,55 "Built target shoulderexo_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/build/CMakeFiles --progress-num=55,56,57,58,59 "Built target shoulderexo_generate_messages_cpp"
 .PHONY : shoulderexo/CMakeFiles/shoulderexo_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.

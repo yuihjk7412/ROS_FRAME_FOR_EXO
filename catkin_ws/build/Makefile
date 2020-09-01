@@ -777,6 +777,19 @@ shoulderexo_genpy/fast:
 .PHONY : shoulderexo_genpy/fast
 
 #=============================================================================
+# Target rules for targets named _shoulderexo_generate_messages_check_deps_Sysstatus
+
+# Build rule for target.
+_shoulderexo_generate_messages_check_deps_Sysstatus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _shoulderexo_generate_messages_check_deps_Sysstatus
+.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus
+
+# fast build rule for target.
+_shoulderexo_generate_messages_check_deps_Sysstatus/fast:
+	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build
+.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus/fast
+
+#=============================================================================
 # Target rules for targets named shoulderexo_geneus
 
 # Build rule for target.
@@ -814,19 +827,6 @@ _shoulderexo_generate_messages_check_deps_Motor_Force: cmake_check_build_system
 _shoulderexo_generate_messages_check_deps_Motor_Force/fast:
 	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Motor_Force.dir/build
 .PHONY : _shoulderexo_generate_messages_check_deps_Motor_Force/fast
-
-#=============================================================================
-# Target rules for targets named _shoulderexo_generate_messages_check_deps_Sysstatus
-
-# Build rule for target.
-_shoulderexo_generate_messages_check_deps_Sysstatus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _shoulderexo_generate_messages_check_deps_Sysstatus
-.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus
-
-# fast build rule for target.
-_shoulderexo_generate_messages_check_deps_Sysstatus/fast:
-	$(MAKE) -f shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build.make shoulderexo/CMakeFiles/_shoulderexo_generate_messages_check_deps_Sysstatus.dir/build
-.PHONY : _shoulderexo_generate_messages_check_deps_Sysstatus/fast
 
 #=============================================================================
 # Target rules for targets named shoulderexo_generate_messages
@@ -920,6 +920,19 @@ shoulderexo_gennodejs/fast:
 .PHONY : shoulderexo_gennodejs/fast
 
 #=============================================================================
+# Target rules for targets named motorcontrol_shoulderexo
+
+# Build rule for target.
+motorcontrol_shoulderexo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 motorcontrol_shoulderexo
+.PHONY : motorcontrol_shoulderexo
+
+# fast build rule for target.
+motorcontrol_shoulderexo/fast:
+	$(MAKE) -f shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build.make shoulderexo/CMakeFiles/motorcontrol_shoulderexo.dir/build
+.PHONY : motorcontrol_shoulderexo/fast
+
+#=============================================================================
 # Target rules for targets named shoulderexo_generate_messages_cpp
 
 # Build rule for target.
@@ -992,10 +1005,10 @@ help:
 	@echo "... shoulderexo_gencpp"
 	@echo "... _shoulderexo_generate_messages_check_deps_Encoder"
 	@echo "... shoulderexo_genpy"
+	@echo "... _shoulderexo_generate_messages_check_deps_Sysstatus"
 	@echo "... shoulderexo_geneus"
 	@echo "... shoulderexo_generate_messages_lisp"
 	@echo "... _shoulderexo_generate_messages_check_deps_Motor_Force"
-	@echo "... _shoulderexo_generate_messages_check_deps_Sysstatus"
 	@echo "... shoulderexo_generate_messages"
 	@echo "... shoulderexo_generate_messages_py"
 	@echo "... _shoulderexo_generate_messages_check_deps_Torque"
@@ -1003,6 +1016,7 @@ help:
 	@echo "... shoulderexo_genlisp"
 	@echo "... shoulderexo_generate_messages_nodejs"
 	@echo "... shoulderexo_gennodejs"
+	@echo "... motorcontrol_shoulderexo"
 	@echo "... shoulderexo_generate_messages_cpp"
 .PHONY : help
 
