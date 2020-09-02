@@ -23,10 +23,12 @@ class Sysstatus {
       this.theta_l1 = null;
       this.delta_theta_r1 = null;
       this.Trr_ad = null;
+      this.m1_target = null;
       this.theta_m2 = null;
       this.theta_l2 = null;
       this.delta_theta_r2 = null;
       this.Trr_cf = null;
+      this.m2_target = null;
     }
     else {
       if (initObj.hasOwnProperty('record_flag')) {
@@ -59,6 +61,12 @@ class Sysstatus {
       else {
         this.Trr_ad = 0.0;
       }
+      if (initObj.hasOwnProperty('m1_target')) {
+        this.m1_target = initObj.m1_target
+      }
+      else {
+        this.m1_target = 0.0;
+      }
       if (initObj.hasOwnProperty('theta_m2')) {
         this.theta_m2 = initObj.theta_m2
       }
@@ -83,6 +91,12 @@ class Sysstatus {
       else {
         this.Trr_cf = 0.0;
       }
+      if (initObj.hasOwnProperty('m2_target')) {
+        this.m2_target = initObj.m2_target
+      }
+      else {
+        this.m2_target = 0.0;
+      }
     }
   }
 
@@ -98,6 +112,8 @@ class Sysstatus {
     bufferOffset = _serializer.float32(obj.delta_theta_r1, buffer, bufferOffset);
     // Serialize message field [Trr_ad]
     bufferOffset = _serializer.float32(obj.Trr_ad, buffer, bufferOffset);
+    // Serialize message field [m1_target]
+    bufferOffset = _serializer.float32(obj.m1_target, buffer, bufferOffset);
     // Serialize message field [theta_m2]
     bufferOffset = _serializer.float32(obj.theta_m2, buffer, bufferOffset);
     // Serialize message field [theta_l2]
@@ -106,6 +122,8 @@ class Sysstatus {
     bufferOffset = _serializer.float32(obj.delta_theta_r2, buffer, bufferOffset);
     // Serialize message field [Trr_cf]
     bufferOffset = _serializer.float32(obj.Trr_cf, buffer, bufferOffset);
+    // Serialize message field [m2_target]
+    bufferOffset = _serializer.float32(obj.m2_target, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -123,6 +141,8 @@ class Sysstatus {
     data.delta_theta_r1 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [Trr_ad]
     data.Trr_ad = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [m1_target]
+    data.m1_target = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [theta_m2]
     data.theta_m2 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [theta_l2]
@@ -131,11 +151,13 @@ class Sysstatus {
     data.delta_theta_r2 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [Trr_cf]
     data.Trr_cf = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [m2_target]
+    data.m2_target = _deserializer.float32(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 34;
+    return 42;
   }
 
   static datatype() {
@@ -145,7 +167,7 @@ class Sysstatus {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'a24a13feba27c82997977933cd4b8af4';
+    return '6a32402b07530897785ed5db6b7432ed';
   }
 
   static messageDefinition() {
@@ -156,10 +178,13 @@ class Sysstatus {
     float32 theta_l1
     float32 delta_theta_r1
     float32 Trr_ad
+    float32 m1_target
     float32 theta_m2
     float32 theta_l2
     float32 delta_theta_r2
     float32 Trr_cf
+    float32 m2_target
+    
     `;
   }
 
@@ -204,6 +229,13 @@ class Sysstatus {
       resolved.Trr_ad = 0.0
     }
 
+    if (msg.m1_target !== undefined) {
+      resolved.m1_target = msg.m1_target;
+    }
+    else {
+      resolved.m1_target = 0.0
+    }
+
     if (msg.theta_m2 !== undefined) {
       resolved.theta_m2 = msg.theta_m2;
     }
@@ -230,6 +262,13 @@ class Sysstatus {
     }
     else {
       resolved.Trr_cf = 0.0
+    }
+
+    if (msg.m2_target !== undefined) {
+      resolved.m2_target = msg.m2_target;
+    }
+    else {
+      resolved.m2_target = 0.0
     }
 
     return resolved;

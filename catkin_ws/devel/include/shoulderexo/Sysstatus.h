@@ -29,10 +29,12 @@ struct Sysstatus_
     , theta_l1(0.0)
     , delta_theta_r1(0.0)
     , Trr_ad(0.0)
+    , m1_target(0.0)
     , theta_m2(0.0)
     , theta_l2(0.0)
     , delta_theta_r2(0.0)
-    , Trr_cf(0.0)  {
+    , Trr_cf(0.0)
+    , m2_target(0.0)  {
     }
   Sysstatus_(const ContainerAllocator& _alloc)
     : record_flag(0)
@@ -40,10 +42,12 @@ struct Sysstatus_
     , theta_l1(0.0)
     , delta_theta_r1(0.0)
     , Trr_ad(0.0)
+    , m1_target(0.0)
     , theta_m2(0.0)
     , theta_l2(0.0)
     , delta_theta_r2(0.0)
-    , Trr_cf(0.0)  {
+    , Trr_cf(0.0)
+    , m2_target(0.0)  {
   (void)_alloc;
     }
 
@@ -64,6 +68,9 @@ struct Sysstatus_
    typedef float _Trr_ad_type;
   _Trr_ad_type Trr_ad;
 
+   typedef float _m1_target_type;
+  _m1_target_type m1_target;
+
    typedef float _theta_m2_type;
   _theta_m2_type theta_m2;
 
@@ -75,6 +82,9 @@ struct Sysstatus_
 
    typedef float _Trr_cf_type;
   _Trr_cf_type Trr_cf;
+
+   typedef float _m2_target_type;
+  _m2_target_type m2_target;
 
 
 
@@ -110,7 +120,7 @@ namespace message_traits
 
 
 
-// BOOLTRAITS {'HasHeader': False, 'IsMessage': True, 'IsFixedSize': True}
+// BOOLTRAITS {'HasHeader': False, 'IsFixedSize': True, 'IsMessage': True}
 // {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'shoulderexo': ['/home/jackho/ROS_FRAME_FOR_EXO/catkin_ws/src/shoulderexo/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
@@ -129,16 +139,6 @@ struct HasHeader< ::shoulderexo::Sysstatus_<ContainerAllocator> const>
   { };
 
 template <class ContainerAllocator>
-struct IsMessage< ::shoulderexo::Sysstatus_<ContainerAllocator> >
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
-struct IsMessage< ::shoulderexo::Sysstatus_<ContainerAllocator> const>
-  : TrueType
-  { };
-
-template <class ContainerAllocator>
 struct IsFixedSize< ::shoulderexo::Sysstatus_<ContainerAllocator> >
   : TrueType
   { };
@@ -148,18 +148,28 @@ struct IsFixedSize< ::shoulderexo::Sysstatus_<ContainerAllocator> const>
   : TrueType
   { };
 
+template <class ContainerAllocator>
+struct IsMessage< ::shoulderexo::Sysstatus_<ContainerAllocator> >
+  : TrueType
+  { };
+
+template <class ContainerAllocator>
+struct IsMessage< ::shoulderexo::Sysstatus_<ContainerAllocator> const>
+  : TrueType
+  { };
+
 
 template<class ContainerAllocator>
 struct MD5Sum< ::shoulderexo::Sysstatus_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "a24a13feba27c82997977933cd4b8af4";
+    return "6a32402b07530897785ed5db6b7432ed";
   }
 
   static const char* value(const ::shoulderexo::Sysstatus_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xa24a13feba27c829ULL;
-  static const uint64_t static_value2 = 0x97977933cd4b8af4ULL;
+  static const uint64_t static_value1 = 0x6a32402b07530897ULL;
+  static const uint64_t static_value2 = 0x785ed5db6b7432edULL;
 };
 
 template<class ContainerAllocator>
@@ -183,10 +193,12 @@ float32 theta_m1\n\
 float32 theta_l1\n\
 float32 delta_theta_r1\n\
 float32 Trr_ad\n\
+float32 m1_target\n\
 float32 theta_m2\n\
 float32 theta_l2\n\
 float32 delta_theta_r2\n\
 float32 Trr_cf\n\
+float32 m2_target\n\
 ";
   }
 
@@ -210,10 +222,12 @@ namespace serialization
       stream.next(m.theta_l1);
       stream.next(m.delta_theta_r1);
       stream.next(m.Trr_ad);
+      stream.next(m.m1_target);
       stream.next(m.theta_m2);
       stream.next(m.theta_l2);
       stream.next(m.delta_theta_r2);
       stream.next(m.Trr_cf);
+      stream.next(m.m2_target);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -242,6 +256,8 @@ struct Printer< ::shoulderexo::Sysstatus_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.delta_theta_r1);
     s << indent << "Trr_ad: ";
     Printer<float>::stream(s, indent + "  ", v.Trr_ad);
+    s << indent << "m1_target: ";
+    Printer<float>::stream(s, indent + "  ", v.m1_target);
     s << indent << "theta_m2: ";
     Printer<float>::stream(s, indent + "  ", v.theta_m2);
     s << indent << "theta_l2: ";
@@ -250,6 +266,8 @@ struct Printer< ::shoulderexo::Sysstatus_<ContainerAllocator> >
     Printer<float>::stream(s, indent + "  ", v.delta_theta_r2);
     s << indent << "Trr_cf: ";
     Printer<float>::stream(s, indent + "  ", v.Trr_cf);
+    s << indent << "m2_target: ";
+    Printer<float>::stream(s, indent + "  ", v.m2_target);
   }
 };
 

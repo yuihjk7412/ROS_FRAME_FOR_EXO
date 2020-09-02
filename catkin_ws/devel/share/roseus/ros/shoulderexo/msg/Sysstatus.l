@@ -14,7 +14,7 @@
 
 (defclass shoulderexo::Sysstatus
   :super ros::object
-  :slots (_record_flag _theta_m1 _theta_l1 _delta_theta_r1 _Trr_ad _theta_m2 _theta_l2 _delta_theta_r2 _Trr_cf ))
+  :slots (_record_flag _theta_m1 _theta_l1 _delta_theta_r1 _Trr_ad _m1_target _theta_m2 _theta_l2 _delta_theta_r2 _Trr_cf _m2_target ))
 
 (defmethod shoulderexo::Sysstatus
   (:init
@@ -24,10 +24,12 @@
     ((:theta_l1 __theta_l1) 0.0)
     ((:delta_theta_r1 __delta_theta_r1) 0.0)
     ((:Trr_ad __Trr_ad) 0.0)
+    ((:m1_target __m1_target) 0.0)
     ((:theta_m2 __theta_m2) 0.0)
     ((:theta_l2 __theta_l2) 0.0)
     ((:delta_theta_r2 __delta_theta_r2) 0.0)
     ((:Trr_cf __Trr_cf) 0.0)
+    ((:m2_target __m2_target) 0.0)
     )
    (send-super :init)
    (setq _record_flag (round __record_flag))
@@ -35,10 +37,12 @@
    (setq _theta_l1 (float __theta_l1))
    (setq _delta_theta_r1 (float __delta_theta_r1))
    (setq _Trr_ad (float __Trr_ad))
+   (setq _m1_target (float __m1_target))
    (setq _theta_m2 (float __theta_m2))
    (setq _theta_l2 (float __theta_l2))
    (setq _delta_theta_r2 (float __delta_theta_r2))
    (setq _Trr_cf (float __Trr_cf))
+   (setq _m2_target (float __m2_target))
    self)
   (:record_flag
    (&optional __record_flag)
@@ -55,6 +59,9 @@
   (:Trr_ad
    (&optional __Trr_ad)
    (if __Trr_ad (setq _Trr_ad __Trr_ad)) _Trr_ad)
+  (:m1_target
+   (&optional __m1_target)
+   (if __m1_target (setq _m1_target __m1_target)) _m1_target)
   (:theta_m2
    (&optional __theta_m2)
    (if __theta_m2 (setq _theta_m2 __theta_m2)) _theta_m2)
@@ -67,6 +74,9 @@
   (:Trr_cf
    (&optional __Trr_cf)
    (if __Trr_cf (setq _Trr_cf __Trr_cf)) _Trr_cf)
+  (:m2_target
+   (&optional __m2_target)
+   (if __m2_target (setq _m2_target __m2_target)) _m2_target)
   (:serialization-length
    ()
    (+
@@ -80,6 +90,8 @@
     4
     ;; float32 _Trr_ad
     4
+    ;; float32 _m1_target
+    4
     ;; float32 _theta_m2
     4
     ;; float32 _theta_l2
@@ -87,6 +99,8 @@
     ;; float32 _delta_theta_r2
     4
     ;; float32 _Trr_cf
+    4
+    ;; float32 _m2_target
     4
     ))
   (:serialize
@@ -103,6 +117,8 @@
        (sys::poke _delta_theta_r1 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _Trr_ad
        (sys::poke _Trr_ad (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float32 _m1_target
+       (sys::poke _m1_target (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _theta_m2
        (sys::poke _theta_m2 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _theta_l2
@@ -111,6 +127,8 @@
        (sys::poke _delta_theta_r2 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _Trr_cf
        (sys::poke _Trr_cf (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float32 _m2_target
+       (sys::poke _m2_target (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -125,6 +143,8 @@
      (setq _delta_theta_r1 (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _Trr_ad
      (setq _Trr_ad (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float32 _m1_target
+     (setq _m1_target (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _theta_m2
      (setq _theta_m2 (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _theta_l2
@@ -133,11 +153,13 @@
      (setq _delta_theta_r2 (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _Trr_cf
      (setq _Trr_cf (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float32 _m2_target
+     (setq _m2_target (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;;
    self)
   )
 
-(setf (get shoulderexo::Sysstatus :md5sum-) "a24a13feba27c82997977933cd4b8af4")
+(setf (get shoulderexo::Sysstatus :md5sum-) "6a32402b07530897785ed5db6b7432ed")
 (setf (get shoulderexo::Sysstatus :datatype-) "shoulderexo/Sysstatus")
 (setf (get shoulderexo::Sysstatus :definition-)
       "int16 record_flag
@@ -145,14 +167,17 @@ float32 theta_m1
 float32 theta_l1
 float32 delta_theta_r1
 float32 Trr_ad
+float32 m1_target
 float32 theta_m2
 float32 theta_l2
 float32 delta_theta_r2
 float32 Trr_cf
+float32 m2_target
+
 ")
 
 
 
-(provide :shoulderexo/Sysstatus "a24a13feba27c82997977933cd4b8af4")
+(provide :shoulderexo/Sysstatus "6a32402b07530897785ed5db6b7432ed")
 
 

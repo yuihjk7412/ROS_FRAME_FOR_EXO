@@ -8,15 +8,15 @@ import eventlet  #导入eventlet这个模块
 
 if __name__ == '__main__':
     rospy.init_node('encoder_talker', anonymous=True)
-    eventlet.monkey_patch()   #必须加这条代码
+    # eventlet.monkey_patch()   #必须加这条代码
     # port_Num = input('PLEASE INPUT THE PORT NUMBER(/dev/ttyUSB*):')
     request_Command = bytes.fromhex('7ff7')
     port_Num = 10
     force_port_num = -1
 
     try:
-        encoder_message = rospy.wait_for_message('encoder_topic',Encoder,timeout=1)
-        force_port_num = encoder_message.port_num
+        force_message = rospy.wait_for_message('force_topic',Encoder,timeout=1)
+        force_port_num = force_message.port_num
         print(force_port_num)
     except rospy.exceptions.ROSException as ex:
         pass
@@ -48,18 +48,21 @@ if __name__ == '__main__':
     buf = ser.read(6)
     # t.start()
     exception_flag = 0
+    pub_msg = Encoder()
+    pub_msg.port_num = port_Num
 
     while not rospy.is_shutdown():
         # with serial.Serial("/dev/ttyUSB%d" % int(port_Num), 115200, timeout=None) as ser:
-        exception_flag = 1
-        with eventlet.Timeout(0.1,False):
-            ser.write(request_Command)  #发出请求
-            buf = ser.read(6)          #接收回复
-            exception_flag = 0
-        if exception_flag:
-            ser.flushInput()
-        # ser.write(request_Command)
-        # buf = ser.read(6)      
+        # exception_flag = 1
+        # with eventlet.Timeout(0.1,False):
+        #     ser.write(request_Command)  #发出请求
+        #     buf = ser.read(6)          #接收回复
+        #     exception_flag = 0
+        # if exception_flag:
+        #     ser.flushInput()
+        #     continue
+        ser.write(request_Command)
+        buf = ser.read(6)      
         
         if len(buf) < 6:
             print("less than ok")
@@ -68,9 +71,10 @@ if __name__ == '__main__':
             #print("found data")
             encoder1 = int.from_bytes(buf[1:3], signed=False, byteorder='big')
             encoder2 = int.from_bytes(buf[3:5], signed=False, byteorder='big')
-            pub_msg = Encoder()
+            # pub_msg = Encoder()
             pub_msg.encoder1 = 65536/2.0 - encoder1
             pub_msg.encoder2 = 65536/2.0 - encoder2
+            # pub_msg.port_num = port_Num
             pub.publish(pub_msg)
             rospy.loginfo("/dev/ttyUSB%d:encoder1:%f  encoder2:%f"%(port_Num, pub_msg.encoder1,pub_msg.encoder2))
             rate.sleep()

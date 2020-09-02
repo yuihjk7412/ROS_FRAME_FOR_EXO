@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
-from exosystem.msg import Sysstatus
-from exosystem.msg import Motor_Force
+from shoulderexo.msg import Sysstatus
+from shoulderexo.msg import Motor_Force
 import pandas as pd
 from pandas import DataFrame
 import time
@@ -30,7 +30,7 @@ def callback(data):
             df = DataFrame([['i','电机1转角','弹簧1末端转角','实际差值1','实测力矩值1','理想力矩1','电机2转角','弹簧2末端转角','实际差值2','实测力矩值2','理想力矩2','xtheta','ytheta','ztheta']])
             df.to_csv('/home/jackho/DataRecord/%s.csv'%Current_Time,mode='a',header=False,index=False,encoding='gbk')
             print("Start recording")
-        df = DataFrame([[i,data.theta_m1,data.theta_l1,data.delta_theta_r1,data.Trr_ad,motor1_force*0.03,data.theta_m2,data.theta_l2,data.delta_theta_r2,data.Trr_cf,motor2_force*0.03,xtheta,ytheta,ztheta]])
+        df = DataFrame([[i,data.theta_m1,data.theta_l1,data.delta_theta_r1,data.Trr_ad,data.m1_target,data.theta_m2,data.theta_l2,data.delta_theta_r2,data.Trr_cf,data.m2_target,xtheta,ytheta,ztheta]])
         df.to_csv('/home/jackho/DataRecord/%s.csv'%Current_Time,mode='a',header=False,index=False)
         i = i + 1
     else:

@@ -31,6 +31,8 @@ const double reduction_ratio = 128.0; //减速器减速比128:1
 const double encoder_line_num = 500; //编码器线数500线
 const double cnt_per_circle = reduction_ratio * encoder_line_num * 4; //电机末端转一圈，编码器接收到的脉冲数
 float Td_ad = 0, Td_cf = 0; //根据上肢位姿计算出来的理想力矩值
+float *M1_target_pointer = new float(0), *M2_target_pointer = new float(0);//分配给两个电机的理想力矩，根据需要改变指向
+float M1_target = 0, M2_target = 0;
 float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
 float Ti_ad, Ti_cf; //初始换算出来的扭力值
 const float Ks = 0.03; //扭簧K值单位（Nm/degree）
@@ -228,6 +230,7 @@ void *pub_status(void* param)
 		msg.theta_l1 = theta_l1 - theta_l_i1;//弹簧末端实际相对转角
 		msg.delta_theta_r1 = msg.theta_m1 - msg.theta_l1;//实际相对转角
 		msg.Trr_ad = Tr_ad - Ti_ad;
+		msg.m1_target = *M1_target_pointer;
 
 		// msg.theta_m2 = (float)(output->motor2->Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角(单位为degree)
 		// usecsleep(500);
@@ -235,6 +238,7 @@ void *pub_status(void* param)
 		msg.theta_l2 = theta_l2 - theta_l_i2;//弹簧末端实际相对转角
 		msg.delta_theta_r2 = msg.theta_m2 - msg.theta_l2;//实际相对转角
 		msg.Trr_cf = Tr_cf - Ti_cf;
+		msg.m2_target = *M2_target_pointer;
 		chatter_pub.publish(msg);
 		ros::spinOnce();
 		loop_rate.sleep();
@@ -458,7 +462,7 @@ main(int argc, char **argv)
 	}
 	
 	
-	PID_position torque_ad_m(0.045, 0, 0);
+	PID_position torque_ad_m(1000, 0, 0);
 	PID_position delta_theta_m1(0, 0, 0);
 	PID_position torque_cf_m(1000, 0, 0);
 	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数 为避免累计误差均采用位置式PD控制
@@ -576,6 +580,7 @@ main(int argc, char **argv)
 	theta_m_i1 = motor1.Motor_Main_Pos(); //电机的初始位置
 	printf("theta_m_i1:%d\r\n",theta_m_i1);
 	usecsleep(100000);//0.1s
+	std::cout<<"111111111111111111111111\r\n";
 	theta_m_i2 = motor2.Motor_Main_Pos();
 	// usecsleep(100000);
 	printf("theta_m_i2:%d\r\n",theta_m_i2);
@@ -599,74 +604,61 @@ main(int argc, char **argv)
 	delta_theta_d1 = 0;delta_theta_d2=0;
 	const float MAXIMUN_DELTA_THETA = 3; //最大pid调节量
 
-	// record_flag = 1;//开始记录
-
 	int64_t s_time = getCurrentTime();
 	float theta_m1_prev = 0;
 	float theta_m2_prev = 0;//前一节拍的电机位置
 	float speed_cf = 0;
+	float speed_ad = 0;
 	theta_m_i2 = motor2.Motor_Main_Pos();
+	record_flag = 1;//开始记录
+
+	
+	// *M1_target_pointer = M1_target;
+	// *M2_target_pointer = M2_target;
+	std::cout<<"START CONTROL LOOP\r\n";
+	M1_target_pointer = &M1_target;
+	M2_target_pointer = &M2_target;
 	
 	while (ros::ok())
 	{
-		record_flag = 1;//开始记录
+		// record_flag = 1;//开始记录
 
 		// M2力控制回路 		
 		Trr_cf = Tr_cf - Ti_cf;	//实测相对力矩值
-		torque_result = torque_cf_m.pid_control(0, Trr_cf);
+		torque_result = torque_cf_m.pid_control(*M2_target_pointer, Trr_cf);
 		theta_m2 = (float)(motor2.Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角
-		speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*0/Ks) / Bv + torque_result;//理想速度（degree/s）
+		speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*(*M2_target_pointer)/Ks) / Bv + torque_result;//理想速度（degree/s）
 		// speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*0/Ks) / Bv;
-		printf("speed_cf:%f\r\n",speed_cf);
-		printf("theta_m2:%f\r\n",theta_m2);
-		printf("torque_result:%f\r\n",torque_result);
+		// printf("speed_cf:%f\r\n",speed_cf);
+		// printf("theta_m2:%f\r\n",theta_m2);
+		// printf("torque_result:%f\r\n",torque_result);
 		speed_cf = Speed_Limit(speed_cf);
 		motor2.Motor_Speed((int32_t)(speed_cf/360.0*cnt_per_circle));
 		// motor2.Motor_Speed((int32_t)(256000));
 		motor2.Motor_Begin();
-		usecsleep(500);
+		usecsleep(100);
 
-		// // M1力控制回路 		
-		// Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
-		// // torque_result = torque_ad_m.pid_control(T_tar, Trr_ad);
-		// torque_result = torque_ad_m.pid_control(Td_ad, Trr_ad);
-		// //delta_theta_d1 = (torque_result + T_tar) / Ks; //理想的转角差
-		// // if (abs(torque_result / Ks) > MAXIMUN_DELTA_THETA) //对PID进行限幅
-		// // {
-		// // 	torque_result = sgn(torque_result) * MAXIMUN_DELTA_THETA * Ks;
-		// // }
-		// delta_theta_d1 = (torque_result) / Ks + delta_theta_d1; //理想的转角差
-		// while (ros::ok())	//引入对电机位置的判断，消除电机位置奇异点
+		// M1力控制回路 		
+		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
+		torque_result = torque_ad_m.pid_control(*M1_target_pointer, Trr_ad);
+		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / cnt_per_circle * 360.0; //电机实际相对转角
+		speed_ad = (Tv - Kv*theta_m1 + (Kv-Ks)*(*M1_target_pointer)/Ks) / Bv + torque_result;//理想速度（degree/s）
+		// speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*0/Ks) / Bv;
+		// printf("speed_cf:%f\r\n",speed_cf);
+		// printf("theta_m2:%f\r\n",theta_m2);
+		// printf("torque_result:%f\r\n",torque_result);
+		speed_ad = Speed_Limit(speed_ad);
+		motor1.Motor_Speed((int32_t)(speed_ad/360.0*cnt_per_circle));
+		// motor2.Motor_Speed((int32_t)(256000));
+		motor1.Motor_Begin();
+		usecsleep(100);
+		
+		// //倒计时
+		// int64_t f_time = getCurrentTime();
+		// if (f_time - s_time > 1200 * 1000000)
 		// {
-		// 	theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / cnt_per_circle * 360.0; //电机实际相对转角
-		// 	if (abs(theta_m1 - theta_m1_prev) < 10)//非奇异点
-		// 	{
-		// 		break;
-		// 	}
-		// 	// printf("strange point! theta_m1:%f\ttheta_m1_prev:%f\r\n", theta_m1, theta_m1_prev);			
+		// 	break;
 		// }
-		// theta_m1_prev = theta_m1;
-		// // theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / cnt_per_circle * 360.0; //电机实际相对转角
-		// // usecsleep(200);
-		// delta_theta_r1 = theta_m1 - (theta_l1 - theta_l_i1); //实际的转角差
-		// delta_result = delta_theta_m1.pid_control(delta_theta_d1, delta_theta_r1); //转角PID控制器输出的结果
-		// // int32_t pos1 = (int32_t)(((theta_l1 - theta_l_i1) + delta_result + delta_theta_d1) / 360 * (128.0*500.0*4.0) + theta_m_i1);
-		// int32_t pos1 = (int32_t)((delta_result + delta_theta_d1) / 360.0 * cnt_per_circle + theta_m_i1);
-		// printf("电机1：理想力矩值:%f\t实测力矩值:%f\t理论角度偏差:%f\t实际角度偏差:%f\r\n", Td_ad, Trr_ad, delta_theta_d1, delta_theta_r1);
-		
-		
-		// motor1.Move_To(pos1);
-		// usecsleep(500);
-
-		
-		
-		
-		//倒计时
-		int64_t f_time = getCurrentTime();
-		if (f_time - s_time > 1200 * 1000000)
-		{
-			break;
-		}
 		
 
 		usecsleep(control_period*3);//延时5ms

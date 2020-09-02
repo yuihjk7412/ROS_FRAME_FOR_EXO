@@ -9,6 +9,8 @@
           DELTA_THETA_R1
           TRR_AD-VAL
           TRR_AD
+          M1_TARGET-VAL
+          M1_TARGET
           THETA_M2-VAL
           THETA_M2
           THETA_L2-VAL
@@ -17,4 +19,6 @@
           DELTA_THETA_R2
           TRR_CF-VAL
           TRR_CF
+          M2_TARGET-VAL
+          M2_TARGET
 ))
