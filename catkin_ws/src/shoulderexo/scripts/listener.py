@@ -27,7 +27,7 @@ def callback(data):
         if i == 0:
             Current_Time = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
             os.mknod(r'/home/jackho/DataRecord/%s.csv' % Current_Time)
-            df = DataFrame([['i','电机1转角','弹簧1末端转角','实际差值1','实测力矩值1','理想力矩1','电机2转角','弹簧2末端转角','实际差值2','实测力矩值2','理想力矩2','xtheta','ytheta','ztheta']])
+            df = DataFrame([['i','m1_angle','spring1_angle','angle_difference1','actual_torque1','ideal_torque1','m2_angle','spring2_angle','angle_difference2','actual_torque2','ideal_torque2','xtheta','ytheta','ztheta']])
             df.to_csv('/home/jackho/DataRecord/%s.csv'%Current_Time,mode='a',header=False,index=False,encoding='gbk')
             print("Start recording")
         df = DataFrame([[i,data.theta_m1,data.theta_l1,data.delta_theta_r1,data.Trr_ad,data.m1_target,data.theta_m2,data.theta_l2,data.delta_theta_r2,data.Trr_cf,data.m2_target,xtheta,ytheta,ztheta]])

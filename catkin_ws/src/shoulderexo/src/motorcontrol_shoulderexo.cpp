@@ -11,6 +11,7 @@
 
 #include <ctime>
 #include <cstdlib>
+#include <cmath>
 #include "unistd.h"
 #include "motorclass.h"
 #include "pidclass.h"
@@ -32,12 +33,12 @@ const double encoder_line_num = 500; //编码器线数500线
 const double cnt_per_circle = reduction_ratio * encoder_line_num * 4; //电机末端转一圈，编码器接收到的脉冲数
 float Td_ad = 0, Td_cf = 0; //根据上肢位姿计算出来的理想力矩值
 float *M1_target_pointer = new float(0), *M2_target_pointer = new float(0);//分配给两个电机的理想力矩，根据需要改变指向
-float M1_target = 0, M2_target = 0;
+float M1_target = 0.0, M2_target = 0.0;
 float Tr_ad, Tr_cf; //拉力传感器测量出来的实际拉力值换算出来的力矩值
 float Ti_ad, Ti_cf; //初始换算出来的扭力值
 const float Ks = 0.03; //扭簧K值单位（Nm/degree）
 const float Kv = 0.005; //对外表现的虚拟刚度
-const float Tv = 0.20; //预扭矩
+float Tv = 0.20; //预扭矩
 const float Bv = 0.003;//阻尼系数
 float theta_l1, theta_l2; //扭簧末端扭转角
 float theta_m1 = 0, theta_m2 = 0; //电机实际相对转角
@@ -464,7 +465,7 @@ main(int argc, char **argv)
 	
 	PID_position torque_ad_m(1000, 0, 0);
 	PID_position delta_theta_m1(0, 0, 0);
-	PID_position torque_cf_m(1000, 0, 0);
+	PID_position torque_cf_m(260, 0.01, 1);
 	PID_position delta_theta_m2(0, 0, 0);//设置PID控制参数 为避免累计误差均采用位置式PD控制
 
 	// PID_incremental torque_ad_m(0.5, 0.2, 1);
@@ -604,7 +605,7 @@ main(int argc, char **argv)
 	delta_theta_d1 = 0;delta_theta_d2=0;
 	const float MAXIMUN_DELTA_THETA = 3; //最大pid调节量
 
-	int64_t s_time = getCurrentTime();
+	
 	float theta_m1_prev = 0;
 	float theta_m2_prev = 0;//前一节拍的电机位置
 	float speed_cf = 0;
@@ -618,50 +619,63 @@ main(int argc, char **argv)
 	std::cout<<"START CONTROL LOOP\r\n";
 	M1_target_pointer = &M1_target;
 	M2_target_pointer = &M2_target;
+	usecsleep(1000000);
+	int64_t s_time = getCurrentTime();
 	
 	while (ros::ok())
 	{
 		// record_flag = 1;//开始记录
+
+		// 倒计时
+		int64_t f_time = getCurrentTime();
+		if (f_time - s_time > 10 * 1000000)
+		{
+			break;
+		}
+
+		M2_target = 0.3*sin((f_time-s_time)*1*3.1415926/1000000) + 0.3;
 
 		// M2力控制回路 		
 		Trr_cf = Tr_cf - Ti_cf;	//实测相对力矩值
 		torque_result = torque_cf_m.pid_control(*M2_target_pointer, Trr_cf);
 		theta_m2 = (float)(motor2.Motor_Main_Pos() - theta_m_i2) / cnt_per_circle * 360.0; //电机实际相对转角
 		speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*(*M2_target_pointer)/Ks) / Bv + torque_result;//理想速度（degree/s）
+		Tv = (Ks - Kv)/Ks*Trr_cf + Kv * theta_m2;
+		// speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*Trr_cf/Ks) / Bv + torque_result;//理想速度（degree/s）
 		// speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*0/Ks) / Bv;
-		// printf("speed_cf:%f\r\n",speed_cf);
-		// printf("theta_m2:%f\r\n",theta_m2);
-		// printf("torque_result:%f\r\n",torque_result);
+		printf("speed_cf:%f\r\n",speed_cf);
+		printf("theta_m2:%f\r\n",theta_m2);
+		printf("torque_result:%f\r\n",torque_result);
 		speed_cf = Speed_Limit(speed_cf);
 		motor2.Motor_Speed((int32_t)(speed_cf/360.0*cnt_per_circle));
 		// motor2.Motor_Speed((int32_t)(256000));
 		motor2.Motor_Begin();
 		usecsleep(100);
 
-		// M1力控制回路 		
-		Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
-		torque_result = torque_ad_m.pid_control(*M1_target_pointer, Trr_ad);
-		theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / cnt_per_circle * 360.0; //电机实际相对转角
-		speed_ad = (Tv - Kv*theta_m1 + (Kv-Ks)*(*M1_target_pointer)/Ks) / Bv + torque_result;//理想速度（degree/s）
-		// speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*0/Ks) / Bv;
-		// printf("speed_cf:%f\r\n",speed_cf);
-		// printf("theta_m2:%f\r\n",theta_m2);
-		// printf("torque_result:%f\r\n",torque_result);
-		speed_ad = Speed_Limit(speed_ad);
-		motor1.Motor_Speed((int32_t)(speed_ad/360.0*cnt_per_circle));
-		// motor2.Motor_Speed((int32_t)(256000));
-		motor1.Motor_Begin();
-		usecsleep(100);
+		// // M1力控制回路 		
+		// Trr_ad = Tr_ad - Ti_ad;	//实测相对力矩值
+		// torque_result = torque_ad_m.pid_control(*M1_target_pointer, Trr_ad);
+		// theta_m1 = (float)(motor1.Motor_Main_Pos() - theta_m_i1) / cnt_per_circle * 360.0; //电机实际相对转角
+		// speed_ad = (Tv - Kv*theta_m1 + (Kv-Ks)*(*M1_target_pointer)/Ks) / Bv + torque_result;//理想速度（degree/s）
+		// // speed_cf = (Tv - Kv*theta_m2 + (Kv-Ks)*0/Ks) / Bv;
+		// // printf("speed_cf:%f\r\n",speed_cf);
+		// // printf("theta_m2:%f\r\n",theta_m2);
+		// // printf("torque_result:%f\r\n",torque_result);
+		// speed_ad = Speed_Limit(speed_ad);
+		// motor1.Motor_Speed((int32_t)(speed_ad/360.0*cnt_per_circle));
+		// // motor2.Motor_Speed((int32_t)(256000));
+		// motor1.Motor_Begin();
+		// usecsleep(100);
 		
-		// //倒计时
+		// // 倒计时
 		// int64_t f_time = getCurrentTime();
-		// if (f_time - s_time > 1200 * 1000000)
+		// if (f_time - s_time > 10 * 1000000)
 		// {
 		// 	break;
 		// }
 		
 
-		usecsleep(control_period*3);//延时5ms
+		usecsleep(control_period);//延时5ms
 	}
 
 	record_flag = 0;//停止记录
@@ -684,7 +698,7 @@ main(int argc, char **argv)
 	VCI_CloseDevice(VCI_USBCAN2,0);//关闭设备。
 	// 除收发函数外，其它的函数调用前后，最好加个毫秒级的延时，即不影响程序的运行，又可以让USBCAN设备有充分的时间处理指令。
 	// goto ext;
-	std::cout<<">>programme end. press ctrl and c to exit the process...";
+	std::cout<<">>programme end. press ctrl and c to exit the process...\r\n";
 	while (ros::ok())
 	{
 		;
